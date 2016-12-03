@@ -3,6 +3,8 @@
 //===========================================//
 /*
 
+Our VGA Module: modifiec by Ben Wong, and Collin Gardner to 
+
 VGA MODULE: Modified by Parth Patel, Ian Baker, and Yi Zhan
 
 Most of all the code here is modified to basic VGA Displaying capabilities,
@@ -32,7 +34,13 @@ Coordinates of the pixel being assigned. Moves top to bottom, left to right.
 */
 wire [30:0]X, Y;
 
+wire reset; 
+//input KB_clk; //needs pins
+//input data;
+wire [4:0]direction;
 
+
+//kbInput kbIn(KB_clk, data, direction, reset);
 //Not sure what these are, probably have to do with the display output system.
 wire [7:0]countRef;
 wire [31:0]countSample;
@@ -40,6 +48,9 @@ wire [31:0]countSample;
 /*COORDINATES, (X,Y) Starting at the top left hand corner of the monitor. True for all coordinates
 in this code block.*/
 //"object1" //top row of blocks
+
+reg [31:0] object38X = 31'd0, object38Y = 31'd0;
+
 reg [31:0] object1X = 31'd0, object1Y = 31'd0;
 //"object2"
 reg [31:0] object2X = 31'd256, object2Y = 31'd0;
@@ -94,6 +105,8 @@ reg [31:0] object35X = 31'd754, object35Y = 31'd830;
 reg [31:0] object36X = 31'd920, object36Y = 31'd830;
 reg [31:0] object37X = 31'd1086, object37Y = 31'd830;
 
+
+
 /* T = Top,  B = Bottom, L = Left, R = Right,  all with respect to the coordinate of where 
 your "object" is placed.
 T and L params are set to the object's upper lefthand.  
@@ -101,7 +114,7 @@ Best if you leave the Left hand side parameters to 0, i.e: Object1_L = 31'd0;
 This will determine the available usable display space you have left.
 */
 
-//======== Object1 =======//     //this may change the length of shit - Collin
+//======== Object1 =======//     //Each one of these draws a box on the screen for each box in the MineSweeper field
 //object1_localParams
 localparam Object1_L = 31'd0;
 localparam Object1_R = Object1_L + 31'd240; //this goes the whole screen size, so 1280 is whole screen size
@@ -363,6 +376,17 @@ localparam Object37_T = 31'd0;
 localparam Object37_B = Object37_T + 31'd150;
 assign Object37 =((X >= Object37_L + object37X)&&(X <= Object37_R + object37X)&&(Y >= Object37_T+ object37Y)&&(Y <= Object37_B + object37Y));
 
+//object38_localParams
+
+
+
+localparam Object38_L = 31'd0;
+localparam Object38_R = Object38_L + 31'd100;
+localparam Object38_T = 31'd0;
+localparam Object38_B = Object38_T + 31'd100;
+assign Object38 =((X >= Object38_L + object38X)&&(X <= Object38_R + object38X)&&(Y >= Object38_T+ object38Y)&&(Y <= Object38_B + object38Y));
+
+
 
 //======Borrowed Code======//
 //==========DO NOT EDIT BELOW==========//
@@ -381,12 +405,53 @@ V_SYNC(clkLine, VGA_VS, vblank, Y);
 /*This block sets the priority of what to display in order, best to list in order of importance.
 The lowercase variables translate the object-to-be-displayed decision to the color module.
 */    //gonna add a box3 reg
-reg box1, box2, box3, box4, box5, box6, box7, box8, box9, box10, box11, box12, box13, box14, box15, box16, box17, box18, box19, box20, box21, box22, box23, box24, box25, box26, box27, box28, box29, box30, box31, box32, box33, box34, box35, box36, box37;//ADD HERE
+reg box1, box2, box3, box4, box5, box6, box7, box8, box9, box10, box11, box12, box13, box14, box15, box16, box17, box18, box19, box20, box21, box22, box23, box24, box25, box26, box27, box28, box29, box30, box31, box32, box33, box34, box35, box36, box37, box38;//ADD HERE
 
 //drawing shapes	
 always@(*)
 begin
-	if(Object1) begin
+	if(Object38) begin
+		box1 = 1'b0;
+		box2 = 1'b0; //changed
+		box3 = 1'b0;
+		box4 = 1'b0;
+		box5 = 1'b0;
+		box6 = 1'b0;
+		box7 = 1'b0;
+		box8 = 1'b0;
+		box9 = 1'b0;
+		box10 = 1'b0;
+		box11 = 1'b0;
+		box12 = 1'b0;
+		box13 = 1'b0;
+		box14 = 1'b0;
+		box15 = 1'b0;
+		box16 = 1'b0;
+		box17 = 1'b0;
+		box18 = 1'b0;
+		box19 = 1'b0;
+		box20 = 1'b0;
+		box21 = 1'b0;
+		box22 = 1'b0;
+		box23 = 1'b0;
+		box24 = 1'b0;
+		box25 = 1'b0;
+		box26 = 1'b0;
+		box27 = 1'b0;
+		box28 = 1'b0;
+		box29 = 1'b0;
+		box30 = 1'b0;
+		box31 = 1'b0;
+		box32 = 1'b0;
+		box33 = 1'b0;
+		box34 = 1'b0;
+		box35 = 1'b0;
+		box36 = 1'b0;
+		box37 = 1'b0;
+		box38= 1'b1;
+		end
+
+	else if(Object1) begin
 		box1 = 1'b1;
 		box2 = 1'b0; //changed
 		box3 = 1'b0;
@@ -1908,9 +1973,9 @@ endmodule
 //============================//
 //========== COLOR ===========//
 //============================//
-module color(clk, red, blue, green, box1, box2, box3, box4, box5, box6, box7, box8, box9, box10, box11, box12, box13, box14, box15, box16, box17, box18, box19, box20, box21, box22, box23, box24, box25, box26, box27, box28, box29, box30, box31, box32, box33, box34, box35, box36, box37);//ADD HERE
+module color(clk, red, blue, green, box1, box2, box3, box4, box5, box6, box7, box8, box9, box10, box11, box12, box13, box14, box15, box16, box17, box18, box19, box20, box21, box22, box23, box24, box25, box26, box27, box28, box29, box30, box31, box32, box33, box34, box35, box36, box37, box38);//ADD HERE
 
-input clk, box1, box2, box3, box4, box5, box6, box7, box8, box9, box10, box11, box12, box13, box14, box15, box16, box17, box18, box19, box20, box21, box22, box23, box24, box25, box26, box27, box28, box29, box30, box31, box32, box33, box34, box35, box36, box37;
+input clk, box1, box2, box3, box4, box5, box6, box7, box8, box9, box10, box11, box12, box13, box14, box15, box16, box17, box18, box19, box20, box21, box22, box23, box24, box25, box26, box27, box28, box29, box30, box31, box32, box33, box34, box35, box36, box37, box38;
 
 output [7:0] red, blue, green;
 reg[7:0] red, green, blue;
@@ -1928,7 +1993,7 @@ begin
 		green = 8'd255;
 		end
 		else if(box3) begin
-		red = 8'd255;
+		red = 8'd000;
 		blue = 8'd000;
 		green = 8'd255;
 		end
@@ -2102,6 +2167,11 @@ begin
 		 blue = 8'd000; 
 		 green = 8'd255; 
 		 end
+		 else if(box38) begin
+		red = 8'd255;
+		blue = 8'd255;
+		green = 8'd000;
+		end
 		/* I have no idea why this block below won't work.
 		its supposed to be the block that displays the background color, however any values other than 000 for R,G, and B
 		will mess eveything up... 
