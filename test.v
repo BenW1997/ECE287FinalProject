@@ -17,11 +17,11 @@ Parameters were set by Ben.
 //===========================================//
 //====================VGA====================//
 //===========================================//
-module test(clk, KB_clk, data, VGA_R, VGA_B, VGA_G, VGA_BLANK_N, VGA_SYNC_N , VGA_HS, VGA_VS, rst, VGA_CLK);
+module test(clk, KB_clk, data, button1, VGA_R, VGA_B, VGA_G, VGA_BLANK_N, VGA_SYNC_N , VGA_HS, VGA_VS, rst, VGA_CLK);
 
 //outputs the colors, determined from the color module.
 output [7:0] VGA_R, VGA_B, VGA_G;
-
+input button1;
 //Makes sure the screen is synced right.
 output VGA_HS, VGA_VS, VGA_BLANK_N, VGA_CLK, VGA_SYNC_N;
 
@@ -379,7 +379,7 @@ assign Object37 =((X >= Object37_L + object37X)&&(X <= Object37_R + object37X)&&
 
 //object38_localParams
 
-always @ (posedge updateSelect)
+/*always @ (posedge updateSelect)
 begin
 	 case(direction)
 			5'b00010: object38Y <= (object38Y - 20);
@@ -387,7 +387,7 @@ begin
 			5'b01000: object38Y <= (object38Y + 20);
 			5'b10000: object38X <= (object38X + 20);
 			endcase
-end
+//end */
 
 localparam Object38_L = 31'd0;
 localparam Object38_R = Object38_L + 31'd100;
@@ -395,18 +395,25 @@ localparam Object38_T = 31'd0;
 localparam Object38_B = Object38_T + 31'd100;
 assign Object38 =((X >= Object38_L + object38X)&&(X <= Object38_R + object38X)&&(Y >= Object38_T+ object38Y)&&(Y <= Object38_B + object38Y));
 
-//COunter for selector 
-   reg updateSelect;
+
+   //reg updateSelect;
 	reg [19:0]count;	
 
-	always@(posedge KB_clk)
+	always@(posedge clk)
 	begin
 		count <= count + 1;
-		if(count == 833334) //32'b1000100
+		if(count==833334 && button1==1'b0) // this has to be like this
+			object38X=object38X+32'd10;
+		/*if(count==833334 && button2==1'b1)
+			object38x=object38+32'd10;
+		if(count==833334 && button2==1'b1)
+			object38x=object38+32'd10;
+		if(count==833334 && button2==1'b1)
+			object38x=object38+32'd10; */
+		else
 		begin
-			updateSelect <= ~updateSelect;
-			count <= 0;
-		end	
+		 object38X = object38X;
+		end
 	end
 
 
@@ -1958,7 +1965,17 @@ begin
 		end
 	end 
 
-
+	
+//This is movement
+/*always @ (posedge clk)
+begin
+if(count >= 31'd1000010)
+count <= 0;
+else
+begin
+count <= count + 1;
+end
+end */
 //======Modified Borrowed Code======//
 //Determines the color output based on the decision from the priority block
 color(clk, VGA_R, VGA_B, VGA_G, box1, box2, box3, box4, box5, box6, box7, box8, box9, box10, box11, box12, box13, box14, box15, box16, box17, box18, box19, box20, box21, box22, box23, box24, box25, box26, box27, box28, box29, box30, box31, box32, box33, box34, box35, box36, box37);//ADD HERE
@@ -2206,7 +2223,6 @@ begin
 	end
 	
 endmodule
-
 
 
 
