@@ -17,11 +17,11 @@ Parameters were set by Ben.
 //===========================================//
 //====================VGA====================//
 //===========================================//
-module test(clk, KB_clk, data, button1, VGA_R, VGA_B, VGA_G, VGA_BLANK_N, VGA_SYNC_N , VGA_HS, VGA_VS, rst, VGA_CLK);
+module test(clk, KB_clk, data, button1, button2, button3, button4, VGA_R, VGA_B, VGA_G, VGA_BLANK_N, VGA_SYNC_N , VGA_HS, VGA_VS, rst, VGA_CLK);
 
 //outputs the colors, determined from the color module.
 output [7:0] VGA_R, VGA_B, VGA_G;
-input button1;
+input button1, button2, button3, button4;
 //Makes sure the screen is synced right.
 output VGA_HS, VGA_VS, VGA_BLANK_N, VGA_CLK, VGA_SYNC_N;
 
@@ -398,18 +398,18 @@ assign Object38 =((X >= Object38_L + object38X)&&(X <= Object38_R + object38X)&&
 
    //reg updateSelect;
 	reg [19:0]count;	
-
+//this moves our selector block  
 	always@(posedge clk)
 	begin
 		count <= count + 1;
 		if(count==833334 && button1==1'b0) // this has to be like this
 			object38X=object38X+32'd10;
-		/*if(count==833334 && button2==1'b1)
-			object38x=object38+32'd10;
-		if(count==833334 && button2==1'b1)
-			object38x=object38+32'd10;
-		if(count==833334 && button2==1'b1)
-			object38x=object38+32'd10; */
+		if(count==833334 && button2==1'b0)
+			object38Y=object38Y+32'd10;
+		if(count==833334 && button2==1'b0)
+			object38Y=object38Y-32'd10;
+		if(count==833334 && button2==1'b0)
+			object38X=object38X-32'd10; 
 		else
 		begin
 		 object38X = object38X;
