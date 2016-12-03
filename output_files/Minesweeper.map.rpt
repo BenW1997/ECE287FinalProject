@@ -1,0 +1,877 @@
+Analysis & Synthesis report for Minesweeper
+Sat Dec 03 17:19:57 2016
+Quartus Prime Version 16.1.0 Build 196 10/24/2016 SJ Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. General Register Statistics
+  9. Parameter Settings for User Entity Instance: clock108:comb_346|altpll:altpll_component
+ 10. altpll Parameter Settings by Entity Instance
+ 11. Port Connectivity Checks: "color:comb_1091"
+ 12. Port Connectivity Checks: "V_SYNC:comb_348"
+ 13. Port Connectivity Checks: "H_SYNC:comb_347"
+ 14. Port Connectivity Checks: "clock108:comb_346"
+ 15. Port Connectivity Checks: "countingRefresh:comb_345"
+ 16. Post-Synthesis Netlist Statistics for Top Partition
+ 17. Elapsed Time Per Partition
+ 18. Analysis & Synthesis Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2016  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel MegaCore Function License Agreement, or other 
+applicable license agreement, including, without limitation, 
+that your use is for the sole purpose of programming logic 
+devices manufactured by Intel and sold by Intel or its 
+authorized distributors.  Please refer to the applicable 
+agreement for further details.
+
+
+
++----------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                     ;
++------------------------------------+---------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Sat Dec 03 17:19:57 2016       ;
+; Quartus Prime Version              ; 16.1.0 Build 196 10/24/2016 SJ Lite Edition ;
+; Revision Name                      ; Minesweeper                                 ;
+; Top-level Entity Name              ; Minesweeper                                 ;
+; Family                             ; Cyclone IV E                                ;
+; Total logic elements               ; 175                                         ;
+;     Total combinational functions  ; 175                                         ;
+;     Dedicated logic registers      ; 64                                          ;
+; Total registers                    ; 64                                          ;
+; Total pins                         ; 31                                          ;
+; Total virtual pins                 ; 0                                           ;
+; Total memory bits                  ; 0                                           ;
+; Embedded Multiplier 9-bit elements ; 0                                           ;
+; Total PLLs                         ; 1                                           ;
++------------------------------------+---------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                        ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                                     ; Setting            ; Default Value      ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                                     ; EP4CE115F29C7      ;                    ;
+; Top-level entity name                                                      ; Minesweeper        ; Minesweeper        ;
+; Family name                                                                ; Cyclone IV E       ; Cyclone V          ;
+; Use smart compilation                                                      ; Off                ; Off                ;
+; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                                ; Off                ; Off                ;
+; Restructure Multiplexers                                                   ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                                        ; Off                ; Off                ;
+; Preserve fewer node names                                                  ; On                 ; On                 ;
+; OpenCore Plus hardware evaluation                                          ; Enable             ; Enable             ;
+; Verilog Version                                                            ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                               ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                                   ; Auto               ; Auto               ;
+; Safe State Machine                                                         ; Off                ; Off                ;
+; Extract Verilog State Machines                                             ; On                 ; On                 ;
+; Extract VHDL State Machines                                                ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                          ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                                 ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                             ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                                    ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                                  ; On                 ; On                 ;
+; Parallel Synthesis                                                         ; On                 ; On                 ;
+; DSP Block Balancing                                                        ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                                         ; On                 ; On                 ;
+; Power-Up Don't Care                                                        ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                               ; Off                ; Off                ;
+; Remove Duplicate Registers                                                 ; On                 ; On                 ;
+; Ignore CARRY Buffers                                                       ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                                     ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                                      ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                                  ; Off                ; Off                ;
+; Ignore LCELL Buffers                                                       ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                        ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                             ; Off                ; Off                ;
+; Optimization Technique                                                     ; Balanced           ; Balanced           ;
+; Carry Chain Length                                                         ; 70                 ; 70                 ;
+; Auto Carry Chains                                                          ; On                 ; On                 ;
+; Auto Open-Drain Pins                                                       ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                                      ; Off                ; Off                ;
+; Auto ROM Replacement                                                       ; On                 ; On                 ;
+; Auto RAM Replacement                                                       ; On                 ; On                 ;
+; Auto DSP Block Replacement                                                 ; On                 ; On                 ;
+; Auto Shift Register Replacement                                            ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                            ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                              ; On                 ; On                 ;
+; Strict RAM Replacement                                                     ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                          ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                                     ; Off                ; Off                ;
+; Auto RAM Block Balancing                                                   ; On                 ; On                 ;
+; Auto RAM to Logic Cell Conversion                                          ; Off                ; Off                ;
+; Auto Resource Sharing                                                      ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                              ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing                        ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                          ; Off                ; Off                ;
+; Timing-Driven Synthesis                                                    ; On                 ; On                 ;
+; Report Parameter Settings                                                  ; On                 ; On                 ;
+; Report Source Assignments                                                  ; On                 ; On                 ;
+; Report Connectivity Checks                                                 ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                         ; Off                ; Off                ;
+; Synchronization Register Chain Length                                      ; 2                  ; 2                  ;
+; PowerPlay Power Optimization During Synthesis                              ; Normal compilation ; Normal compilation ;
+; HDL message level                                                          ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                            ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report                   ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report                         ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report                  ; 100                ; 100                ;
+; Clock MUX Protection                                                       ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                                ; Off                ; Off                ;
+; Block Design Naming                                                        ; Auto               ; Auto               ;
+; SDC constraint protection                                                  ; Off                ; Off                ;
+; Synthesis Effort                                                           ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal               ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                                       ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                                         ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                                ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                                     ; On                 ; On                 ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 4           ;
+; Maximum allowed            ; 2           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 2           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
+;     Processor 2            ;   0.0%      ;
++----------------------------+-------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                 ;
++----------------------------------+-----------------+------------------------------+--------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                             ; Library ;
++----------------------------------+-----------------+------------------------------+--------------------------------------------------------------------------+---------+
+; minesweeper.v                    ; yes             ; Auto-Found Verilog HDL File  ; C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v           ;         ;
+; altpll.tdf                       ; yes             ; Megafunction                 ; c:/intelfpga_lite/16.1/quartus/libraries/megafunctions/altpll.tdf        ;         ;
+; aglobal161.inc                   ; yes             ; Megafunction                 ; c:/intelfpga_lite/16.1/quartus/libraries/megafunctions/aglobal161.inc    ;         ;
+; stratix_pll.inc                  ; yes             ; Megafunction                 ; c:/intelfpga_lite/16.1/quartus/libraries/megafunctions/stratix_pll.inc   ;         ;
+; stratixii_pll.inc                ; yes             ; Megafunction                 ; c:/intelfpga_lite/16.1/quartus/libraries/megafunctions/stratixii_pll.inc ;         ;
+; cycloneii_pll.inc                ; yes             ; Megafunction                 ; c:/intelfpga_lite/16.1/quartus/libraries/megafunctions/cycloneii_pll.inc ;         ;
+; db/clock108_altpll.v             ; yes             ; Auto-Generated Megafunction  ; C:/Users/Ben/Documents/GitHub/ECE287FinalProject/db/clock108_altpll.v    ;         ;
++----------------------------------+-----------------+------------------------------+--------------------------------------------------------------------------+---------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                                                                                             ;
++---------------------------------------------+-------------------------------------------------------------------------------------------+
+; Resource                                    ; Usage                                                                                     ;
++---------------------------------------------+-------------------------------------------------------------------------------------------+
+; Estimated Total logic elements              ; 175                                                                                       ;
+;                                             ;                                                                                           ;
+; Total combinational functions               ; 175                                                                                       ;
+; Logic element usage by number of LUT inputs ;                                                                                           ;
+;     -- 4 input functions                    ; 84                                                                                        ;
+;     -- 3 input functions                    ; 18                                                                                        ;
+;     -- <=2 input functions                  ; 73                                                                                        ;
+;                                             ;                                                                                           ;
+; Logic elements by mode                      ;                                                                                           ;
+;     -- normal mode                          ; 113                                                                                       ;
+;     -- arithmetic mode                      ; 62                                                                                        ;
+;                                             ;                                                                                           ;
+; Total registers                             ; 64                                                                                        ;
+;     -- Dedicated logic registers            ; 64                                                                                        ;
+;     -- I/O registers                        ; 0                                                                                         ;
+;                                             ;                                                                                           ;
+; I/O pins                                    ; 31                                                                                        ;
+;                                             ;                                                                                           ;
+; Embedded Multiplier 9-bit elements          ; 0                                                                                         ;
+;                                             ;                                                                                           ;
+; Total PLLs                                  ; 1                                                                                         ;
+;     -- PLLs                                 ; 1                                                                                         ;
+;                                             ;                                                                                           ;
+; Maximum fan-out node                        ; clock108:comb_346|altpll:altpll_component|clock108_altpll:auto_generated|wire_pll1_clk[0] ;
+; Maximum fan-out                             ; 34                                                                                        ;
+; Total fan-out                               ; 788                                                                                       ;
+; Average fan-out                             ; 2.61                                                                                      ;
++---------------------------------------------+-------------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                           ;
++-------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------+-----------------+--------------+
+; Compilation Hierarchy Node                ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                   ; Entity Name     ; Library Name ;
++-------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------+-----------------+--------------+
+; |Minesweeper                              ; 175 (41)            ; 64 (0)                    ; 0           ; 0            ; 0       ; 0         ; 31   ; 0            ; |Minesweeper                                                                          ; Minesweeper     ; work         ;
+;    |H_SYNC:comb_347|                      ; 50 (50)             ; 32 (32)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Minesweeper|H_SYNC:comb_347                                                          ; H_SYNC          ; work         ;
+;    |V_SYNC:comb_348|                      ; 40 (40)             ; 32 (32)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Minesweeper|V_SYNC:comb_348                                                          ; V_SYNC          ; work         ;
+;    |clock108:comb_346|                    ; 0 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Minesweeper|clock108:comb_346                                                        ; clock108        ; work         ;
+;       |altpll:altpll_component|           ; 0 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Minesweeper|clock108:comb_346|altpll:altpll_component                                ; altpll          ; work         ;
+;          |clock108_altpll:auto_generated| ; 0 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Minesweeper|clock108:comb_346|altpll:altpll_component|clock108_altpll:auto_generated ; clock108_altpll ; work         ;
+;    |color:comb_1091|                      ; 44 (44)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Minesweeper|color:comb_1091                                                          ; color           ; work         ;
++-------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------+-----------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 64    ;
+; Number of registers using Synchronous Clear  ; 64    ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 0     ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 0     ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++----------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: clock108:comb_346|altpll:altpll_component ;
++-------------------------------+----------------------------+---------------------------+
+; Parameter Name                ; Value                      ; Type                      ;
++-------------------------------+----------------------------+---------------------------+
+; OPERATION_MODE                ; NORMAL                     ; Untyped                   ;
+; PLL_TYPE                      ; AUTO                       ; Untyped                   ;
+; LPM_HINT                      ; CBX_MODULE_PREFIX=clock108 ; Untyped                   ;
+; QUALIFY_CONF_DONE             ; OFF                        ; Untyped                   ;
+; COMPENSATE_CLOCK              ; CLK0                       ; Untyped                   ;
+; SCAN_CHAIN                    ; LONG                       ; Untyped                   ;
+; PRIMARY_CLOCK                 ; INCLK0                     ; Untyped                   ;
+; INCLK0_INPUT_FREQUENCY        ; 20000                      ; Signed Integer            ;
+; INCLK1_INPUT_FREQUENCY        ; 0                          ; Untyped                   ;
+; GATE_LOCK_SIGNAL              ; NO                         ; Untyped                   ;
+; GATE_LOCK_COUNTER             ; 0                          ; Untyped                   ;
+; LOCK_HIGH                     ; 1                          ; Untyped                   ;
+; LOCK_LOW                      ; 1                          ; Untyped                   ;
+; VALID_LOCK_MULTIPLIER         ; 1                          ; Untyped                   ;
+; INVALID_LOCK_MULTIPLIER       ; 5                          ; Untyped                   ;
+; SWITCH_OVER_ON_LOSSCLK        ; OFF                        ; Untyped                   ;
+; SWITCH_OVER_ON_GATED_LOCK     ; OFF                        ; Untyped                   ;
+; ENABLE_SWITCH_OVER_COUNTER    ; OFF                        ; Untyped                   ;
+; SKIP_VCO                      ; OFF                        ; Untyped                   ;
+; SWITCH_OVER_COUNTER           ; 0                          ; Untyped                   ;
+; SWITCH_OVER_TYPE              ; AUTO                       ; Untyped                   ;
+; FEEDBACK_SOURCE               ; EXTCLK0                    ; Untyped                   ;
+; BANDWIDTH                     ; 0                          ; Untyped                   ;
+; BANDWIDTH_TYPE                ; AUTO                       ; Untyped                   ;
+; SPREAD_FREQUENCY              ; 0                          ; Untyped                   ;
+; DOWN_SPREAD                   ; 0                          ; Untyped                   ;
+; SELF_RESET_ON_GATED_LOSS_LOCK ; OFF                        ; Untyped                   ;
+; SELF_RESET_ON_LOSS_LOCK       ; OFF                        ; Untyped                   ;
+; CLK9_MULTIPLY_BY              ; 0                          ; Untyped                   ;
+; CLK8_MULTIPLY_BY              ; 0                          ; Untyped                   ;
+; CLK7_MULTIPLY_BY              ; 0                          ; Untyped                   ;
+; CLK6_MULTIPLY_BY              ; 0                          ; Untyped                   ;
+; CLK5_MULTIPLY_BY              ; 1                          ; Untyped                   ;
+; CLK4_MULTIPLY_BY              ; 1                          ; Untyped                   ;
+; CLK3_MULTIPLY_BY              ; 1                          ; Untyped                   ;
+; CLK2_MULTIPLY_BY              ; 1                          ; Untyped                   ;
+; CLK1_MULTIPLY_BY              ; 1                          ; Untyped                   ;
+; CLK0_MULTIPLY_BY              ; 54                         ; Signed Integer            ;
+; CLK9_DIVIDE_BY                ; 0                          ; Untyped                   ;
+; CLK8_DIVIDE_BY                ; 0                          ; Untyped                   ;
+; CLK7_DIVIDE_BY                ; 0                          ; Untyped                   ;
+; CLK6_DIVIDE_BY                ; 0                          ; Untyped                   ;
+; CLK5_DIVIDE_BY                ; 1                          ; Untyped                   ;
+; CLK4_DIVIDE_BY                ; 1                          ; Untyped                   ;
+; CLK3_DIVIDE_BY                ; 1                          ; Untyped                   ;
+; CLK2_DIVIDE_BY                ; 1                          ; Untyped                   ;
+; CLK1_DIVIDE_BY                ; 1                          ; Untyped                   ;
+; CLK0_DIVIDE_BY                ; 25                         ; Signed Integer            ;
+; CLK9_PHASE_SHIFT              ; 0                          ; Untyped                   ;
+; CLK8_PHASE_SHIFT              ; 0                          ; Untyped                   ;
+; CLK7_PHASE_SHIFT              ; 0                          ; Untyped                   ;
+; CLK6_PHASE_SHIFT              ; 0                          ; Untyped                   ;
+; CLK5_PHASE_SHIFT              ; 0                          ; Untyped                   ;
+; CLK4_PHASE_SHIFT              ; 0                          ; Untyped                   ;
+; CLK3_PHASE_SHIFT              ; 0                          ; Untyped                   ;
+; CLK2_PHASE_SHIFT              ; 0                          ; Untyped                   ;
+; CLK1_PHASE_SHIFT              ; 0                          ; Untyped                   ;
+; CLK0_PHASE_SHIFT              ; 0                          ; Untyped                   ;
+; CLK5_TIME_DELAY               ; 0                          ; Untyped                   ;
+; CLK4_TIME_DELAY               ; 0                          ; Untyped                   ;
+; CLK3_TIME_DELAY               ; 0                          ; Untyped                   ;
+; CLK2_TIME_DELAY               ; 0                          ; Untyped                   ;
+; CLK1_TIME_DELAY               ; 0                          ; Untyped                   ;
+; CLK0_TIME_DELAY               ; 0                          ; Untyped                   ;
+; CLK9_DUTY_CYCLE               ; 50                         ; Untyped                   ;
+; CLK8_DUTY_CYCLE               ; 50                         ; Untyped                   ;
+; CLK7_DUTY_CYCLE               ; 50                         ; Untyped                   ;
+; CLK6_DUTY_CYCLE               ; 50                         ; Untyped                   ;
+; CLK5_DUTY_CYCLE               ; 50                         ; Untyped                   ;
+; CLK4_DUTY_CYCLE               ; 50                         ; Untyped                   ;
+; CLK3_DUTY_CYCLE               ; 50                         ; Untyped                   ;
+; CLK2_DUTY_CYCLE               ; 50                         ; Untyped                   ;
+; CLK1_DUTY_CYCLE               ; 50                         ; Untyped                   ;
+; CLK0_DUTY_CYCLE               ; 50                         ; Signed Integer            ;
+; CLK9_USE_EVEN_COUNTER_MODE    ; OFF                        ; Untyped                   ;
+; CLK8_USE_EVEN_COUNTER_MODE    ; OFF                        ; Untyped                   ;
+; CLK7_USE_EVEN_COUNTER_MODE    ; OFF                        ; Untyped                   ;
+; CLK6_USE_EVEN_COUNTER_MODE    ; OFF                        ; Untyped                   ;
+; CLK5_USE_EVEN_COUNTER_MODE    ; OFF                        ; Untyped                   ;
+; CLK4_USE_EVEN_COUNTER_MODE    ; OFF                        ; Untyped                   ;
+; CLK3_USE_EVEN_COUNTER_MODE    ; OFF                        ; Untyped                   ;
+; CLK2_USE_EVEN_COUNTER_MODE    ; OFF                        ; Untyped                   ;
+; CLK1_USE_EVEN_COUNTER_MODE    ; OFF                        ; Untyped                   ;
+; CLK0_USE_EVEN_COUNTER_MODE    ; OFF                        ; Untyped                   ;
+; CLK9_USE_EVEN_COUNTER_VALUE   ; OFF                        ; Untyped                   ;
+; CLK8_USE_EVEN_COUNTER_VALUE   ; OFF                        ; Untyped                   ;
+; CLK7_USE_EVEN_COUNTER_VALUE   ; OFF                        ; Untyped                   ;
+; CLK6_USE_EVEN_COUNTER_VALUE   ; OFF                        ; Untyped                   ;
+; CLK5_USE_EVEN_COUNTER_VALUE   ; OFF                        ; Untyped                   ;
+; CLK4_USE_EVEN_COUNTER_VALUE   ; OFF                        ; Untyped                   ;
+; CLK3_USE_EVEN_COUNTER_VALUE   ; OFF                        ; Untyped                   ;
+; CLK2_USE_EVEN_COUNTER_VALUE   ; OFF                        ; Untyped                   ;
+; CLK1_USE_EVEN_COUNTER_VALUE   ; OFF                        ; Untyped                   ;
+; CLK0_USE_EVEN_COUNTER_VALUE   ; OFF                        ; Untyped                   ;
+; LOCK_WINDOW_UI                ;  0.05                      ; Untyped                   ;
+; LOCK_WINDOW_UI_BITS           ; UNUSED                     ; Untyped                   ;
+; VCO_RANGE_DETECTOR_LOW_BITS   ; UNUSED                     ; Untyped                   ;
+; VCO_RANGE_DETECTOR_HIGH_BITS  ; UNUSED                     ; Untyped                   ;
+; DPA_MULTIPLY_BY               ; 0                          ; Untyped                   ;
+; DPA_DIVIDE_BY                 ; 1                          ; Untyped                   ;
+; DPA_DIVIDER                   ; 0                          ; Untyped                   ;
+; EXTCLK3_MULTIPLY_BY           ; 1                          ; Untyped                   ;
+; EXTCLK2_MULTIPLY_BY           ; 1                          ; Untyped                   ;
+; EXTCLK1_MULTIPLY_BY           ; 1                          ; Untyped                   ;
+; EXTCLK0_MULTIPLY_BY           ; 1                          ; Untyped                   ;
+; EXTCLK3_DIVIDE_BY             ; 1                          ; Untyped                   ;
+; EXTCLK2_DIVIDE_BY             ; 1                          ; Untyped                   ;
+; EXTCLK1_DIVIDE_BY             ; 1                          ; Untyped                   ;
+; EXTCLK0_DIVIDE_BY             ; 1                          ; Untyped                   ;
+; EXTCLK3_PHASE_SHIFT           ; 0                          ; Untyped                   ;
+; EXTCLK2_PHASE_SHIFT           ; 0                          ; Untyped                   ;
+; EXTCLK1_PHASE_SHIFT           ; 0                          ; Untyped                   ;
+; EXTCLK0_PHASE_SHIFT           ; 0                          ; Untyped                   ;
+; EXTCLK3_TIME_DELAY            ; 0                          ; Untyped                   ;
+; EXTCLK2_TIME_DELAY            ; 0                          ; Untyped                   ;
+; EXTCLK1_TIME_DELAY            ; 0                          ; Untyped                   ;
+; EXTCLK0_TIME_DELAY            ; 0                          ; Untyped                   ;
+; EXTCLK3_DUTY_CYCLE            ; 50                         ; Untyped                   ;
+; EXTCLK2_DUTY_CYCLE            ; 50                         ; Untyped                   ;
+; EXTCLK1_DUTY_CYCLE            ; 50                         ; Untyped                   ;
+; EXTCLK0_DUTY_CYCLE            ; 50                         ; Untyped                   ;
+; VCO_MULTIPLY_BY               ; 0                          ; Untyped                   ;
+; VCO_DIVIDE_BY                 ; 0                          ; Untyped                   ;
+; SCLKOUT0_PHASE_SHIFT          ; 0                          ; Untyped                   ;
+; SCLKOUT1_PHASE_SHIFT          ; 0                          ; Untyped                   ;
+; VCO_MIN                       ; 0                          ; Untyped                   ;
+; VCO_MAX                       ; 0                          ; Untyped                   ;
+; VCO_CENTER                    ; 0                          ; Untyped                   ;
+; PFD_MIN                       ; 0                          ; Untyped                   ;
+; PFD_MAX                       ; 0                          ; Untyped                   ;
+; M_INITIAL                     ; 0                          ; Untyped                   ;
+; M                             ; 0                          ; Untyped                   ;
+; N                             ; 1                          ; Untyped                   ;
+; M2                            ; 1                          ; Untyped                   ;
+; N2                            ; 1                          ; Untyped                   ;
+; SS                            ; 1                          ; Untyped                   ;
+; C0_HIGH                       ; 0                          ; Untyped                   ;
+; C1_HIGH                       ; 0                          ; Untyped                   ;
+; C2_HIGH                       ; 0                          ; Untyped                   ;
+; C3_HIGH                       ; 0                          ; Untyped                   ;
+; C4_HIGH                       ; 0                          ; Untyped                   ;
+; C5_HIGH                       ; 0                          ; Untyped                   ;
+; C6_HIGH                       ; 0                          ; Untyped                   ;
+; C7_HIGH                       ; 0                          ; Untyped                   ;
+; C8_HIGH                       ; 0                          ; Untyped                   ;
+; C9_HIGH                       ; 0                          ; Untyped                   ;
+; C0_LOW                        ; 0                          ; Untyped                   ;
+; C1_LOW                        ; 0                          ; Untyped                   ;
+; C2_LOW                        ; 0                          ; Untyped                   ;
+; C3_LOW                        ; 0                          ; Untyped                   ;
+; C4_LOW                        ; 0                          ; Untyped                   ;
+; C5_LOW                        ; 0                          ; Untyped                   ;
+; C6_LOW                        ; 0                          ; Untyped                   ;
+; C7_LOW                        ; 0                          ; Untyped                   ;
+; C8_LOW                        ; 0                          ; Untyped                   ;
+; C9_LOW                        ; 0                          ; Untyped                   ;
+; C0_INITIAL                    ; 0                          ; Untyped                   ;
+; C1_INITIAL                    ; 0                          ; Untyped                   ;
+; C2_INITIAL                    ; 0                          ; Untyped                   ;
+; C3_INITIAL                    ; 0                          ; Untyped                   ;
+; C4_INITIAL                    ; 0                          ; Untyped                   ;
+; C5_INITIAL                    ; 0                          ; Untyped                   ;
+; C6_INITIAL                    ; 0                          ; Untyped                   ;
+; C7_INITIAL                    ; 0                          ; Untyped                   ;
+; C8_INITIAL                    ; 0                          ; Untyped                   ;
+; C9_INITIAL                    ; 0                          ; Untyped                   ;
+; C0_MODE                       ; BYPASS                     ; Untyped                   ;
+; C1_MODE                       ; BYPASS                     ; Untyped                   ;
+; C2_MODE                       ; BYPASS                     ; Untyped                   ;
+; C3_MODE                       ; BYPASS                     ; Untyped                   ;
+; C4_MODE                       ; BYPASS                     ; Untyped                   ;
+; C5_MODE                       ; BYPASS                     ; Untyped                   ;
+; C6_MODE                       ; BYPASS                     ; Untyped                   ;
+; C7_MODE                       ; BYPASS                     ; Untyped                   ;
+; C8_MODE                       ; BYPASS                     ; Untyped                   ;
+; C9_MODE                       ; BYPASS                     ; Untyped                   ;
+; C0_PH                         ; 0                          ; Untyped                   ;
+; C1_PH                         ; 0                          ; Untyped                   ;
+; C2_PH                         ; 0                          ; Untyped                   ;
+; C3_PH                         ; 0                          ; Untyped                   ;
+; C4_PH                         ; 0                          ; Untyped                   ;
+; C5_PH                         ; 0                          ; Untyped                   ;
+; C6_PH                         ; 0                          ; Untyped                   ;
+; C7_PH                         ; 0                          ; Untyped                   ;
+; C8_PH                         ; 0                          ; Untyped                   ;
+; C9_PH                         ; 0                          ; Untyped                   ;
+; L0_HIGH                       ; 1                          ; Untyped                   ;
+; L1_HIGH                       ; 1                          ; Untyped                   ;
+; G0_HIGH                       ; 1                          ; Untyped                   ;
+; G1_HIGH                       ; 1                          ; Untyped                   ;
+; G2_HIGH                       ; 1                          ; Untyped                   ;
+; G3_HIGH                       ; 1                          ; Untyped                   ;
+; E0_HIGH                       ; 1                          ; Untyped                   ;
+; E1_HIGH                       ; 1                          ; Untyped                   ;
+; E2_HIGH                       ; 1                          ; Untyped                   ;
+; E3_HIGH                       ; 1                          ; Untyped                   ;
+; L0_LOW                        ; 1                          ; Untyped                   ;
+; L1_LOW                        ; 1                          ; Untyped                   ;
+; G0_LOW                        ; 1                          ; Untyped                   ;
+; G1_LOW                        ; 1                          ; Untyped                   ;
+; G2_LOW                        ; 1                          ; Untyped                   ;
+; G3_LOW                        ; 1                          ; Untyped                   ;
+; E0_LOW                        ; 1                          ; Untyped                   ;
+; E1_LOW                        ; 1                          ; Untyped                   ;
+; E2_LOW                        ; 1                          ; Untyped                   ;
+; E3_LOW                        ; 1                          ; Untyped                   ;
+; L0_INITIAL                    ; 1                          ; Untyped                   ;
+; L1_INITIAL                    ; 1                          ; Untyped                   ;
+; G0_INITIAL                    ; 1                          ; Untyped                   ;
+; G1_INITIAL                    ; 1                          ; Untyped                   ;
+; G2_INITIAL                    ; 1                          ; Untyped                   ;
+; G3_INITIAL                    ; 1                          ; Untyped                   ;
+; E0_INITIAL                    ; 1                          ; Untyped                   ;
+; E1_INITIAL                    ; 1                          ; Untyped                   ;
+; E2_INITIAL                    ; 1                          ; Untyped                   ;
+; E3_INITIAL                    ; 1                          ; Untyped                   ;
+; L0_MODE                       ; BYPASS                     ; Untyped                   ;
+; L1_MODE                       ; BYPASS                     ; Untyped                   ;
+; G0_MODE                       ; BYPASS                     ; Untyped                   ;
+; G1_MODE                       ; BYPASS                     ; Untyped                   ;
+; G2_MODE                       ; BYPASS                     ; Untyped                   ;
+; G3_MODE                       ; BYPASS                     ; Untyped                   ;
+; E0_MODE                       ; BYPASS                     ; Untyped                   ;
+; E1_MODE                       ; BYPASS                     ; Untyped                   ;
+; E2_MODE                       ; BYPASS                     ; Untyped                   ;
+; E3_MODE                       ; BYPASS                     ; Untyped                   ;
+; L0_PH                         ; 0                          ; Untyped                   ;
+; L1_PH                         ; 0                          ; Untyped                   ;
+; G0_PH                         ; 0                          ; Untyped                   ;
+; G1_PH                         ; 0                          ; Untyped                   ;
+; G2_PH                         ; 0                          ; Untyped                   ;
+; G3_PH                         ; 0                          ; Untyped                   ;
+; E0_PH                         ; 0                          ; Untyped                   ;
+; E1_PH                         ; 0                          ; Untyped                   ;
+; E2_PH                         ; 0                          ; Untyped                   ;
+; E3_PH                         ; 0                          ; Untyped                   ;
+; M_PH                          ; 0                          ; Untyped                   ;
+; C1_USE_CASC_IN                ; OFF                        ; Untyped                   ;
+; C2_USE_CASC_IN                ; OFF                        ; Untyped                   ;
+; C3_USE_CASC_IN                ; OFF                        ; Untyped                   ;
+; C4_USE_CASC_IN                ; OFF                        ; Untyped                   ;
+; C5_USE_CASC_IN                ; OFF                        ; Untyped                   ;
+; C6_USE_CASC_IN                ; OFF                        ; Untyped                   ;
+; C7_USE_CASC_IN                ; OFF                        ; Untyped                   ;
+; C8_USE_CASC_IN                ; OFF                        ; Untyped                   ;
+; C9_USE_CASC_IN                ; OFF                        ; Untyped                   ;
+; CLK0_COUNTER                  ; G0                         ; Untyped                   ;
+; CLK1_COUNTER                  ; G0                         ; Untyped                   ;
+; CLK2_COUNTER                  ; G0                         ; Untyped                   ;
+; CLK3_COUNTER                  ; G0                         ; Untyped                   ;
+; CLK4_COUNTER                  ; G0                         ; Untyped                   ;
+; CLK5_COUNTER                  ; G0                         ; Untyped                   ;
+; CLK6_COUNTER                  ; E0                         ; Untyped                   ;
+; CLK7_COUNTER                  ; E1                         ; Untyped                   ;
+; CLK8_COUNTER                  ; E2                         ; Untyped                   ;
+; CLK9_COUNTER                  ; E3                         ; Untyped                   ;
+; L0_TIME_DELAY                 ; 0                          ; Untyped                   ;
+; L1_TIME_DELAY                 ; 0                          ; Untyped                   ;
+; G0_TIME_DELAY                 ; 0                          ; Untyped                   ;
+; G1_TIME_DELAY                 ; 0                          ; Untyped                   ;
+; G2_TIME_DELAY                 ; 0                          ; Untyped                   ;
+; G3_TIME_DELAY                 ; 0                          ; Untyped                   ;
+; E0_TIME_DELAY                 ; 0                          ; Untyped                   ;
+; E1_TIME_DELAY                 ; 0                          ; Untyped                   ;
+; E2_TIME_DELAY                 ; 0                          ; Untyped                   ;
+; E3_TIME_DELAY                 ; 0                          ; Untyped                   ;
+; M_TIME_DELAY                  ; 0                          ; Untyped                   ;
+; N_TIME_DELAY                  ; 0                          ; Untyped                   ;
+; EXTCLK3_COUNTER               ; E3                         ; Untyped                   ;
+; EXTCLK2_COUNTER               ; E2                         ; Untyped                   ;
+; EXTCLK1_COUNTER               ; E1                         ; Untyped                   ;
+; EXTCLK0_COUNTER               ; E0                         ; Untyped                   ;
+; ENABLE0_COUNTER               ; L0                         ; Untyped                   ;
+; ENABLE1_COUNTER               ; L0                         ; Untyped                   ;
+; CHARGE_PUMP_CURRENT           ; 2                          ; Untyped                   ;
+; LOOP_FILTER_R                 ;  1.000000                  ; Untyped                   ;
+; LOOP_FILTER_C                 ; 5                          ; Untyped                   ;
+; CHARGE_PUMP_CURRENT_BITS      ; 9999                       ; Untyped                   ;
+; LOOP_FILTER_R_BITS            ; 9999                       ; Untyped                   ;
+; LOOP_FILTER_C_BITS            ; 9999                       ; Untyped                   ;
+; VCO_POST_SCALE                ; 0                          ; Untyped                   ;
+; CLK2_OUTPUT_FREQUENCY         ; 0                          ; Untyped                   ;
+; CLK1_OUTPUT_FREQUENCY         ; 0                          ; Untyped                   ;
+; CLK0_OUTPUT_FREQUENCY         ; 0                          ; Untyped                   ;
+; INTENDED_DEVICE_FAMILY        ; Cyclone IV E               ; Untyped                   ;
+; PORT_CLKENA0                  ; PORT_UNUSED                ; Untyped                   ;
+; PORT_CLKENA1                  ; PORT_UNUSED                ; Untyped                   ;
+; PORT_CLKENA2                  ; PORT_UNUSED                ; Untyped                   ;
+; PORT_CLKENA3                  ; PORT_UNUSED                ; Untyped                   ;
+; PORT_CLKENA4                  ; PORT_UNUSED                ; Untyped                   ;
+; PORT_CLKENA5                  ; PORT_UNUSED                ; Untyped                   ;
+; PORT_EXTCLKENA0               ; PORT_CONNECTIVITY          ; Untyped                   ;
+; PORT_EXTCLKENA1               ; PORT_CONNECTIVITY          ; Untyped                   ;
+; PORT_EXTCLKENA2               ; PORT_CONNECTIVITY          ; Untyped                   ;
+; PORT_EXTCLKENA3               ; PORT_CONNECTIVITY          ; Untyped                   ;
+; PORT_EXTCLK0                  ; PORT_UNUSED                ; Untyped                   ;
+; PORT_EXTCLK1                  ; PORT_UNUSED                ; Untyped                   ;
+; PORT_EXTCLK2                  ; PORT_UNUSED                ; Untyped                   ;
+; PORT_EXTCLK3                  ; PORT_UNUSED                ; Untyped                   ;
+; PORT_CLKBAD0                  ; PORT_UNUSED                ; Untyped                   ;
+; PORT_CLKBAD1                  ; PORT_UNUSED                ; Untyped                   ;
+; PORT_CLK0                     ; PORT_USED                  ; Untyped                   ;
+; PORT_CLK1                     ; PORT_UNUSED                ; Untyped                   ;
+; PORT_CLK2                     ; PORT_UNUSED                ; Untyped                   ;
+; PORT_CLK3                     ; PORT_UNUSED                ; Untyped                   ;
+; PORT_CLK4                     ; PORT_UNUSED                ; Untyped                   ;
+; PORT_CLK5                     ; PORT_UNUSED                ; Untyped                   ;
+; PORT_CLK6                     ; PORT_UNUSED                ; Untyped                   ;
+; PORT_CLK7                     ; PORT_UNUSED                ; Untyped                   ;
+; PORT_CLK8                     ; PORT_UNUSED                ; Untyped                   ;
+; PORT_CLK9                     ; PORT_UNUSED                ; Untyped                   ;
+; PORT_SCANDATA                 ; PORT_UNUSED                ; Untyped                   ;
+; PORT_SCANDATAOUT              ; PORT_UNUSED                ; Untyped                   ;
+; PORT_SCANDONE                 ; PORT_UNUSED                ; Untyped                   ;
+; PORT_SCLKOUT1                 ; PORT_CONNECTIVITY          ; Untyped                   ;
+; PORT_SCLKOUT0                 ; PORT_CONNECTIVITY          ; Untyped                   ;
+; PORT_ACTIVECLOCK              ; PORT_UNUSED                ; Untyped                   ;
+; PORT_CLKLOSS                  ; PORT_UNUSED                ; Untyped                   ;
+; PORT_INCLK1                   ; PORT_UNUSED                ; Untyped                   ;
+; PORT_INCLK0                   ; PORT_USED                  ; Untyped                   ;
+; PORT_FBIN                     ; PORT_UNUSED                ; Untyped                   ;
+; PORT_PLLENA                   ; PORT_UNUSED                ; Untyped                   ;
+; PORT_CLKSWITCH                ; PORT_UNUSED                ; Untyped                   ;
+; PORT_ARESET                   ; PORT_USED                  ; Untyped                   ;
+; PORT_PFDENA                   ; PORT_UNUSED                ; Untyped                   ;
+; PORT_SCANCLK                  ; PORT_UNUSED                ; Untyped                   ;
+; PORT_SCANACLR                 ; PORT_UNUSED                ; Untyped                   ;
+; PORT_SCANREAD                 ; PORT_UNUSED                ; Untyped                   ;
+; PORT_SCANWRITE                ; PORT_UNUSED                ; Untyped                   ;
+; PORT_ENABLE0                  ; PORT_CONNECTIVITY          ; Untyped                   ;
+; PORT_ENABLE1                  ; PORT_CONNECTIVITY          ; Untyped                   ;
+; PORT_LOCKED                   ; PORT_USED                  ; Untyped                   ;
+; PORT_CONFIGUPDATE             ; PORT_UNUSED                ; Untyped                   ;
+; PORT_FBOUT                    ; PORT_CONNECTIVITY          ; Untyped                   ;
+; PORT_PHASEDONE                ; PORT_UNUSED                ; Untyped                   ;
+; PORT_PHASESTEP                ; PORT_UNUSED                ; Untyped                   ;
+; PORT_PHASEUPDOWN              ; PORT_UNUSED                ; Untyped                   ;
+; PORT_SCANCLKENA               ; PORT_UNUSED                ; Untyped                   ;
+; PORT_PHASECOUNTERSELECT       ; PORT_UNUSED                ; Untyped                   ;
+; PORT_VCOOVERRANGE             ; PORT_CONNECTIVITY          ; Untyped                   ;
+; PORT_VCOUNDERRANGE            ; PORT_CONNECTIVITY          ; Untyped                   ;
+; M_TEST_SOURCE                 ; 5                          ; Untyped                   ;
+; C0_TEST_SOURCE                ; 5                          ; Untyped                   ;
+; C1_TEST_SOURCE                ; 5                          ; Untyped                   ;
+; C2_TEST_SOURCE                ; 5                          ; Untyped                   ;
+; C3_TEST_SOURCE                ; 5                          ; Untyped                   ;
+; C4_TEST_SOURCE                ; 5                          ; Untyped                   ;
+; C5_TEST_SOURCE                ; 5                          ; Untyped                   ;
+; C6_TEST_SOURCE                ; 5                          ; Untyped                   ;
+; C7_TEST_SOURCE                ; 5                          ; Untyped                   ;
+; C8_TEST_SOURCE                ; 5                          ; Untyped                   ;
+; C9_TEST_SOURCE                ; 5                          ; Untyped                   ;
+; CBXI_PARAMETER                ; clock108_altpll            ; Untyped                   ;
+; VCO_FREQUENCY_CONTROL         ; AUTO                       ; Untyped                   ;
+; VCO_PHASE_SHIFT_STEP          ; 0                          ; Untyped                   ;
+; WIDTH_CLOCK                   ; 5                          ; Signed Integer            ;
+; WIDTH_PHASECOUNTERSELECT      ; 4                          ; Untyped                   ;
+; USING_FBMIMICBIDIR_PORT       ; OFF                        ; Untyped                   ;
+; DEVICE_FAMILY                 ; Cyclone IV E               ; Untyped                   ;
+; SCAN_CHAIN_MIF_FILE           ; UNUSED                     ; Untyped                   ;
+; SIM_GATE_LOCK_DEVICE_BEHAVIOR ; OFF                        ; Untyped                   ;
+; AUTO_CARRY_CHAINS             ; ON                         ; AUTO_CARRY                ;
+; IGNORE_CARRY_BUFFERS          ; OFF                        ; IGNORE_CARRY              ;
+; AUTO_CASCADE_CHAINS           ; ON                         ; AUTO_CASCADE              ;
+; IGNORE_CASCADE_BUFFERS        ; OFF                        ; IGNORE_CASCADE            ;
++-------------------------------+----------------------------+---------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------+
+; altpll Parameter Settings by Entity Instance                              ;
++-------------------------------+-------------------------------------------+
+; Name                          ; Value                                     ;
++-------------------------------+-------------------------------------------+
+; Number of entity instances    ; 1                                         ;
+; Entity Instance               ; clock108:comb_346|altpll:altpll_component ;
+;     -- OPERATION_MODE         ; NORMAL                                    ;
+;     -- PLL_TYPE               ; AUTO                                      ;
+;     -- PRIMARY_CLOCK          ; INCLK0                                    ;
+;     -- INCLK0_INPUT_FREQUENCY ; 20000                                     ;
+;     -- INCLK1_INPUT_FREQUENCY ; 0                                         ;
+;     -- VCO_MULTIPLY_BY        ; 0                                         ;
+;     -- VCO_DIVIDE_BY          ; 0                                         ;
++-------------------------------+-------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "color:comb_1091"                                                                                                                             ;
++-------+-------+----------+----------------------------------------------------------------------------------------------------------------------------------------------+
+; Port  ; Type  ; Severity ; Details                                                                                                                                      ;
++-------+-------+----------+----------------------------------------------------------------------------------------------------------------------------------------------+
+; box38 ; Input ; Warning  ; Declared by entity but not connected by instance. If a default value exists, it will be used.  Otherwise, the port will be connected to GND. ;
++-------+-------+----------+----------------------------------------------------------------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "V_SYNC:comb_348"                                                                                                                ;
++--------+--------+----------+-------------------------------------------------------------------------------------------------------------------------------+
+; Port   ; Type   ; Severity ; Details                                                                                                                       ;
++--------+--------+----------+-------------------------------------------------------------------------------------------------------------------------------+
+; bout   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed.                                           ;
+; Ycount ; Output ; Warning  ; Output or bidir port (32 bits) is wider than the port expression (31 bits) it drives; bit(s) "Ycount[31..31]" have no fanouts ;
++--------+--------+----------+-------------------------------------------------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "H_SYNC:comb_347"                                                                                                                ;
++--------+--------+----------+-------------------------------------------------------------------------------------------------------------------------------+
+; Port   ; Type   ; Severity ; Details                                                                                                                       ;
++--------+--------+----------+-------------------------------------------------------------------------------------------------------------------------------+
+; bout   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed.                                           ;
+; Xcount ; Output ; Warning  ; Output or bidir port (32 bits) is wider than the port expression (31 bits) it drives; bit(s) "Xcount[31..31]" have no fanouts ;
++--------+--------+----------+-------------------------------------------------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "clock108:comb_346"                                                                    ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+; Port   ; Type   ; Severity ; Details                                                                             ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+; locked ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "countingRefresh:comb_345"                                                                                                                      ;
++-------+--------+----------+-----------------------------------------------------------------------------------------------------------------------------------------------+
+; Port  ; Type   ; Severity ; Details                                                                                                                                       ;
++-------+--------+----------+-----------------------------------------------------------------------------------------------------------------------------------------------+
+; X     ; Input  ; Warning  ; Input port expression (31 bits) is smaller than the input port (32 bits) it drives.  Extra input bit(s) "X[31..31]" will be connected to GND. ;
+; Y     ; Input  ; Warning  ; Input port expression (31 bits) is smaller than the input port (32 bits) it drives.  Extra input bit(s) "Y[31..31]" will be connected to GND. ;
+; count ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed.                                                           ;
++-------+--------+----------+-----------------------------------------------------------------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------+
+; Post-Synthesis Netlist Statistics for Top Partition ;
++-----------------------+-----------------------------+
+; Type                  ; Count                       ;
++-----------------------+-----------------------------+
+; boundary_port         ; 31                          ;
+; cycloneiii_ff         ; 64                          ;
+;     SCLR              ; 64                          ;
+; cycloneiii_lcell_comb ; 177                         ;
+;     arith             ; 62                          ;
+;         2 data inputs ; 62                          ;
+;     normal            ; 115                         ;
+;         0 data inputs ; 1                           ;
+;         1 data inputs ; 3                           ;
+;         2 data inputs ; 9                           ;
+;         3 data inputs ; 18                          ;
+;         4 data inputs ; 84                          ;
+; cycloneiii_pll        ; 1                           ;
+;                       ;                             ;
+; Max LUT depth         ; 8.00                        ;
+; Average LUT depth     ; 5.11                        ;
++-----------------------+-----------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:02     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Analysis & Synthesis
+    Info: Version 16.1.0 Build 196 10/24/2016 SJ Lite Edition
+    Info: Processing started: Sat Dec 03 17:19:36 2016
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Minesweeper -c Minesweeper
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
+Info (12021): Found 1 design units, including 1 entities, in source file main.v
+    Info (12023): Found entity 1: main File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/Main.v Line: 1
+Warning (12125): Using design file minesweeper.v, which is not specified as a design file for the current project, but contains definitions for 6 design units and 6 entities in project
+    Info (12023): Found entity 1: Minesweeper File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 20
+    Info (12023): Found entity 2: countingRefresh File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 1953
+    Info (12023): Found entity 3: color File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 1976
+    Info (12023): Found entity 4: H_SYNC File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 2198
+    Info (12023): Found entity 5: V_SYNC File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 2249
+    Info (12023): Found entity 6: clock108 File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 2293
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(123): created implicit net for "Object1" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 123
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(131): created implicit net for "Object2" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 131
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(139): created implicit net for "Object3" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 139
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(146): created implicit net for "Object4" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 146
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(153): created implicit net for "Object5" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 153
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(160): created implicit net for "Object6" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 160
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(167): created implicit net for "Object7" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 167
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(174): created implicit net for "Object8" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 174
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(181): created implicit net for "Object9" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 181
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(188): created implicit net for "Object10" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 188
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(195): created implicit net for "Object11" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 195
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(202): created implicit net for "Object12" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 202
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(209): created implicit net for "Object13" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 209
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(216): created implicit net for "Object14" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 216
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(223): created implicit net for "Object15" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 223
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(230): created implicit net for "Object16" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 230
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(237): created implicit net for "Object17" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 237
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(244): created implicit net for "Object18" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 244
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(251): created implicit net for "Object19" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 251
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(258): created implicit net for "Object20" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 258
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(265): created implicit net for "Object21" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 265
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(272): created implicit net for "Object22" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 272
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(279): created implicit net for "Object23" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 279
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(286): created implicit net for "Object24" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 286
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(293): created implicit net for "Object25" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 293
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(300): created implicit net for "Object26" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 300
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(307): created implicit net for "Object27" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 307
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(314): created implicit net for "Object28" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 314
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(321): created implicit net for "Object29" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 321
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(328): created implicit net for "Object30" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 328
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(335): created implicit net for "Object31" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 335
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(342): created implicit net for "Object32" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 342
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(349): created implicit net for "Object33" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 349
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(356): created implicit net for "Object34" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 356
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(363): created implicit net for "Object35" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 363
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(370): created implicit net for "Object36" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 370
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(377): created implicit net for "Object37" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 377
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(387): created implicit net for "Object38" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 387
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(394): created implicit net for "CLK_108" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 394
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(394): created implicit net for "locked" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 394
+Critical Warning (10846): Verilog HDL Instantiation warning at minesweeper.v(393): instance has no name File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 393
+Critical Warning (10846): Verilog HDL Instantiation warning at minesweeper.v(394): instance has no name File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 394
+Critical Warning (10846): Verilog HDL Instantiation warning at minesweeper.v(399): instance has no name File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 399
+Critical Warning (10846): Verilog HDL Instantiation warning at minesweeper.v(400): instance has no name File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 400
+Critical Warning (10846): Verilog HDL Instantiation warning at minesweeper.v(1942): instance has no name File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 1942
+Info (12127): Elaborating entity "Minesweeper" for the top level hierarchy
+Warning (10036): Verilog HDL or VHDL warning at minesweeper.v(408): object "box38" assigned a value but never read File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 408
+Info (12128): Elaborating entity "countingRefresh" for hierarchy "countingRefresh:comb_345" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 393
+Warning (10230): Verilog HDL assignment warning at minesweeper.v(1961): truncated value with size 32 to match size of target (8) File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 1961
+Info (12128): Elaborating entity "clock108" for hierarchy "clock108:comb_346" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 394
+Info (12128): Elaborating entity "altpll" for hierarchy "clock108:comb_346|altpll:altpll_component" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 2356
+Info (12130): Elaborated megafunction instantiation "clock108:comb_346|altpll:altpll_component" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 2356
+Info (12133): Instantiated megafunction "clock108:comb_346|altpll:altpll_component" with the following parameter: File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 2356
+    Info (12134): Parameter "bandwidth_type" = "AUTO"
+    Info (12134): Parameter "clk0_divide_by" = "25"
+    Info (12134): Parameter "clk0_duty_cycle" = "50"
+    Info (12134): Parameter "clk0_multiply_by" = "54"
+    Info (12134): Parameter "clk0_phase_shift" = "0"
+    Info (12134): Parameter "compensate_clock" = "CLK0"
+    Info (12134): Parameter "inclk0_input_frequency" = "20000"
+    Info (12134): Parameter "intended_device_family" = "Cyclone IV E"
+    Info (12134): Parameter "lpm_hint" = "CBX_MODULE_PREFIX=clock108"
+    Info (12134): Parameter "lpm_type" = "altpll"
+    Info (12134): Parameter "operation_mode" = "NORMAL"
+    Info (12134): Parameter "pll_type" = "AUTO"
+    Info (12134): Parameter "port_activeclock" = "PORT_UNUSED"
+    Info (12134): Parameter "port_areset" = "PORT_USED"
+    Info (12134): Parameter "port_clkbad0" = "PORT_UNUSED"
+    Info (12134): Parameter "port_clkbad1" = "PORT_UNUSED"
+    Info (12134): Parameter "port_clkloss" = "PORT_UNUSED"
+    Info (12134): Parameter "port_clkswitch" = "PORT_UNUSED"
+    Info (12134): Parameter "port_configupdate" = "PORT_UNUSED"
+    Info (12134): Parameter "port_fbin" = "PORT_UNUSED"
+    Info (12134): Parameter "port_inclk0" = "PORT_USED"
+    Info (12134): Parameter "port_inclk1" = "PORT_UNUSED"
+    Info (12134): Parameter "port_locked" = "PORT_USED"
+    Info (12134): Parameter "port_pfdena" = "PORT_UNUSED"
+    Info (12134): Parameter "port_phasecounterselect" = "PORT_UNUSED"
+    Info (12134): Parameter "port_phasedone" = "PORT_UNUSED"
+    Info (12134): Parameter "port_phasestep" = "PORT_UNUSED"
+    Info (12134): Parameter "port_phaseupdown" = "PORT_UNUSED"
+    Info (12134): Parameter "port_pllena" = "PORT_UNUSED"
+    Info (12134): Parameter "port_scanaclr" = "PORT_UNUSED"
+    Info (12134): Parameter "port_scanclk" = "PORT_UNUSED"
+    Info (12134): Parameter "port_scanclkena" = "PORT_UNUSED"
+    Info (12134): Parameter "port_scandata" = "PORT_UNUSED"
+    Info (12134): Parameter "port_scandataout" = "PORT_UNUSED"
+    Info (12134): Parameter "port_scandone" = "PORT_UNUSED"
+    Info (12134): Parameter "port_scanread" = "PORT_UNUSED"
+    Info (12134): Parameter "port_scanwrite" = "PORT_UNUSED"
+    Info (12134): Parameter "port_clk0" = "PORT_USED"
+    Info (12134): Parameter "port_clk1" = "PORT_UNUSED"
+    Info (12134): Parameter "port_clk2" = "PORT_UNUSED"
+    Info (12134): Parameter "port_clk3" = "PORT_UNUSED"
+    Info (12134): Parameter "port_clk4" = "PORT_UNUSED"
+    Info (12134): Parameter "port_clk5" = "PORT_UNUSED"
+    Info (12134): Parameter "port_clkena0" = "PORT_UNUSED"
+    Info (12134): Parameter "port_clkena1" = "PORT_UNUSED"
+    Info (12134): Parameter "port_clkena2" = "PORT_UNUSED"
+    Info (12134): Parameter "port_clkena3" = "PORT_UNUSED"
+    Info (12134): Parameter "port_clkena4" = "PORT_UNUSED"
+    Info (12134): Parameter "port_clkena5" = "PORT_UNUSED"
+    Info (12134): Parameter "port_extclk0" = "PORT_UNUSED"
+    Info (12134): Parameter "port_extclk1" = "PORT_UNUSED"
+    Info (12134): Parameter "port_extclk2" = "PORT_UNUSED"
+    Info (12134): Parameter "port_extclk3" = "PORT_UNUSED"
+    Info (12134): Parameter "self_reset_on_loss_lock" = "OFF"
+    Info (12134): Parameter "width_clock" = "5"
+Info (12021): Found 1 design units, including 1 entities, in source file db/clock108_altpll.v
+    Info (12023): Found entity 1: clock108_altpll File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/db/clock108_altpll.v Line: 31
+Info (12128): Elaborating entity "clock108_altpll" for hierarchy "clock108:comb_346|altpll:altpll_component|clock108_altpll:auto_generated" File: c:/intelfpga_lite/16.1/quartus/libraries/megafunctions/altpll.tdf Line: 898
+Info (12128): Elaborating entity "H_SYNC" for hierarchy "H_SYNC:comb_347" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 399
+Info (12128): Elaborating entity "V_SYNC" for hierarchy "V_SYNC:comb_348" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 400
+Info (12128): Elaborating entity "color" for hierarchy "color:comb_1091" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 1942
+Warning (12241): 4 hierarchies have connectivity warnings - see the Connectivity Checks report folder
+Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "VGA_SYNC_N" is stuck at GND File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 26
+Info (286030): Timing-Driven Synthesis is running
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 1 node(s), including 0 DDIO, 1 PLL, 0 transceiver and 0 LCELL
+Info (21057): Implemented 207 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 2 input pins
+    Info (21059): Implemented 29 output pins
+    Info (21061): Implemented 175 logic cells
+    Info (21065): Implemented 1 PLLs
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 52 warnings
+    Info: Peak virtual memory: 655 megabytes
+    Info: Processing ended: Sat Dec 03 17:19:57 2016
+    Info: Elapsed time: 00:00:21
+    Info: Total CPU time (on all processors): 00:00:42
+
+
