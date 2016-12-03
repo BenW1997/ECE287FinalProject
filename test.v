@@ -17,7 +17,7 @@ Parameters were set by Ben.
 //===========================================//
 //====================VGA====================//
 //===========================================//
-module test(clk, VGA_R, VGA_B, VGA_G, VGA_BLANK_N, VGA_SYNC_N , VGA_HS, VGA_VS, rst, VGA_CLK);
+module test(clk, KB_clk, data, VGA_R, VGA_B, VGA_G, VGA_BLANK_N, VGA_SYNC_N , VGA_HS, VGA_VS, rst, VGA_CLK);
 
 //outputs the colors, determined from the color module.
 output [7:0] VGA_R, VGA_B, VGA_G;
@@ -35,12 +35,13 @@ Coordinates of the pixel being assigned. Moves top to bottom, left to right.
 wire [30:0]X, Y;
 
 wire reset; 
-//input KB_clk; //needs pins
-//input data;
+input KB_clk; //needs pins
+input data;
 wire [4:0]direction;
+wire update;
 
 
-//kbInput kbIn(KB_clk, data, direction, reset);
+kbInput kbIn(KB_clk, data, direction, reset);
 //Not sure what these are, probably have to do with the display output system.
 wire [7:0]countRef;
 wire [31:0]countSample;
@@ -378,7 +379,15 @@ assign Object37 =((X >= Object37_L + object37X)&&(X <= Object37_R + object37X)&&
 
 //object38_localParams
 
-
+always @ (posedge updateSelect)
+begin
+	 case(direction)
+			5'b00010: object38Y <= (object38Y - 20);
+			5'b00100: object38X <= (object38X - 20);
+			5'b01000: object38Y <= (object38Y + 20);
+			5'b10000: object38X <= (object38X + 20);
+			endcase
+end
 
 localparam Object38_L = 31'd0;
 localparam Object38_R = Object38_L + 31'd100;
@@ -386,6 +395,19 @@ localparam Object38_T = 31'd0;
 localparam Object38_B = Object38_T + 31'd100;
 assign Object38 =((X >= Object38_L + object38X)&&(X <= Object38_R + object38X)&&(Y >= Object38_T+ object38Y)&&(Y <= Object38_B + object38Y));
 
+//COunter for selector 
+   reg updateSelect;
+	reg [19:0]count;	
+
+	always@(posedge KB_clk)
+	begin
+		count <= count + 1;
+		if(count == 833334) //32'b1000100
+		begin
+			updateSelect <= ~updateSelect;
+			count <= 0;
+		end	
+	end
 
 
 //======Borrowed Code======//
@@ -459,7 +481,7 @@ begin
 		box5 = 1'b0;
 		box6 = 1'b0;
 		box7 = 1'b0;
-				box8 = 1'b0;
+		box8 = 1'b0;
 		box9 = 1'b0;
 		box10 = 1'b0;
 		box11 = 1'b0;
@@ -498,7 +520,7 @@ begin
 		box5 = 1'b0;
 		box6 = 1'b0;
 		box7 = 1'b0;
-				box8 = 1'b0;
+		box8 = 1'b0;
 		box9 = 1'b0;
 		box10 = 1'b0;
 		box11 = 1'b0;
