@@ -1,0 +1,113 @@
+------------------------------------------------------------
+TimeQuest Timing Analyzer Summary
+------------------------------------------------------------
+
+Type  : Slow 1200mV 85C Model Setup 'H_SYNC:comb_1077|count[0]'
+Slack : -3.818
+TNS   : -108.996
+
+Type  : Slow 1200mV 85C Model Setup 'comb_1076|altpll_component|auto_generated|pll1|clk[0]'
+Slack : -3.395
+TNS   : -79.517
+
+Type  : Slow 1200mV 85C Model Setup 'clk'
+Slack : 7.243
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'comb_1076|altpll_component|auto_generated|pll1|clk[0]'
+Slack : 0.318
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'clk'
+Slack : 0.407
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'H_SYNC:comb_1077|count[0]'
+Slack : 0.582
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'H_SYNC:comb_1077|count[0]'
+Slack : -1.285
+TNS   : -41.120
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'comb_1076|altpll_component|auto_generated|pll1|clk[0]'
+Slack : 4.336
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'clk'
+Slack : 9.757
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Setup 'H_SYNC:comb_1077|count[0]'
+Slack : -3.427
+TNS   : -97.320
+
+Type  : Slow 1200mV 0C Model Setup 'comb_1076|altpll_component|auto_generated|pll1|clk[0]'
+Slack : -2.926
+TNS   : -67.751
+
+Type  : Slow 1200mV 0C Model Setup 'clk'
+Slack : 8.538
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'comb_1076|altpll_component|auto_generated|pll1|clk[0]'
+Slack : 0.198
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'clk'
+Slack : 0.365
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'H_SYNC:comb_1077|count[0]'
+Slack : 0.518
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'H_SYNC:comb_1077|count[0]'
+Slack : -1.285
+TNS   : -41.120
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'comb_1076|altpll_component|auto_generated|pll1|clk[0]'
+Slack : 4.322
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'clk'
+Slack : 9.777
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Setup 'comb_1076|altpll_component|auto_generated|pll1|clk[0]'
+Slack : -1.776
+TNS   : -42.253
+
+Type  : Fast 1200mV 0C Model Setup 'H_SYNC:comb_1077|count[0]'
+Slack : -1.260
+TNS   : -34.264
+
+Type  : Fast 1200mV 0C Model Setup 'clk'
+Slack : 13.625
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'comb_1076|altpll_component|auto_generated|pll1|clk[0]'
+Slack : 0.129
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'clk'
+Slack : 0.189
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'H_SYNC:comb_1077|count[0]'
+Slack : 0.270
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'H_SYNC:comb_1077|count[0]'
+Slack : -1.000
+TNS   : -32.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'comb_1076|altpll_component|auto_generated|pll1|clk[0]'
+Slack : 4.409
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'clk'
+Slack : 9.437
+TNS   : 0.000
+
+------------------------------------------------------------
