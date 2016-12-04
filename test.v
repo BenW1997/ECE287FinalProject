@@ -17,11 +17,11 @@ Parameters were set by Ben.
 //===========================================//
 //====================VGA====================//
 //===========================================//
-module test(clk, KB_clk, data, button1, button2, button3, button4, VGA_R, VGA_B, VGA_G, VGA_BLANK_N, VGA_SYNC_N , VGA_HS, VGA_VS, rst, VGA_CLK);
+module test(clk, KB_clk, data, button1, button2, button3, button4, select, VGA_R, VGA_B, VGA_G, VGA_BLANK_N, VGA_SYNC_N , VGA_HS, VGA_VS, rst, VGA_CLK);
 
 //outputs the colors, determined from the color module.
 output [7:0] VGA_R, VGA_B, VGA_G;
-input button1, button2, button3, button4;
+input button1, button2, button3, button4, select;
 //Makes sure the screen is synced right.
 output VGA_HS, VGA_VS, VGA_BLANK_N, VGA_CLK, VGA_SYNC_N;
 
@@ -396,21 +396,37 @@ localparam Object38_B = Object38_T + 31'd100;
 assign Object38 =((X >= Object38_L + object38X)&&(X <= Object38_R + object38X)&&(Y >= Object38_T+ object38Y)&&(Y <= Object38_B + object38Y));
 
 
-reg ccbox1;
+reg ccbox1; //need a reg for each color changer.  
+reg stay1;
 reg ccount;
-////SELECTOR MOUDLE
+////SELECTOR MOUDLE //this Module Controls us selecting the each grid in the field, and tells us what will change
 always @ (*)
 	begin
 	//ccount <= ccount +1;
-		if(object38X >= 31'd256 && object38X <= 31'd406 && object38Y <= 31'd166 && object38Y >= 31'd000) begin
+		if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd166 -31'd100 && object38Y >= 31'd000 && select == 1'b1) begin
 				ccbox1 = 1;
 			end
 		else 
-				begin
-					ccbox1 = 0;
-				end
-	
-
+			begin
+				ccbox1 = 0;
+			end
+		if(ccbox1 == 1) begin
+				stay1 = 1;
+			end
+		if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd166 && object38Y >= 31'd000 && select == 1'b1) begin
+				ccbox1 = 1;
+			end
+		else 
+			begin
+				ccbox1 = 0;
+			end	
+		if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd166 && object38Y >= 31'd000 && select == 1'b1) begin
+				ccbox1 = 1;
+			end
+		else 
+			begin
+				ccbox1 = 0;
+			end
 
 
 	end
@@ -478,318 +494,37 @@ reg box1, box2, box3, box4, box5, box6, box7, box8, box9, box10, box11, box12, b
 always@(*)
 begin
 	if(Object38) begin
-		box1 = 1'b0;
-		box2 = 1'b0; //changed
-		box3 = 1'b0;
-		box4 = 1'b0;
-		box5 = 1'b0;
-		box6 = 1'b0;
-		box7 = 1'b0;
-		box8 = 1'b0;
-		box9 = 1'b0;
-		box10 = 1'b0;
-		box11 = 1'b0;
-		box12 = 1'b0;
-		box13 = 1'b0;
-		box14 = 1'b0;
-		box15 = 1'b0;
-		box16 = 1'b0;
-		box17 = 1'b0;
-		box18 = 1'b0;
-		box19 = 1'b0;
-		box20 = 1'b0;
-		box21 = 1'b0;
-		box22 = 1'b0;
-		box23 = 1'b0;
-		box24 = 1'b0;
-		box25 = 1'b0;
-		box26 = 1'b0;
-		box27 = 1'b0;
-		box28 = 1'b0;
-		box29 = 1'b0;
-		box30 = 1'b0;
-		box31 = 1'b0;
-		box32 = 1'b0;
-		box33 = 1'b0;
-		box34 = 1'b0;
-		box35 = 1'b0;
-		box36 = 1'b0;
-		box37 = 1'b0;
-		box38= 1'b1;
+		box1 = 1'b0; box2 = 1'b0;	box3 = 1'b0;		box4 = 1'b0;		box5 = 1'b0;	box6 = 1'b0;		box7 = 1'b0; box8 = 1'b0;		box9 = 1'b0;		box10 = 1'b0;		box11 = 1'b0;		box12 = 1'b0;		box13 = 1'b0;		box14 = 1'b0;		box15 = 1'b0;		box16 = 1'b0;		box17 = 1'b0;		box18 = 1'b0;		box19 = 1'b0;		box20 = 1'b0;		box21 = 1'b0;		box22 = 1'b0;		box23 = 1'b0;		box24 = 1'b0;		box25 = 1'b0;		box26 = 1'b0;		box27 = 1'b0;		box28 = 1'b0;		box29 = 1'b0;		box30 = 1'b0;		box31 = 1'b0;		box32 = 1'b0;		box33 = 1'b0;		box34 = 1'b0;		box35 = 1'b0;		box36 = 1'b0;		box37 = 1'b0;	box38= 1'b1;
 		end
 
 	else if(Object1) begin
-		box1 = 1'b1;
-		box2 = 1'b0; //changed
-		box3 = 1'b0;
-		box4 = 1'b0;
-		box5 = 1'b0;
-		box6 = 1'b0;
-		box7 = 1'b0;
-		box8 = 1'b0;
-		box9 = 1'b0;
-		box10 = 1'b0;
-		box11 = 1'b0;
-		box12 = 1'b0;
-		box13 = 1'b0;
-		box14 = 1'b0;
-		box15 = 1'b0;
-		box16 = 1'b0;
-		box17 = 1'b0;
-		box18 = 1'b0;
-		box19 = 1'b0;
-		box20 = 1'b0;
-		box21 = 1'b0;
-		box22 = 1'b0;
-		box23 = 1'b0;
-		box24 = 1'b0;
-		box25 = 1'b0;
-		box26 = 1'b0;
-		box27 = 1'b0;
-		box28 = 1'b0;
-		box29 = 1'b0;
-		box30 = 1'b0;
-		box31 = 1'b0;
-		box32 = 1'b0;
-		box33 = 1'b0;
-		box34 = 1'b0;
-		box35 = 1'b0;
-		box36 = 1'b0;
-		box37 = 1'b0;
+		box1 = 1'b1;box2 = 1'b0;box3 = 1'b0;box4 = 1'b0;box5 = 1'b0;box6 = 1'b0;box7 = 1'b0;box8 = 1'b0;box9 = 1'b0;box10 = 1'b0;box11 = 1'b0;box12 = 1'b0;box13 = 1'b0;
+		box14 = 1'b0;box15 = 1'b0;box16 = 1'b0;box17 = 1'b0;box18 = 1'b0;box19 = 1'b0;box20 = 1'b0;box21 = 1'b0;box22 = 1'b0;box23 = 1'b0;box24 = 1'b0;box25 = 1'b0;box26 = 1'b0;box27 = 1'b0;
+		box28 = 1'b0;box29 = 1'b0;box30 = 1'b0;box31 = 1'b0;box32 = 1'b0;box33 = 1'b0;box34 = 1'b0;box35 = 1'b0;box36 = 1'b0;box37 = 1'b0;
 		end
 	else if(Object2) begin
-		box1 = 1'b0;//changed
-		box2 = 1'b1;//changed
-		box3 = 1'b0;
-		box4 = 1'b0;
-		box5 = 1'b0;
-		box6 = 1'b0;
-		box7 = 1'b0;
-		box8 = 1'b0;
-		box9 = 1'b0;
-		box10 = 1'b0;
-		box11 = 1'b0;
-		box12 = 1'b0;
-		box13 = 1'b0;
-		box14 = 1'b0;
-		box15 = 1'b0;
-		box16 = 1'b0;
-		box17 = 1'b0;
-		box18 = 1'b0;
-		box19 = 1'b0;
-		box20 = 1'b0;
-		box21 = 1'b0;
-		box22 = 1'b0;
-		box23 = 1'b0;
-		box24 = 1'b0;
-		box25 = 1'b0;
-		box26 = 1'b0;
-		box27 = 1'b0;
-		box28 = 1'b0;
-		box29 = 1'b0;
-		box30 = 1'b0;
-		box31 = 1'b0;
-		box32 = 1'b0;
-		box33 = 1'b0;
-		box34 = 1'b0;
-		box35 = 1'b0;
-		box36 = 1'b0;
-		box37 = 1'b0;
+		box1 = 1'b0;box2 = 1'b1;box3 = 1'b0;box4 = 1'b0;box5 = 1'b0;box6 = 1'b0;box7 = 1'b0;box8 = 1'b0;box9 = 1'b0;box10 = 1'b0;box11 = 1'b0;box12 = 1'b0;
+		box13 = 1'b0; box14 = 1'b0;box15 = 1'b0;box16 = 1'b0;box17 = 1'b0;box18 = 1'b0;box19 = 1'b0;box20 = 1'b0;box21 = 1'b0;box22 = 1'b0;box23 = 1'b0;box24 = 1'b0;box25 = 1'b0;box26 = 1'b0;
+		box27 = 1'b0;box28 = 1'b0;box29 = 1'b0;box30 = 1'b0;box31 = 1'b0;box32 = 1'b0;box33 = 1'b0;box34 = 1'b0;box35 = 1'b0;box36 = 1'b0;box37 = 1'b0;
 		end
 	else if(Object3) begin
-		box1 = 1'b0;//changed
-		box2 = 1'b0;//changed
-		box3 = 1'b1;
-		box4 = 1'b0;
-		box5 = 1'b0;
-		box6 = 1'b0;
-		box7 = 1'b0;
-				box8 = 1'b0;
-		box9 = 1'b0;
-		box10 = 1'b0;
-		box11 = 1'b0;
-		box12 = 1'b0;
-		box13 = 1'b0;
-		box14 = 1'b0;
-		box15 = 1'b0;
-		box16 = 1'b0;
-		box17 = 1'b0;
-		box18 = 1'b0;
-		box19 = 1'b0;
-		box20 = 1'b0;
-		box21 = 1'b0;
-		box22 = 1'b0;
-		box23 = 1'b0;
-		box24 = 1'b0;
-		box25 = 1'b0;
-		box26 = 1'b0;
-		box27 = 1'b0;
-		box28 = 1'b0;
-		box29 = 1'b0;
-		box30 = 1'b0;
-		box31 = 1'b0;
-		box32 = 1'b0;
-		box33 = 1'b0;
-		box34 = 1'b0;
-		box35 = 1'b0;
-		box36 = 1'b0;
-		box37 = 1'b0;
+		box1 = 1'b0;box2 = 1'b0;box3 = 1'b1;box4 = 1'b0;box5 = 1'b0;box6 = 1'b0;box7 = 1'b0;box8 = 1'b0;box9 = 1'b0;box10 = 1'b0;box11 = 1'b0;box12 = 1'b0;box13 = 1'b0;box14 = 1'b0;box15 = 1'b0;box16 = 1'b0;box17 = 1'b0;box18 = 1'b0;box19 = 1'b0;box20 = 1'b0;box21 = 1'b0;box22 = 1'b0;box23 = 1'b0;box24 = 1'b0;box25 = 1'b0;box26 = 1'b0;box27 = 1'b0;box28 = 1'b0;box29 = 1'b0;box30 = 1'b0;box31 = 1'b0;box32 = 1'b0;box33 = 1'b0;box34 = 1'b0;box35 = 1'b0;box36 = 1'b0;box37 = 1'b0;
 		end
 	else if(Object4) begin 
-		box1 = 1'b0;
-		box2 = 1'b0;
-		box3 = 1'b0;
-		box4 = 1'b1;
-		box5 = 1'b0;
-		box6 = 1'b0;
-		box7 = 1'b0;
-				box8 = 1'b0;
-		box9 = 1'b0;
-		box10 = 1'b0;
-		box11 = 1'b0;
-		box12 = 1'b0;
-		box13 = 1'b0;
-		box14 = 1'b0;
-		box15 = 1'b0;
-		box16 = 1'b0;
-		box17 = 1'b0;
-		box18 = 1'b0;
-		box19 = 1'b0;
-		box20 = 1'b0;
-		box21 = 1'b0;
-		box22 = 1'b0;
-		box23 = 1'b0;
-		box24 = 1'b0;
-		box25 = 1'b0;
-		box26 = 1'b0;
-		box27 = 1'b0;
-		box28 = 1'b0;
-		box29 = 1'b0;
-		box30 = 1'b0;
-		box31 = 1'b0;
-		box32 = 1'b0;
-		box33 = 1'b0;
-		box34 = 1'b0;
-		box35 = 1'b0;
-		box36 = 1'b0;
-		box37 = 1'b0;
+		box1 = 1'b0;box2 = 1'b0;box3 = 1'b0;box4 = 1'b1;box5 = 1'b0;box6 = 1'b0;box7 = 1'b0;box8 = 1'b0;box9 = 1'b0;box10 = 1'b0;box11 = 1'b0;box12 = 1'b0;box13 = 1'b0;box14 = 1'b0;box15 = 1'b0;box16 = 1'b0;box17 = 1'b0;box18 = 1'b0;box19 = 1'b0;box20 = 1'b0;box21 = 1'b0;box22 = 1'b0;box23 = 1'b0;box24 = 1'b0;box25 = 1'b0;box26 = 1'b0;box27 = 1'b0;box28 = 1'b0;box29 = 1'b0;box30 = 1'b0;box31 = 1'b0;box32 = 1'b0;box33 = 1'b0;box34 = 1'b0;box35 = 1'b0;box36 = 1'b0;box37 = 1'b0;
 		end
 	else if(Object5) begin 
-		box1 = 1'b0;
-		box2 = 1'b0;
-		box3 = 1'b0;
-		box4 = 1'b0;
-		box5 = 1'b1;
-		box6 = 1'b0;
-		box7 = 1'b0;
-				box8 = 1'b0;
-		box9 = 1'b0;
-		box10 = 1'b0;
-		box11 = 1'b0;
-		box12 = 1'b0;
-		box13 = 1'b0;
-		box14 = 1'b0;
-		box15 = 1'b0;
-		box16 = 1'b0;
-		box17 = 1'b0;
-		box18 = 1'b0;
-		box19 = 1'b0;
-		box20 = 1'b0;
-		box21 = 1'b0;
-		box22 = 1'b0;
-		box23 = 1'b0;
-		box24 = 1'b0;
-		box25 = 1'b0;
-		box26 = 1'b0;
-		box27 = 1'b0;
-		box28 = 1'b0;
-		box29 = 1'b0;
-		box30 = 1'b0;
-		box31 = 1'b0;
-		box32 = 1'b0;
-		box33 = 1'b0;
-		box34 = 1'b0;
-		box35 = 1'b0;
-		box36 = 1'b0;
-		box37 = 1'b0;
+		box1 = 1'b0;box2 = 1'b0;box3 = 1'b0;box4 = 1'b0;box5 = 1'b1;box6 = 1'b0;box7 = 1'b0;box8 = 1'b0;box9 = 1'b0;box10 = 1'b0;box11 = 1'b0;box12 = 1'b0;box13 = 1'b0;box14 = 1'b0;	box15 = 1'b0;		box16 = 1'b0;		box17 = 1'b0;		box18 = 1'b0;		box19 = 1'b0;		box20 = 1'b0;		box21 = 1'b0;		box22 = 1'b0;		box23 = 1'b0;		box24 = 1'b0;		box25 = 1'b0;		box26 = 1'b0;		box27 = 1'b0;		box28 = 1'b0;		box29 = 1'b0;		box30 = 1'b0;		box31 = 1'b0;		box32 = 1'b0;		box33 = 1'b0;		box34 = 1'b0;		box35 = 1'b0;		box36 = 1'b0;box37 = 1'b0;
 		end
 	else if(Object6) begin 
-		box1 = 1'b0;
-		box2 = 1'b0;
-		box3 = 1'b0;
-		box4 = 1'b0;
-		box5 = 1'b0;
-		box6 = 1'b1;
-		box7 = 1'b0;
-				box8 = 1'b0;
-		box9 = 1'b0;
-		box10 = 1'b0;
-		box11 = 1'b0;
-		box12 = 1'b0;
-		box13 = 1'b0;
-		box14 = 1'b0;
-		box15 = 1'b0;
-		box16 = 1'b0;
-		box17 = 1'b0;
-		box18 = 1'b0;
-		box19 = 1'b0;
-		box20 = 1'b0;
-		box21 = 1'b0;
-		box22 = 1'b0;
-		box23 = 1'b0;
-		box24 = 1'b0;
-		box25 = 1'b0;
-		box26 = 1'b0;
-		box27 = 1'b0;
-		box28 = 1'b0;
-		box29 = 1'b0;
-		box30 = 1'b0;
-		box31 = 1'b0;
-		box32 = 1'b0;
-		box33 = 1'b0;
-		box34 = 1'b0;
-		box35 = 1'b0;
-		box36 = 1'b0;
-		box37 = 1'b0;
+		box1 = 1'b0;box2 = 1'b0;box3 = 1'b0;box4 = 1'b0;box5 = 1'b0;box6 = 1'b1;box7 = 1'b0;box8 = 1'b0;box9 = 1'b0;box10 = 1'b0;box11 = 1'b0;box12 = 1'b0;
+		box13 = 1'b0;box14 = 1'b0;box15 = 1'b0;box16 = 1'b0;box17 = 1'b0;box18 = 1'b0;box19 = 1'b0;box20 = 1'b0;box21 = 1'b0;box22 = 1'b0;box23 = 1'b0;box24 = 1'b0;box25 = 1'b0;box26 = 1'b0;box27 = 1'b0;
+		box28 = 1'b0;box29 = 1'b0;box30 = 1'b0;box31 = 1'b0;box32 = 1'b0;box33 = 1'b0;box34 = 1'b0;box35 = 1'b0;box36 = 1'b0;box37 = 1'b0;
 		end
 	else if(Object7) begin 
-		box1 = 1'b0;
-		box2 = 1'b0;
-		box3 = 1'b0;
-		box4 = 1'b0;
-		box5 = 1'b0;
-		box6 = 1'b0;
-		box7 = 1'b1;
-				box8 = 1'b0;
-		box9 = 1'b0;
-		box10 = 1'b0;
-		box11 = 1'b0;
-		box12 = 1'b0;
-		box13 = 1'b0;
-		box14 = 1'b0;
-		box15 = 1'b0;
-		box16 = 1'b0;
-		box17 = 1'b0;
-		box18 = 1'b0;
-		box19 = 1'b0;
-		box20 = 1'b0;
-		box21 = 1'b0;
-		box22 = 1'b0;
-		box23 = 1'b0;
-		box24 = 1'b0;
-		box25 = 1'b0;
-		box26 = 1'b0;
-		box27 = 1'b0;
-		box28 = 1'b0;
-		box29 = 1'b0;
-		box30 = 1'b0;
-		box31 = 1'b0;
-		box32 = 1'b0;
-		box33 = 1'b0;
-		box34 = 1'b0;
-		box35 = 1'b0;
-		box36 = 1'b0;
-		box37 = 1'b0;
+		box1 = 1'b0;box2 = 1'b0;box3 = 1'b0;box4 = 1'b0;box5 = 1'b0;box6 = 1'b0;box7 = 1'b1;box8 = 1'b0;box9 = 1'b0;box10 = 1'b0;box11 = 1'b0;box12 = 1'b0;
+		box13 = 1'b0;box14 = 1'b0;box15 = 1'b0;box16 = 1'b0;box17 = 1'b0;box18 = 1'b0;box19 = 1'b0;box20 = 1'b0;box21 = 1'b0;box22 = 1'b0;	box23 = 1'b0;
+		box24 = 1'b0;box25 = 1'b0;box26 = 1'b0;box27 = 1'b0;box28 = 1'b0;box29 = 1'b0;box30 = 1'b0;box31 = 1'b0;box32 = 1'b0;box33 = 1'b0;box34 = 1'b0;box35 = 1'b0;box36 = 1'b0;box37 = 1'b0;
 		end
 		else if(Object8) begin 
 		box1 = 1'b0;
@@ -1963,43 +1698,7 @@ begin
 		end
 
 	else begin
-		box1 = 1'b0;
-		box2 = 1'b0;
-		box3 = 1'b0;
-		box4 = 1'b0;
-		box5 = 1'b0;
-		box6 = 1'b0;
-		box7 = 1'b0;
-			box8 = 1'b0;
-		box9 = 1'b0;
-		box10 = 1'b0;
-		box11 = 1'b0;
-		box12 = 1'b0;
-		box13 = 1'b0;
-		box14 = 1'b0;
-		box15 = 1'b0;
-		box16 = 1'b0;
-		box17 = 1'b0;
-		box18 = 1'b0;
-		box19 = 1'b0;
-		box20 = 1'b0;
-		box21 = 1'b0;
-		box22 = 1'b0;
-		box23 = 1'b0;
-		box24 = 1'b0;
-		box25 = 1'b0;
-		box26 = 1'b0;
-		box27 = 1'b0;
-		box28 = 1'b0;
-		box29 = 1'b0;
-		box30 = 1'b0;
-		box31 = 1'b0;
-		box32 = 1'b0;
-		box33 = 1'b0;
-		box34 = 1'b0;
-		box35 = 1'b0;
-		box36 = 1'b0;
-		box37 = 1'b0;
+		box1 = 1'b0;box2 = 1'b0;box3 = 1'b0;box4 = 1'b0;box5 = 1'b0;box6 = 1'b0; box7 = 1'b0; box8 = 1'b0;box9 = 1'b0;box10 = 1'b0;box11 = 1'b0;box12 = 1'b0;box13 = 1'b0;box14 = 1'b0;box15 = 1'b0;box16 = 1'b0;box17 = 1'b0;box18 = 1'b0;box19 = 1'b0;box20 = 1'b0;box21 = 1'b0;box22 = 1'b0;box23 = 1'b0;box24 = 1'b0;box25 = 1'b0;box26 = 1'b0;box27 = 1'b0;box28 = 1'b0;	box29 = 1'b0;box30 = 1'b0; box31 = 1'b0;box32 = 1'b0; box33 = 1'b0; box34 = 1'b0; box35 = 1'b0; box36 = 1'b0;	box37 = 1'b0;
 		end
 	end 
 
@@ -2050,32 +1749,32 @@ endmodule
 //============================//
 //========== COLOR ===========//
 //============================//
-module color(clk, red, blue, green, box1, ccbox1, box2, box3, box4, box5, box6, box7, box8, box9, box10, box11, box12, box13, box14, box15, box16, box17, box18, box19, box20, box21, box22, box23, box24, box25, box26, box27, box28, box29, box30, box31, box32, box33, box34, box35, box36, box37, box38);//ADD HERE
+module color(clk, red, blue, green, box1, stay1, box2, box3, box4, box5, box6, box7, box8, box9, box10, box11, box12, box13, box14, box15, box16, box17, box18, box19, box20, box21, box22, box23, box24, box25, box26, box27, box28, box29, box30, box31, box32, box33, box34, box35, box36, box37, box38);//ADD HERE
 
 input clk, box1, box2, box3, box4, box5, box6, box7, box8, box9, box10, box11, box12, box13, box14, box15, box16, box17, box18, box19, box20, box21, box22, box23, box24, box25, box26, box27, box28, box29, box30, box31, box32, box33, box34, box35, box36, box37, box38;
-input ccbox1;
+input stay1;
 output [7:0] red, blue, green;
 reg[7:0] red, green, blue;
 
 always@(*)
 begin
 	if(box1) begin
-	 if( ccbox1 == 1) begin
-		red = 8'd255;
-		blue = 8'd000;
-		green = 8'd255;
-		end
-		else begin
 		red = 8'd255;
 		blue = 8'd255;
 		green = 8'd255;
 		end
-	end
 	else if(box2) begin
+		 if(stay1 == 1) begin
+		red = 8'd000;
+		blue = 8'd000;
+		green = 8'd000;
+		end
+		else begin
 		red = 8'd000;
 		blue = 8'd000;
 		green = 8'd255;
 		end
+	end
 		else if(box3) begin
 		red = 8'd000;
 		blue = 8'd000;
