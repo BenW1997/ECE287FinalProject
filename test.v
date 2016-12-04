@@ -396,6 +396,24 @@ localparam Object38_B = Object38_T + 31'd100;
 assign Object38 =((X >= Object38_L + object38X)&&(X <= Object38_R + object38X)&&(Y >= Object38_T+ object38Y)&&(Y <= Object38_B + object38Y));
 
 
+reg ccbox1;
+reg ccount;
+////SELECTOR MOUDLE
+always @ (*)
+	begin
+	//ccount <= ccount +1;
+		if(object38X >= 31'd256 && object38X <= 31'd406 && object38Y <= 31'd166 && object38Y >= 31'd000) begin
+				ccbox1 = 1;
+			end
+		else 
+				begin
+					ccbox1 = 0;
+				end
+	
+
+
+
+	end
    //reg updateSelect;
 	reg [19:0]count;	
 //this moves our selector block  
@@ -1998,7 +2016,7 @@ end
 end */
 //======Modified Borrowed Code======//
 //Determines the color output based on the decision from the priority block
-color(clk, VGA_R, VGA_B, VGA_G, box1, box2, box3, box4, box5, box6, box7, box8, box9, box10, box11, box12, box13, box14, box15, box16, box17, box18, box19, box20, box21, box22, box23, box24, box25, box26, box27, box28, box29, box30, box31, box32, box33, box34, box35, box36, box37);//ADD HERE
+color(clk, VGA_R, VGA_B, VGA_G, box1, ccbox1, box2, box3, box4, box5, box6, box7, box8, box9, box10, box11, box12, box13, box14, box15, box16, box17, box18, box19, box20, box21, box22, box23, box24, box25, box26, box27, box28, box29, box30, box31, box32, box33, box34, box35, box36, box37);//ADD HERE
 
 //======Borrowed code======//
 //======DO NOT EDIT========//
@@ -2032,20 +2050,27 @@ endmodule
 //============================//
 //========== COLOR ===========//
 //============================//
-module color(clk, red, blue, green, box1, box2, box3, box4, box5, box6, box7, box8, box9, box10, box11, box12, box13, box14, box15, box16, box17, box18, box19, box20, box21, box22, box23, box24, box25, box26, box27, box28, box29, box30, box31, box32, box33, box34, box35, box36, box37, box38);//ADD HERE
+module color(clk, red, blue, green, box1, ccbox1, box2, box3, box4, box5, box6, box7, box8, box9, box10, box11, box12, box13, box14, box15, box16, box17, box18, box19, box20, box21, box22, box23, box24, box25, box26, box27, box28, box29, box30, box31, box32, box33, box34, box35, box36, box37, box38);//ADD HERE
 
 input clk, box1, box2, box3, box4, box5, box6, box7, box8, box9, box10, box11, box12, box13, box14, box15, box16, box17, box18, box19, box20, box21, box22, box23, box24, box25, box26, box27, box28, box29, box30, box31, box32, box33, box34, box35, box36, box37, box38;
-
+input ccbox1;
 output [7:0] red, blue, green;
 reg[7:0] red, green, blue;
 
 always@(*)
 begin
 	if(box1) begin
+	 if( ccbox1 == 1) begin
+		red = 8'd255;
+		blue = 8'd000;
+		green = 8'd255;
+		end
+		else begin
 		red = 8'd255;
 		blue = 8'd255;
 		green = 8'd255;
 		end
+	end
 	else if(box2) begin
 		red = 8'd000;
 		blue = 8'd000;
