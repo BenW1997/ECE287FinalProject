@@ -402,14 +402,34 @@ assign Object38 =((X >= Object38_L + object38X)&&(X <= Object38_R + object38X)&&
 	always@(posedge clk)
 	begin
 		count <= count + 1;
-		if(count==833334 && button1==1'b0) // this has to be like this
-			object38X=object38X-32'd10;
+		if(count==833334 && button1==1'b0)// this has to be like this
+		begin
+			if(object38X >= 10) //restrictions to movement
+			begin
+				object38X=object38X-32'd10;
+			end
+		end
 		if(count==833334 && button2==1'b0)
-			object38Y=object38Y-32'd10;
+		begin
+			if(object38Y >= 10)
+			begin
+				object38Y=object38Y-32'd10;
+			end
+		end
 		if(count==833334 && button3==1'b0)
-			object38Y=object38Y+32'd10;
+		begin
+			if(object38Y <= 914)
+			begin
+				object38Y=object38Y+32'd10;
+			end
+		end
 		if(count==833334 && button4==1'b0)
-			object38X=object38X+32'd10; 
+		begin
+			if(object38X <= 1170)
+			begin
+				object38X=object38X+32'd10; 
+			end
+		end
 		else
 		begin
 		 object38X = object38X;
