@@ -3,7 +3,8 @@
 //===========================================//
 /*
 
-Our VGA Module: modifiec by Ben Wong, and Collin Gardner to 
+Our VGA Module: Modified by Collin Gardner and Ben Wong
+Also our minesweeper module by Collin Gardner
 
 VGA MODULE: Modified by Parth Patel, Ian Baker, and Yi Zhan
 
@@ -17,23 +18,24 @@ Parameters were set by Ben.
 //===========================================//
 //====================VGA====================//
 //===========================================//
-module test(clk, KB_clk, data, button1, button2, button3, button4, select, VGA_R, VGA_B, VGA_G, VGA_BLANK_N, VGA_SYNC_N , VGA_HS, VGA_VS, rst, VGA_CLK);
+module test(clk, KB_clk, data, button1, button2, button3, button4, select, resetGame, in1, in2, in3, in4, in5, in6, in7, in8, in9, in10, in11, in12, in13, in14, in15,  VGA_R, VGA_B, VGA_G, VGA_BLANK_N, VGA_SYNC_N , VGA_HS, VGA_VS, rst, VGA_CLK);
 
 //outputs the colors, determined from the color module.
 output [7:0] VGA_R, VGA_B, VGA_G;
 input button1, button2, button3, button4, select;
+input in1, in2, in3, in4, in5, in6, in7, in8, in9, in10, in11, in12, in13, in14, in15; //these are all the switches for the bombs
 //Makes sure the screen is synced right.
 output VGA_HS, VGA_VS, VGA_BLANK_N, VGA_CLK, VGA_SYNC_N;
 
 input clk, rst; //clk is taken from the onboard clock 50MHz. rst is taken from a switch, SW[17].
-
+//input testEn; 
 wire CLK108; //Clock for the VGA
 
 /*
 Coordinates of the pixel being assigned. Moves top to bottom, left to right.
 */
 wire [30:0]X, Y;
-
+input resetGame;
 wire reset; 
 input KB_clk; //needs pins
 input data;
@@ -114,6 +116,7 @@ T and L params are set to the object's upper lefthand.
 Best if you leave the Left hand side parameters to 0, i.e: Object1_L = 31'd0;
 This will determine the available usable display space you have left.
 */
+
 
 //======== Object1 =======//     //Each one of these draws a box on the screen for each box in the MineSweeper field
 //object1_localParams
@@ -379,58 +382,422 @@ assign Object37 =((X >= Object37_L + object37X)&&(X <= Object37_R + object37X)&&
 
 //object38_localParams
 
-/*always @ (posedge updateSelect)
-begin
-	 case(direction)
-			5'b00010: object38Y <= (object38Y - 20);
-			5'b00100: object38X <= (object38X - 20);
-			5'b01000: object38Y <= (object38Y + 20);
-			5'b10000: object38X <= (object38X + 20);
-			endcase
-//end */
-
 localparam Object38_L = 31'd0;
 localparam Object38_R = Object38_L + 31'd100;
 localparam Object38_T = 31'd0;
 localparam Object38_B = Object38_T + 31'd100;
 assign Object38 =((X >= Object38_L + object38X)&&(X <= Object38_R + object38X)&&(Y >= Object38_T+ object38Y)&&(Y <= Object38_B + object38Y));
 
+//reg that tells to erase the box
+reg erasebox2 = 0;reg erasebox3 = 0; reg erasebox4 = 0;reg erasebox5 = 0; reg erasebox6 = 0; reg erasebox7 = 0; reg erasebox8 = 0; reg erasebox9 = 0; reg erasebox10 = 0; reg erasebox11 = 0; reg erasebox12 = 0; reg erasebox13 = 0; reg erasebox14 = 0; reg erasebox15 = 0; reg erasebox16 = 0; reg erasebox17 = 0; reg erasebox18 = 0; reg erasebox19 = 0; reg erasebox20 = 0; reg erasebox21 = 0; reg erasebox22 = 0; reg erasebox23 = 0; reg erasebox24 = 0; reg erasebox25 = 0; reg erasebox26 = 0; reg erasebox27 = 0; reg erasebox28 = 0; reg erasebox29 = 0; reg erasebox30 = 0; reg erasebox31 = 0; reg erasebox32 = 0; reg erasebox33 = 0; reg erasebox34 = 0; reg erasebox35 = 0; reg erasebox36 = 0; reg erasebox37 = 0; 
+//reg that gives caution signal that space is touching one space with a bomb
+reg caution2 = 0; reg caution3 = 0; reg caution4 = 0; reg caution5 = 0; reg caution6 = 0; reg caution7 = 0; reg caution8 = 0; reg caution9 = 0; reg caution10 = 0; reg caution11 = 0; reg caution12 = 0; reg caution13 = 0; reg caution14 = 0; reg caution15 = 0; reg caution16 = 0; reg caution17 = 0; reg caution18 = 0; reg caution19 = 0; reg caution20 = 0; reg caution21 = 0; reg caution22 = 0; reg caution23 = 0; reg caution24 = 0; reg caution25 = 0; reg caution26 = 0; reg caution27 = 0; reg caution28 = 0; reg caution29 = 0; reg caution30 = 0; reg caution31 = 0; reg caution32 = 0; reg caution33 = 0; reg caution34 = 0; reg caution35 = 0; reg caution36 = 0; reg caution37 = 0; 
+//tells uswhere teh bombs would be at
+reg bombAT2 = 0; reg bombAT3 = 0; reg bombAT4 = 0; reg bombAT5 = 0; reg bombAT6 = 0; reg bombAT7 = 0; reg bombAT8 = 0; reg bombAT9 = 0; reg bombAT10 = 0; reg bombAT11 = 0; reg bombAT12 = 0; reg bombAT13 = 0; reg bombAT14 = 0; reg bombAT15 = 0; reg bombAT16 = 0; reg bombAT17 = 0; reg bombAT18 = 0; reg bombAT19 = 0; reg bombAT20 = 0; reg bombAT21 = 0; reg bombAT22 = 0; reg bombAT23 = 0; reg bombAT24 = 0; reg bombAT25 = 0; reg bombAT26 = 0; reg bombAT27 = 0; reg bombAT28 = 0; reg bombAT29 = 0; reg bombAT30 = 0; reg bombAT31 = 0; reg bombAT32 = 0; reg bombAT33 = 0; reg bombAT34 = 0; reg bombAT35 = 0; reg bombAT36 = 0; reg bombAT37 = 0; 
 
-reg ccbox1; //need a reg for each color changer.  
-reg stay1;
+//reg that gives signal that space is touching spaces with two or more bombs
+reg warning2= 0; reg warning3 = 0;
+
+//this tells us if there is bomb there or not
+wire isBomb2, isBomb3, isBomb4, isBomb5, isBomb6, isBomb7, isBomb8, isBomb9, isBomb10, isBomb11, isBomb12, isBomb13, isBomb14, isBomb15, isBomb16, isBomb17, isBomb18, isBomb19, isBomb20, isBomb21, isBomb22, isBomb23, isBomb24, isBomb25, isBomb26, isBomb27, isBomb28, isBomb29, isBomb30, isBomb31, isBomb32, isBomb33, isBomb34, isBomb35, isBomb36, isBomb37;
+
+//these arent used
+wire stay1;
 reg ccount;
+reg en;
+
+
+//this module generates the bombs
+randomGen bombGeneration(in1, in2, in3, in4, in5, in6, in7, in8, in9, in10, in11, in12, in13, in14, in15, isBomb2, isBomb3, isBomb4, isBomb5, isBomb6, isBomb7, isBomb8, isBomb9, isBomb10, isBomb11, isBomb12, isBomb13, isBomb14, isBomb15, isBomb16, isBomb17, isBomb18, isBomb19, isBomb20, isBomb21, isBomb22, isBomb23, isBomb24, isBomb25, isBomb26, isBomb27, isBomb28, isBomb29, isBomb30, isBomb31, isBomb32, isBomb33, isBomb34, isBomb35, isBomb36, isBomb37);
+ 
+//module that tells bomb is there 
+// wire isBomb2, ....
+
 ////SELECTOR MOUDLE //this Module Controls us selecting the each grid in the field, and tells us what will change
-always @ (*)
+always @ (posedge clk)
 	begin
 	//ccount <= ccount +1;
-		if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd166 -31'd100 && object38Y >= 31'd000 && select == 1'b1) begin
-				ccbox1 = 1;
+		if(resetGame == 1'b1) //this would reset the whole game 
+		begin
+			erasebox2 = 0; erasebox3 = 0; erasebox4 = 0; erasebox5 = 0; erasebox6 = 0; erasebox7 = 0;
+			caution2 = 0; caution3 = 0; caution4 = 0; caution5 = 0; caution6 = 0;
+			bombAT2 = 0; bombAT3 = 0; bombAT4 = 0; bombAT5 = 0; 
+			warning2 = 0;
+			
+		end
+	
+		if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd166 -31'd100 && object38Y >= 31'd000 && select == 1'b1 && isBomb2 == 1'b0) 
+		begin
+			erasebox2 = 1;
+	   end
+	 	else if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd166 -31'd100 && object38Y >= 31'd000 && select == 1'b1 && isBomb2 == 1'b1) 
+		begin
+			bombAT2 = 1; //this would just change it to red, then change the color module down below
+	   end
+		//square3
+		if(object38X >= 31'd422 && object38X <= 31'd572 - 31'd100 && object38Y <= 31'd166 -31'd100 && object38Y >= 31'd000 && select == 1'b1 && isBomb3 == 1'b0)
+		begin
+			erasebox3= 1;
+		end
+			if(object38X >= 31'd422 && object38X <= 31'd572 - 31'd100 && object38Y <= 31'd150 -31'd100 && object38Y >= 31'd000 && select == 1'b1 && isBomb3 == 1'b1)
+				begin
+					bombAT3 = 1;
 			end
-		else 
-			begin
-				ccbox1 = 0;
+			//square4
+			if(object38X >= 31'd588 && object38X <= 31'd738 - 31'd100 && object38Y <= 31'd150 -31'd100 && object38Y >= 31'd000 && select == 1'b1 && isBomb4 == 1'b0)
+					begin
+						erasebox4= 1;
+					end
+			if(object38X >= 31'd588 && object38X <= 31'd738 - 31'd100 && object38Y <= 31'd150 -31'd100 && object38Y >= 31'd000 && select == 1'b1 && isBomb4 == 1'b1)
+					begin
+						bombAT4 = 1;
 			end
-		if(ccbox1 == 1) begin
-				stay1 = 1;
+			//square5
+			if(object38X >= 31'd754 && object38X <= 31'd904 - 31'd100 && object38Y <= 31'd150 -31'd100 && object38Y >= 31'd000 && select == 1'b1 && isBomb5 == 1'b0)
+					begin
+						erasebox5= 1;
+					end
+			if(object38X >= 31'd754 && object38X <= 31'd904 - 31'd100 && object38Y <= 31'd150 -31'd100 && object38Y >= 31'd000 && select == 1'b1 && isBomb5 == 1'b1)
+					begin
+						bombAT5 = 1;
 			end
-		if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd166 && object38Y >= 31'd000 && select == 1'b1) begin
-				ccbox1 = 1;
+			//square6
+			if(object38X >= 31'd920 && object38X <= 31'd1070 - 31'd100 && object38Y <= 31'd150 -31'd100 && object38Y >= 31'd000 && select == 1'b1 && isBomb6 == 1'b0)
+					begin
+						erasebox6= 1;
+					end
+			if(object38X >= 31'd920 && object38X <= 31'd1070 - 31'd100 && object38Y <= 31'd150 -31'd100 && object38Y >= 31'd000 && select == 1'b1 && isBomb6 == 1'b1)
+					begin
+						bombAT6 = 1;
 			end
-		else 
-			begin
-				ccbox1 = 0;
-			end	
-		if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd166 && object38Y >= 31'd000 && select == 1'b1) begin
-				ccbox1 = 1;
+			//square7
+			if(object38X >= 31'd1086 && object38X <= 31'd1236 - 31'd100 && object38Y <= 31'd150 -31'd100 && object38Y >= 31'd000 && select == 1'b1 && isBomb7 == 1'b0)
+					begin
+						erasebox7= 1;
+					end
+			if(object38X >= 31'd1086 && object38X <= 31'd1236 - 31'd100 && object38Y <= 31'd150 -31'd100 && object38Y >= 31'd000 && select == 1'b1 && isBomb7 == 1'b1)
+					begin
+						bombAT7 = 1;
 			end
-		else 
-			begin
-				ccbox1 = 0;
+			//newSquare
+			if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd316 -31'd100 && object38Y >= 31'd166 && select == 1'b1 && isBomb8 == 1'b0)
+					begin
+						erasebox8= 1;
+					end
+			if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd316 -31'd100 && object38Y >= 31'd166 && select == 1'b1 && isBomb8 == 1'b1)
+					begin
+						bombAT8 = 1;
 			end
-
-
+			//newSquare
+			if(object38X >= 31'd422 && object38X <= 31'd572 - 31'd100 && object38Y <= 31'd316 -31'd100 && object38Y >= 31'd166 && select == 1'b1 && isBomb9 == 1'b0)
+					begin
+						erasebox9= 1;
+					end
+			if(object38X >= 31'd422 && object38X <= 31'd572 - 31'd100 && object38Y <= 31'd316 -31'd100 && object38Y >= 31'd166 && select == 1'b1 && isBomb9 == 1'b1)
+					begin
+						bombAT9 = 1;
+			end
+			//newSquare
+			if(object38X >= 31'd588 && object38X <= 31'd738 - 31'd100 && object38Y <= 31'd316 -31'd100 && object38Y >= 31'd166 && select == 1'b1 && isBomb10 == 1'b0)
+					begin
+						erasebox10= 1;
+					end
+			if(object38X >= 31'd588 && object38X <= 31'd738 - 31'd100 && object38Y <= 31'd316 -31'd100 && object38Y >= 31'd166 && select == 1'b1 && isBomb10 == 1'b1)
+					begin
+						bombAT10 = 1;
+			end
+			//newSquare
+			if(object38X >= 31'd754 && object38X <= 31'd904 - 31'd100 && object38Y <= 31'd316 -31'd100 && object38Y >= 31'd166 && select == 1'b1 && isBomb11 == 1'b0)
+					begin
+						erasebox11= 1;
+					end
+			if(object38X >= 31'd754 && object38X <= 31'd904 - 31'd100 && object38Y <= 31'd316 -31'd100 && object38Y >= 31'd166 && select == 1'b1 && isBomb11 == 1'b1)
+					begin
+						bombAT11 = 1;
+			end
+			//newSquare
+			if(object38X >= 31'd920 && object38X <= 31'd1070 - 31'd100 && object38Y <= 31'd316 -31'd100 && object38Y >= 31'd166 && select == 1'b1 && isBomb12 == 1'b0)
+					begin
+						erasebox12= 1;
+					end
+			if(object38X >= 31'd920 && object38X <= 31'd1070 - 31'd100 && object38Y <= 31'd316 -31'd100 && object38Y >= 31'd166 && select == 1'b1 && isBomb12 == 1'b1)
+					begin
+						bombAT12 = 1;
+			end
+			//newSquare
+			if(object38X >= 31'd1086 && object38X <= 31'd1236 - 31'd100 && object38Y <= 31'd316 -31'd100 && object38Y >= 31'd166 && select == 1'b1 && isBomb13 == 1'b0)
+					begin
+						erasebox13= 1;
+					end
+			if(object38X >= 31'd1086 && object38X <= 31'd1236 - 31'd100 && object38Y <= 31'd316 -31'd100 && object38Y >= 31'd166 && select == 1'b1 && isBomb13 == 1'b1)
+					begin
+						bombAT13 = 1;
+			end
+			//newSquare and new Row
+			if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd482 -31'd100 && object38Y >= 31'd332 && select == 1'b1 && isBomb14 == 1'b0)
+					begin
+						erasebox14= 1;
+					end
+			if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd482 -31'd100 && object38Y >= 31'd332 && select == 1'b1 && isBomb14 == 1'b1)
+					begin
+						bombAT14 = 1;
+			end
+			//newSquare
+			if(object38X >= 31'd422 && object38X <= 31'd572 - 31'd100 && object38Y <= 31'd482 -31'd100 && object38Y >= 31'd332 && select == 1'b1 && isBomb15 == 1'b0)
+					begin
+						erasebox15= 1;
+					end
+			if(object38X >= 31'd422 && object38X <= 31'd572 - 31'd100 && object38Y <= 31'd482 -31'd100 && object38Y >= 31'd332 && select == 1'b1 && isBomb15 == 1'b1)
+					begin
+						bombAT15 = 1;
+			end
+			//newSquare
+			if(object38X >= 31'd588 && object38X <= 31'd738 - 31'd100 && object38Y <= 31'd482 -31'd100 && object38Y >= 31'd332 && select == 1'b1 && isBomb16 == 1'b0)
+					begin
+						erasebox16= 1;
+					end
+			if(object38X >= 31'd588 && object38X <= 31'd738 - 31'd100 && object38Y <= 31'd482 -31'd100 && object38Y >= 31'd332 && select == 1'b1 && isBomb16 == 1'b1)
+					begin
+						bombAT16 = 1;
+			end
+			//newSquare
+			if(object38X >= 31'd754 && object38X <= 31'd904 - 31'd100 && object38Y <= 31'd482 -31'd100 && object38Y >= 31'd332 && select == 1'b1 && isBomb17 == 1'b0)
+					begin
+						erasebox17= 1;
+					end
+			if(object38X >= 31'd754 && object38X <= 31'd904 - 31'd100 && object38Y <= 31'd482 -31'd100 && object38Y >= 31'd332 && select == 1'b1 && isBomb17 == 1'b1)
+					begin
+						bombAT17 = 1;
+			end
+			//newSquare
+			if(object38X >= 31'd920 && object38X <= 31'd1070 - 31'd100 && object38Y <= 31'd482 -31'd100 && object38Y >= 31'd332 && select == 1'b1 && isBomb18 == 1'b0)
+					begin
+						erasebox18= 1;
+					end
+			if(object38X >= 31'd920 && object38X <= 31'd1070 - 31'd100 && object38Y <= 31'd482 -31'd100 && object38Y >= 31'd332 && select == 1'b1 && isBomb18 == 1'b1)
+					begin
+						bombAT18 = 1;
+			end
+			//newSquare
+			if(object38X >= 31'd1086 && object38X <= 31'd1236 - 31'd100 && object38Y <= 31'd482 -31'd100 && object38Y >= 31'd332 && select == 1'b1 && isBomb19 == 1'b0)
+					begin
+						erasebox19= 1;
+					end
+			if(object38X >= 31'd1086 && object38X <= 31'd1236 - 31'd100 && object38Y <= 31'd482 -31'd100 && object38Y >= 31'd332 && select == 1'b1 && isBomb19 == 1'b1)
+					begin
+						bombAT19 = 1;
+			end
+			//newSquare
+			if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd648-31'd100 && object38Y >= 31'd498 && select == 1'b1 && isBomb20 == 1'b0)
+					begin
+						erasebox20= 1;
+					end
+			if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd648 -31'd100 && object38Y >= 31'd498 && select == 1'b1 && isBomb20 == 1'b1)
+					begin
+						bombAT20 = 1;
+			end
+			//newSquare
+			if(object38X >= 31'd422 && object38X <= 31'd572 - 31'd100 && object38Y <= 31'd648 -31'd100 && object38Y >= 31'd498 && select == 1'b1 && isBomb21 == 1'b0)
+					begin
+						erasebox21= 1;
+					end
+			if(object38X >= 31'd422 && object38X <= 31'd572 - 31'd100 && object38Y <= 31'd648 -31'd100 && object38Y >= 31'd498 && select == 1'b1 && isBomb21 == 1'b1)
+					begin
+						bombAT21 = 1;
+			end
+			//newSquare
+			if(object38X >= 31'd588 && object38X <= 31'd738 - 31'd100 && object38Y <= 31'd648 -31'd100 && object38Y >= 31'd498 && select == 1'b1 && isBomb22 == 1'b0)
+					begin
+						erasebox22= 1;
+					end
+			if(object38X >= 31'd588 && object38X <= 31'd738 - 31'd100 && object38Y <= 31'd648 -31'd100 && object38Y >= 31'd498 && select == 1'b1 && isBomb22 == 1'b1)
+					begin
+						bombAT22 = 1;
+			end
+			//newSquare
+			if(object38X >= 31'd754 && object38X <= 31'd904 - 31'd100 && object38Y <= 31'd648 -31'd100 && object38Y >= 31'd498 && select == 1'b1 && isBomb23 == 1'b0)
+					begin
+						erasebox23= 1;
+					end
+			if(object38X >= 31'd754 && object38X <= 31'd904 - 31'd100 && object38Y <= 31'd648 -31'd100 && object38Y >= 31'd498 && select == 1'b1 && isBomb23 == 1'b1)
+					begin
+						bombAT23 = 1;
+			end
+			//newSquare
+			if(object38X >= 31'd920 && object38X <= 31'd1070 - 31'd100 && object38Y <= 31'd648 -31'd100 && object38Y >= 31'd498 && select == 1'b1 && isBomb24 == 1'b0)
+					begin
+						erasebox24= 1;
+					end
+			if(object38X >= 31'd920 && object38X <= 31'd1070 - 31'd100 && object38Y <= 31'd648 -31'd100 && object38Y >= 31'd498 && select == 1'b1 && isBomb24 == 1'b1)
+					begin
+						bombAT24 = 1;
+			end
+			//newSquare
+			if(object38X >= 31'd1086 && object38X <= 31'd1236 - 31'd100 && object38Y <= 31'd648 -31'd100 && object38Y >= 31'd498 && select == 1'b1 && isBomb25 == 1'b0)
+					begin
+						erasebox25= 1;
+					end
+			if(object38X >= 31'd1086 && object38X <= 31'd1236 - 31'd100 && object38Y <= 31'd648 -31'd100 && object38Y >= 31'd498 && select == 1'b1 && isBomb25 == 1'b1)
+					begin
+						bombAT25 = 1;
+			end
+			//newSquare
+			if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd814 -31'd100 && object38Y >= 31'd664 && select == 1'b1 && isBomb26 == 1'b0)
+					begin
+						erasebox26= 1;
+					end
+			if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd814 -31'd100 && object38Y >= 31'd664 && select == 1'b1 && isBomb26 == 1'b1)
+					begin
+						bombAT26 = 1;
+			end
+			//newSquare
+			if(object38X >= 31'd422 && object38X <= 31'd572 - 31'd100 && object38Y <= 31'd814 -31'd100 && object38Y >= 31'd664 && select == 1'b1 && isBomb27 == 1'b0)
+					begin
+						erasebox27= 1;
+					end
+			if(object38X >= 31'd422 && object38X <= 31'd572 - 31'd100 && object38Y <= 31'd814 -31'd100 && object38Y >= 31'd664 && select == 1'b1 && isBomb27 == 1'b1)
+					begin
+						bombAT27 = 1;
+			end
+			//newSquare
+			if(object38X >= 31'd588 && object38X <= 31'd738 - 31'd100 && object38Y <= 31'd814 -31'd100 && object38Y >= 31'd664 && select == 1'b1 && isBomb28 == 1'b0)
+					begin
+						erasebox28= 1;
+					end
+			if(object38X >= 31'd588 && object38X <= 31'd738 - 31'd100 && object38Y <= 31'd814 -31'd100 && object38Y >= 31'd664 && select == 1'b1 && isBomb28 == 1'b1)
+					begin
+						bombAT28 = 1;
+			end
+			//newSquare
+			if(object38X >= 31'd754 && object38X <= 31'd904 - 31'd100 && object38Y <= 31'd814 -31'd100 && object38Y >= 31'd664 && select == 1'b1 && isBomb29 == 1'b0)
+					begin
+						erasebox29= 1;
+					end
+			if(object38X >= 31'd754 && object38X <= 31'd904 - 31'd100 && object38Y <= 31'd814 -31'd100 && object38Y >= 31'd664 && select == 1'b1 && isBomb29 == 1'b1)
+					begin
+						bombAT29 = 1;
+			end
+			//newSquare
+			if(object38X >= 31'd920 && object38X <= 31'd1070 - 31'd100 && object38Y <= 31'd814 -31'd100 && object38Y >= 31'd664 && select == 1'b1 && isBomb30 == 1'b0)
+					begin
+						erasebox30= 1;
+					end
+			if(object38X >= 31'd920 && object38X <= 31'd1070 - 31'd100 && object38Y <= 31'd814 -31'd100 && object38Y >= 31'd664 && select == 1'b1 && isBomb30 == 1'b1)
+					begin
+						bombAT30 = 1;
+			end
+			//newSquare
+			if(object38X >= 31'd1086 && object38X <= 31'd1236 - 31'd100 && object38Y <= 31'd814 -31'd100 && object38Y >= 31'd664 && select == 1'b1 && isBomb31 == 1'b0)
+					begin
+						erasebox31= 1;
+					end
+			if(object38X >= 31'd1086 && object38X <= 31'd1236 - 31'd100 && object38Y <= 31'd814 -31'd100 && object38Y >= 31'd664 && select == 1'b1 && isBomb31 == 1'b1)
+					begin
+						bombAT31 = 1;
+			end
+			//newSquare
+			if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd980 -31'd100 && object38Y >= 31'd830 && select == 1'b1 && isBomb32 == 1'b0)
+					begin
+						erasebox32= 1;
+					end
+			if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd980 -31'd100 && object38Y >= 31'd830 && select == 1'b1 && isBomb32 == 1'b1)
+					begin
+						bombAT32 = 1;
+			end
+			//newSquare
+			if(object38X >= 31'd422 && object38X <= 31'd572 - 31'd100 && object38Y <= 31'd980 -31'd100 && object38Y >= 31'd830 && select == 1'b1 && isBomb33 == 1'b0)
+					begin
+						erasebox33= 1;
+					end
+			if(object38X >= 31'd422 && object38X <= 31'd572 - 31'd100 && object38Y <= 31'd980 -31'd100 && object38Y >= 31'd830 && select == 1'b1 && isBomb33 == 1'b1)
+					begin
+						bombAT33 = 1;
+			end
+			//newSquare
+			if(object38X >= 31'd588 && object38X <= 31'd738 - 31'd100 && object38Y <= 31'd980 -31'd100 && object38Y >= 31'd830 && select == 1'b1 && isBomb34 == 1'b0)
+					begin
+						erasebox34= 1;
+					end
+			if(object38X >= 31'd588 && object38X <= 31'd738 - 31'd100 && object38Y <= 31'd980 -31'd100 && object38Y >= 31'd830 && select == 1'b1 && isBomb34 == 1'b1)
+					begin
+						bombAT34 = 1;
+			end
+			if(object38X >= 31'd754 && object38X <= 31'd904 - 31'd100 && object38Y <= 31'd980 -31'd100 && object38Y >= 31'd830 && select == 1'b1 && isBomb35 == 1'b0)
+					begin
+						erasebox35= 1;
+					end
+			if(object38X >= 31'd754 && object38X <= 31'd904 - 31'd100 && object38Y <= 31'd980 -31'd100 && object38Y >= 31'd830 && select == 1'b1 && isBomb35 == 1'b1)
+					begin
+						bombAT35 = 1;
+			end
+			if(object38X >= 31'd920 && object38X <= 31'd1070 - 31'd100 && object38Y <= 31'd980 -31'd100 && object38Y >= 31'd830 && select == 1'b1 && isBomb36 == 1'b0)
+					begin
+						erasebox36= 1;
+					end
+			if(object38X >= 31'd920 && object38X <= 31'd1070 - 31'd100 && object38Y <= 31'd980 -31'd100 && object38Y >= 31'd830 && select == 1'b1 && isBomb36 == 1'b1)
+					begin
+						bombAT36 = 1;
+			end
+			if(object38X >= 31'd1086 && object38X <= 31'd1236 - 31'd100 && object38Y <= 31'd980 -31'd100 && object38Y >= 31'd830 && select == 1'b1 && isBomb37 == 1'b0)
+					begin
+						erasebox37= 1;
+					end
+			if(object38X >= 31'd1086 && object38X <= 31'd1236 - 31'd100 && object38Y <= 31'd980 -31'd100 && object38Y >= 31'd830 && select == 1'b1 && isBomb37 == 1'b1)
+					begin
+						bombAT37 = 1;
+			end
+			
+			///end of telling use whether space is empty or bomb occupied
+			//NOW TO TELL IF SPACE HAS BOMB AROUND IT, YELLOW(CAUTION REG "bOOLEAN")  = SPACE IS TOUCHING 1 BOMB AND (WARNING "BOOLEAN")ORANGE = SPACE IS TOUCHING 2 OR MORE BOMBS 
+			if(erasebox2 == 1 && (isBomb4 == 1 ^ isBomb9 == 1))//tells if one bomb by space  3
+						caution3 = 1;
+		
+			if(erasebox2 ==1 && (isBomb4 ==1 && isBomb9 ==1)) //tells if 2 bombs by space 3
+						warning3 = 1;
+						
+		
+	/*	else if(object38X >= 31'd422 && object38X <= 31'd572 - 31'd100 && object38Y <= 31'd166 -31'd100 && object38Y >= 31'd000 && select == 1'b1) 
+		begin
+			erasebox3 = 1;
+	   end
+		if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd166 -31'd100 && object38Y >= 31'd000 && select == 1'b1 && isBomb3 == 1'b1) 
+		begin
+			bombAT3 = 1;
+	   end
+		
+		if(object38X >= 31'd588 && object38X <= 31'd738 - 31'd100 && object38Y <= 31'd166 -31'd100 && object38Y >= 31'd000 && select == 1'b1) 
+		begin
+			erasebox4 = 1;
+	   end
+		if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd166 -31'd100 && object38Y >= 31'd000 && select == 1'b1 && isBomb4 == 1'b1) 
+		begin
+			bombAT4 = 1;
+	   end
+		
+		if(object38X >= 31'd754 && object38X <= 31'd904 - 31'd100 && object38Y <= 31'd166 -31'd100 && object38Y >= 31'd000 && select == 1'b1) 
+		begin
+			erasebox5 = 1;
+	   end
+		if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd166 -31'd100 && object38Y >= 31'd000 && select == 1'b1 && isBomb5 == 1'b1) 
+		begin
+			bombAT5 = 1;
+	   end
+		
+		if(object38X >= 31'd920 && object38X <= 31'd1070 - 31'd100 && object38Y <= 31'd166 -31'd100 && object38Y >= 31'd000 && select == 1'b1) 
+		begin
+			erasebox6 = 1;
+	   end
+		if(object38X >= 31'd1086 && object38X <= 31'd1246 - 31'd100 && object38Y <= 31'd166 -31'd100 && object38Y >= 31'd000 && select == 1'b1) 
+		begin
+			erasebox7 = 1;
+	   end
+			*/
 	end
-   //reg updateSelect;
+//gameReg ccbox1Reg(ccbox1, enablebox1, enTest, stay1);
+	
+
+				
+ // MOVEMENT OF THE SELECTOR BLOck
 	reg [19:0]count;	
 //this moves our selector block  
 	always@(posedge clk)
@@ -498,14 +865,10 @@ begin
 		end
 
 	else if(Object1) begin
-		box1 = 1'b1;box2 = 1'b0;box3 = 1'b0;box4 = 1'b0;box5 = 1'b0;box6 = 1'b0;box7 = 1'b0;box8 = 1'b0;box9 = 1'b0;box10 = 1'b0;box11 = 1'b0;box12 = 1'b0;box13 = 1'b0;
-		box14 = 1'b0;box15 = 1'b0;box16 = 1'b0;box17 = 1'b0;box18 = 1'b0;box19 = 1'b0;box20 = 1'b0;box21 = 1'b0;box22 = 1'b0;box23 = 1'b0;box24 = 1'b0;box25 = 1'b0;box26 = 1'b0;box27 = 1'b0;
-		box28 = 1'b0;box29 = 1'b0;box30 = 1'b0;box31 = 1'b0;box32 = 1'b0;box33 = 1'b0;box34 = 1'b0;box35 = 1'b0;box36 = 1'b0;box37 = 1'b0;
+		box1 = 1'b1;box2 = 1'b0;box3 = 1'b0;box4 = 1'b0;box5 = 1'b0;box6 = 1'b0;box7 = 1'b0;box8 = 1'b0;box9 = 1'b0;box10 = 1'b0;box11 = 1'b0;box12 = 1'b0;box13 = 1'b0;box14 = 1'b0;box15 = 1'b0;box16 = 1'b0;box17 = 1'b0;box18 = 1'b0;box19 = 1'b0;box20 = 1'b0;box21 = 1'b0;box22 = 1'b0;box23 = 1'b0;box24 = 1'b0;box25 = 1'b0;box26 = 1'b0;box27 = 1'b0;box28 = 1'b0;box29 = 1'b0;box30 = 1'b0;box31 = 1'b0;box32 = 1'b0;box33 = 1'b0;box34 = 1'b0;box35 = 1'b0;box36 = 1'b0;box37 = 1'b0;
 		end
 	else if(Object2) begin
-		box1 = 1'b0;box2 = 1'b1;box3 = 1'b0;box4 = 1'b0;box5 = 1'b0;box6 = 1'b0;box7 = 1'b0;box8 = 1'b0;box9 = 1'b0;box10 = 1'b0;box11 = 1'b0;box12 = 1'b0;
-		box13 = 1'b0; box14 = 1'b0;box15 = 1'b0;box16 = 1'b0;box17 = 1'b0;box18 = 1'b0;box19 = 1'b0;box20 = 1'b0;box21 = 1'b0;box22 = 1'b0;box23 = 1'b0;box24 = 1'b0;box25 = 1'b0;box26 = 1'b0;
-		box27 = 1'b0;box28 = 1'b0;box29 = 1'b0;box30 = 1'b0;box31 = 1'b0;box32 = 1'b0;box33 = 1'b0;box34 = 1'b0;box35 = 1'b0;box36 = 1'b0;box37 = 1'b0;
+		box1 = 1'b0;box2 = 1'b1;box3 = 1'b0;box4 = 1'b0;box5 = 1'b0;box6 = 1'b0;box7 = 1'b0;box8 = 1'b0;box9 = 1'b0;box10 = 1'b0;box11 = 1'b0;box12 = 1'b0;	box13 = 1'b0; box14 = 1'b0;box15 = 1'b0;box16 = 1'b0;box17 = 1'b0;box18 = 1'b0;box19 = 1'b0;box20 = 1'b0;box21 = 1'b0;box22 = 1'b0;box23 = 1'b0;box24 = 1'b0;box25 = 1'b0;box26 = 1'b0;box27 = 1'b0;box28 = 1'b0;box29 = 1'b0;box30 = 1'b0;box31 = 1'b0;box32 = 1'b0;box33 = 1'b0;box34 = 1'b0;box35 = 1'b0;box36 = 1'b0;box37 = 1'b0;
 		end
 	else if(Object3) begin
 		box1 = 1'b0;box2 = 1'b0;box3 = 1'b1;box4 = 1'b0;box5 = 1'b0;box6 = 1'b0;box7 = 1'b0;box8 = 1'b0;box9 = 1'b0;box10 = 1'b0;box11 = 1'b0;box12 = 1'b0;box13 = 1'b0;box14 = 1'b0;box15 = 1'b0;box16 = 1'b0;box17 = 1'b0;box18 = 1'b0;box19 = 1'b0;box20 = 1'b0;box21 = 1'b0;box22 = 1'b0;box23 = 1'b0;box24 = 1'b0;box25 = 1'b0;box26 = 1'b0;box27 = 1'b0;box28 = 1'b0;box29 = 1'b0;box30 = 1'b0;box31 = 1'b0;box32 = 1'b0;box33 = 1'b0;box34 = 1'b0;box35 = 1'b0;box36 = 1'b0;box37 = 1'b0;
@@ -517,131 +880,19 @@ begin
 		box1 = 1'b0;box2 = 1'b0;box3 = 1'b0;box4 = 1'b0;box5 = 1'b1;box6 = 1'b0;box7 = 1'b0;box8 = 1'b0;box9 = 1'b0;box10 = 1'b0;box11 = 1'b0;box12 = 1'b0;box13 = 1'b0;box14 = 1'b0;	box15 = 1'b0;		box16 = 1'b0;		box17 = 1'b0;		box18 = 1'b0;		box19 = 1'b0;		box20 = 1'b0;		box21 = 1'b0;		box22 = 1'b0;		box23 = 1'b0;		box24 = 1'b0;		box25 = 1'b0;		box26 = 1'b0;		box27 = 1'b0;		box28 = 1'b0;		box29 = 1'b0;		box30 = 1'b0;		box31 = 1'b0;		box32 = 1'b0;		box33 = 1'b0;		box34 = 1'b0;		box35 = 1'b0;		box36 = 1'b0;box37 = 1'b0;
 		end
 	else if(Object6) begin 
-		box1 = 1'b0;box2 = 1'b0;box3 = 1'b0;box4 = 1'b0;box5 = 1'b0;box6 = 1'b1;box7 = 1'b0;box8 = 1'b0;box9 = 1'b0;box10 = 1'b0;box11 = 1'b0;box12 = 1'b0;
-		box13 = 1'b0;box14 = 1'b0;box15 = 1'b0;box16 = 1'b0;box17 = 1'b0;box18 = 1'b0;box19 = 1'b0;box20 = 1'b0;box21 = 1'b0;box22 = 1'b0;box23 = 1'b0;box24 = 1'b0;box25 = 1'b0;box26 = 1'b0;box27 = 1'b0;
-		box28 = 1'b0;box29 = 1'b0;box30 = 1'b0;box31 = 1'b0;box32 = 1'b0;box33 = 1'b0;box34 = 1'b0;box35 = 1'b0;box36 = 1'b0;box37 = 1'b0;
+		box1 = 1'b0;box2 = 1'b0;box3 = 1'b0;box4 = 1'b0;box5 = 1'b0;box6 = 1'b1;box7 = 1'b0;box8 = 1'b0;box9 = 1'b0;box10 = 1'b0;box11 = 1'b0;box12 = 1'b0;box13 = 1'b0;box14 = 1'b0;box15 = 1'b0;box16 = 1'b0;box17 = 1'b0;box18 = 1'b0;box19 = 1'b0;box20 = 1'b0;box21 = 1'b0;box22 = 1'b0;box23 = 1'b0;box24 = 1'b0;box25 = 1'b0;box26 = 1'b0;box27 = 1'b0;box28 = 1'b0;box29 = 1'b0;box30 = 1'b0;box31 = 1'b0;box32 = 1'b0;box33 = 1'b0;box34 = 1'b0;box35 = 1'b0;box36 = 1'b0;box37 = 1'b0;
 		end
 	else if(Object7) begin 
-		box1 = 1'b0;box2 = 1'b0;box3 = 1'b0;box4 = 1'b0;box5 = 1'b0;box6 = 1'b0;box7 = 1'b1;box8 = 1'b0;box9 = 1'b0;box10 = 1'b0;box11 = 1'b0;box12 = 1'b0;
-		box13 = 1'b0;box14 = 1'b0;box15 = 1'b0;box16 = 1'b0;box17 = 1'b0;box18 = 1'b0;box19 = 1'b0;box20 = 1'b0;box21 = 1'b0;box22 = 1'b0;	box23 = 1'b0;
-		box24 = 1'b0;box25 = 1'b0;box26 = 1'b0;box27 = 1'b0;box28 = 1'b0;box29 = 1'b0;box30 = 1'b0;box31 = 1'b0;box32 = 1'b0;box33 = 1'b0;box34 = 1'b0;box35 = 1'b0;box36 = 1'b0;box37 = 1'b0;
+		box1 = 1'b0;box2 = 1'b0;box3 = 1'b0;box4 = 1'b0;box5 = 1'b0;box6 = 1'b0;box7 = 1'b1;box8 = 1'b0;box9 = 1'b0;box10 = 1'b0;box11 = 1'b0;box12 = 1'b0;box13 = 1'b0;box14 = 1'b0;box15 = 1'b0;box16 = 1'b0;box17 = 1'b0;box18 = 1'b0;box19 = 1'b0;box20 = 1'b0;box21 = 1'b0;box22 = 1'b0;	box23 = 1'b0;box24 = 1'b0;box25 = 1'b0;box26 = 1'b0;box27 = 1'b0;box28 = 1'b0;box29 = 1'b0;box30 = 1'b0;box31 = 1'b0;box32 = 1'b0;box33 = 1'b0;box34 = 1'b0;box35 = 1'b0;box36 = 1'b0;box37 = 1'b0;
 		end
 		else if(Object8) begin 
-		box1 = 1'b0;
-		box2 = 1'b0;
-		box3 = 1'b0;
-		box4 = 1'b0;
-		box5 = 1'b0;
-		box6 = 1'b0;
-		box7 = 1'b0;
-		box8 = 1'b1;
-		box9 = 1'b0;
-		box10 = 1'b0;
-		box11 = 1'b0;
-		box12 = 1'b0;
-		box13 = 1'b0;
-		box14 = 1'b0;
-		box15 = 1'b0;
-		box16 = 1'b0;
-		box17 = 1'b0;
-		box18 = 1'b0;
-		box19 = 1'b0;
-		box20 = 1'b0;
-		box21 = 1'b0;
-		box22 = 1'b0;
-		box23 = 1'b0;
-		box24 = 1'b0;
-		box25 = 1'b0;
-		box26 = 1'b0;
-		box27 = 1'b0;
-		box28 = 1'b0;
-		box29 = 1'b0;
-		box30 = 1'b0;
-		box31 = 1'b0;
-		box32 = 1'b0;
-		box33 = 1'b0;
-		box34 = 1'b0;
-		box35 = 1'b0;
-		box36 = 1'b0;
-		box37 = 1'b0;
+		box1 = 1'b0;		box2 = 1'b0;		box3 = 1'b0;		box4 = 1'b0;		box5 = 1'b0;		box6 = 1'b0;		box7 = 1'b0;		box8 = 1'b1;		box9 = 1'b0;		box10 = 1'b0;		box11 = 1'b0;		box12 = 1'b0;		box13 = 1'b0;		box14 = 1'b0;		box15 = 1'b0;		box16 = 1'b0;box17 = 1'b0;		box18 = 1'b0;		box19 = 1'b0;		box20 = 1'b0;		box21 = 1'b0;		box22 = 1'b0;		box23 = 1'b0;		box24 = 1'b0;		box25 = 1'b0;		box26 = 1'b0;		box27 = 1'b0;		box28 = 1'b0;		box29 = 1'b0;		box30 = 1'b0;		box31 = 1'b0;		box32 = 1'b0;		box33 = 1'b0;		box34 = 1'b0;		box35 = 1'b0;		box36 = 1'b0;		box37 = 1'b0;
 		end
 		else if(Object9) begin 
-		box1 = 1'b0;
-		box2 = 1'b0;
-		box3 = 1'b0;
-		box4 = 1'b0;
-		box5 = 1'b0;
-		box6 = 1'b0;
-		box7 = 1'b0;
-		box8 = 1'b0;
-		box9 = 1'b1;
-		box10 = 1'b0;
-		box11 = 1'b0;
-		box12 = 1'b0;
-		box13 = 1'b0;
-		box14 = 1'b0;
-		box15 = 1'b0;
-		box16 = 1'b0;
-		box17 = 1'b0;
-		box18 = 1'b0;
-		box19 = 1'b0;
-		box20 = 1'b0;
-		box21 = 1'b0;
-		box22 = 1'b0;
-		box23 = 1'b0;
-		box24 = 1'b0;
-		box25 = 1'b0;
-		box26 = 1'b0;
-		box27 = 1'b0;
-		box28 = 1'b0;
-		box29 = 1'b0;
-		box30 = 1'b0;
-		box31 = 1'b0;
-		box32 = 1'b0;
-		box33 = 1'b0;
-		box34 = 1'b0;
-		box35 = 1'b0;
-		box36 = 1'b0;
-		box37 = 1'b0;
+		box1 = 1'b0;		box2 = 1'b0;		box3 = 1'b0;		box4 = 1'b0;		box5 = 1'b0;		box6 = 1'b0;		box7 = 1'b0;		box8 = 1'b0;		box9 = 1'b1;		box10 = 1'b0;		box11 = 1'b0;		box12 = 1'b0;		box13 = 1'b0;		box14 = 1'b0;		box15 = 1'b0;		box16 = 1'b0;		box17 = 1'b0;		box18 = 1'b0;		box19 = 1'b0;		box20 = 1'b0;		box21 = 1'b0;		box22 = 1'b0;		box23 = 1'b0;		box24 = 1'b0;		box25 = 1'b0;		box26 = 1'b0;		box27 = 1'b0;		box28 = 1'b0;		box29 = 1'b0;		box30 = 1'b0;		box31 = 1'b0;		box32 = 1'b0;		box33 = 1'b0;		box34 = 1'b0;		box35 = 1'b0;		box36 = 1'b0;box37 = 1'b0;
 		end
 		else if(Object10) begin 
-		box1 = 1'b0;
-		box2 = 1'b0;
-		box3 = 1'b0;
-		box4 = 1'b0;
-		box5 = 1'b0;
-		box6 = 1'b0;
-		box7 = 1'b0;
-		box8 = 1'b0;
-		box9 = 1'b0;
-		box10 = 1'b1;
-		box11 = 1'b0;
-		box12 = 1'b0;
-		box13 = 1'b0;
-		box14 = 1'b0;
-		box15 = 1'b0;
-		box16 = 1'b0;
-		box17 = 1'b0;
-		box18 = 1'b0;
-		box19 = 1'b0;
-		box20 = 1'b0;
-		box21 = 1'b0;
-		box22 = 1'b0;
-		box23 = 1'b0;
-		box24 = 1'b0;
-		box25 = 1'b0;
-		box26 = 1'b0;
-		box27 = 1'b0;
-		box28 = 1'b0;
-		box29 = 1'b0;
-		box30 = 1'b0;
-		box31 = 1'b0;
-		box32 = 1'b0;
-		box33 = 1'b0;
-		box34 = 1'b0;
-		box35 = 1'b0;
-		box36 = 1'b0;
-		box37 = 1'b0;
+		box1 = 1'b0;		box2 = 1'b0;		box3 = 1'b0;		box4 = 1'b0;		box5 = 1'b0;		box6 = 1'b0;		box7 = 1'b0;		box8 = 1'b0;		box9 = 1'b0;		box10 = 1'b1;		box11 = 1'b0;		box12 = 1'b0;		box13 = 1'b0;		box14 = 1'b0;		box15 = 1'b0;		box16 = 1'b0;		box17 = 1'b0;		box18 = 1'b0;		box19 = 1'b0;		box20 = 1'b0;		box21 = 1'b0;		box22 = 1'b0;		box23 = 1'b0;		box24 = 1'b0;		box25 = 1'b0;		box26 = 1'b0;		box27 = 1'b0;		box28 = 1'b0;		box29 = 1'b0;		box30 = 1'b0;		box31 = 1'b0;		box32 = 1'b0;		box33 = 1'b0;		box34 = 1'b0;		box35 = 1'b0;		box36 = 1'b0;		box37 = 1'b0;
 		end
 		else if(Object11) begin 
 		box1 = 1'b0;
@@ -701,25 +952,7 @@ begin
 		box16 = 1'b0;
 		box17 = 1'b0;
 		box18 = 1'b0;
-		box19 = 1'b0;
-		box20 = 1'b0;
-		box21 = 1'b0;
-		box22 = 1'b0;
-		box23 = 1'b0;
-		box24 = 1'b0;
-		box25 = 1'b0;
-		box26 = 1'b0;
-		box27 = 1'b0;
-		box28 = 1'b0;
-		box29 = 1'b0;
-		box30 = 1'b0;
-		box31 = 1'b0;
-		box32 = 1'b0;
-		box33 = 1'b0;
-		box34 = 1'b0;
-		box35 = 1'b0;
-		box36 = 1'b0;
-		box37 = 1'b0;
+		box19 = 1'b0;		box20 = 1'b0;	box21 = 1'b0;		box22 = 1'b0;		box23 = 1'b0;		box24 = 1'b0;		box25 = 1'b0;		box26 = 1'b0;		box27 = 1'b0;		box28 = 1'b0;		box29 = 1'b0;		box30 = 1'b0;		box31 = 1'b0;		box32 = 1'b0;		box33 = 1'b0;		box34 = 1'b0;		box35 = 1'b0;		box36 = 1'b0;box37 = 1'b0;
 		end
 		else if(Object13) begin 
 		box1 = 1'b0;
@@ -761,44 +994,8 @@ begin
 		box37 = 1'b0;
 		end
 		else if(Object14) begin 
-		box1 = 1'b0;
-		box2 = 1'b0;
-		box3 = 1'b0;
-		box4 = 1'b0;
-		box5 = 1'b0;
-		box6 = 1'b0;
-		box7 = 1'b0;
-		box8 = 1'b0;
-		box9 = 1'b0;
-		box10 = 1'b0;
-		box11 = 1'b0;
-		box12 = 1'b0;
-		box13 = 1'b0;
-		box14 = 1'b1;
-		box15 = 1'b0;
-		box16 = 1'b0;
-		box17 = 1'b0;
-		box18 = 1'b0;
-		box19 = 1'b0;
-		box20 = 1'b0;
-		box21 = 1'b0;
-		box22 = 1'b0;
-		box23 = 1'b0;
-		box24 = 1'b0;
-		box25 = 1'b0;
-		box26 = 1'b0;
-		box27 = 1'b0;
-		box28 = 1'b0;
-		box29 = 1'b0;
-		box30 = 1'b0;
-		box31 = 1'b0;
-		box32 = 1'b0;
-		box33 = 1'b0;
-		box34 = 1'b0;
-		box35 = 1'b0;
-		box36 = 1'b0;
-		box37 = 1'b0;
-		end
+		box1 = 1'b0;		box2 = 1'b0;	box3 = 1'b0;		box4 = 1'b0;	box5 = 1'b0;		box6 = 1'b0;		box7 = 1'b0;		box8 = 1'b0;box9 = 1'b0;		box10 = 1'b0;		box11 = 1'b0;		box12 = 1'b0;box13 = 1'b0;		box14 = 1'b1;		box15 = 1'b0;		box16 = 1'b0;box17 = 1'b0;		box18 = 1'b0;		box19 = 1'b0;		box20 = 1'b0;	box21 = 1'b0;		box22 = 1'b0;		box23 = 1'b0;		box24 = 1'b0;	box25 = 1'b0;		box26 = 1'b0;		box27 = 1'b0;		box28 = 1'b0;		box29 = 1'b0;box30 = 1'b0;		box31 = 1'b0;		box32 = 1'b0;		box33 = 1'b0;		box34 = 1'b0;		box35 = 1'b0;		box36 = 1'b0;	box37 = 1'b0;
+	  end
 		else if(Object15) begin 
 		box1 = 1'b0;
 		box2 = 1'b0;
@@ -917,43 +1114,7 @@ begin
 		box37 = 1'b0;
 		end
 		else if(Object18) begin 
-		box1 = 1'b0;
-		box2 = 1'b0;
-		box3 = 1'b0;
-		box4 = 1'b0;
-		box5 = 1'b0;
-		box6 = 1'b0;
-		box7 = 1'b0;
-		box8 = 1'b0;
-		box9 = 1'b0;
-		box10 = 1'b0;
-		box11 = 1'b0;
-		box12 = 1'b0;
-		box13 = 1'b0;
-		box14 = 1'b0;
-		box15 = 1'b0;
-		box16 = 1'b0;
-		box17 = 1'b0;
-		box18 = 1'b1;
-		box19 = 1'b0;
-		box20 = 1'b0;
-		box21 = 1'b0;
-		box22 = 1'b0;
-		box23 = 1'b0;
-		box24 = 1'b0;
-		box25 = 1'b0;
-		box26 = 1'b0;
-		box27 = 1'b0;
-		box28 = 1'b0;
-		box29 = 1'b0;
-		box30 = 1'b0;
-		box31 = 1'b0;
-		box32 = 1'b0;
-		box33 = 1'b0;
-		box34 = 1'b0;
-		box35 = 1'b0;
-		box36 = 1'b0;
-		box37 = 1'b0;
+		box1 = 1'b0;		box2 = 1'b0; box3 = 1'b0;		box4 = 1'b0;box5 = 1'b0;		box6 = 1'b0; box7 = 1'b0;		box8 = 1'b0;		box9 = 1'b0;		box10 = 1'b0;		box11 = 1'b0;		box12 = 1'b0;		box13 = 1'b0;		box14 = 1'b0;		box15 = 1'b0;		box16 = 1'b0;		box17 = 1'b0;		box18 = 1'b1;		box19 = 1'b0;		box20 = 1'b0;		box21 = 1'b0;		box22 = 1'b0;		box23 = 1'b0;		box24 = 1'b0;		box25 = 1'b0;		box26 = 1'b0;		box27 = 1'b0;		box28 = 1'b0;		box29 = 1'b0;		box30 = 1'b0;		box31 = 1'b0;		box32 = 1'b0;		box33 = 1'b0;		box34 = 1'b0;		box35 = 1'b0;box36 = 1'b0;box37 = 1'b0;
 		end
 		else if(Object19) begin 
 		box1 = 1'b0;
@@ -1229,472 +1390,40 @@ begin
 		box37 = 1'b0;
 		end
 		else if(Object26) begin 
-		box1 = 1'b0;
-		box2 = 1'b0;
-		box3 = 1'b0;
-		box4 = 1'b0;
-		box5 = 1'b0;
-		box6 = 1'b0;
-		box7 = 1'b0;
-		box8 = 1'b0;
-		box9 = 1'b0;
-		box10 = 1'b0;
-		box11 = 1'b0;
-		box12 = 1'b0;
-		box13 = 1'b0;
-		box14 = 1'b0;
-		box15 = 1'b0;
-		box16 = 1'b0;
-		box17 = 1'b0;
-		box18 = 1'b0;
-		box19 = 1'b0;
-		box20 = 1'b0;
-		box21 = 1'b0;
-		box22 = 1'b0;
-		box23 = 1'b0;
-		box24 = 1'b0;
-		box25 = 1'b0;
-		box26 = 1'b1;
-		box27 = 1'b0;
-		box28 = 1'b0;
-		box29 = 1'b0;
-		box30 = 1'b0;
-		box31 = 1'b0;
-		box32 = 1'b0;
-		box33 = 1'b0;
-		box34 = 1'b0;
-		box35 = 1'b0;
-		box36 = 1'b0;
-		box37 = 1'b0;
+		box1 = 1'b0;		box2 = 1'b0;		box3 = 1'b0;		box4 = 1'b0;		box5 = 1'b0;		box6 = 1'b0;		box7 = 1'b0;		box8 = 1'b0;		box9 = 1'b0;		box10 = 1'b0;		box11 = 1'b0;		box12 = 1'b0;		box13 = 1'b0;		box14 = 1'b0;		box15 = 1'b0;		box16 = 1'b0;		box17 = 1'b0;		box18 = 1'b0;		box19 = 1'b0;		box20 = 1'b0;		box21 = 1'b0;		box22 = 1'b0;		box23 = 1'b0;		box24 = 1'b0;		box25 = 1'b0;		box26 = 1'b1;		box27 = 1'b0;		box28 = 1'b0;		box29 = 1'b0;		box30 = 1'b0;		box31 = 1'b0;		box32 = 1'b0;		box33 = 1'b0;		box34 = 1'b0;		box35 = 1'b0;		box36 = 1'b0;box37 = 1'b0;
 		end
 		else if(Object27) begin 
-		box1 = 1'b0;
-		box2 = 1'b0;
-		box3 = 1'b0;
-		box4 = 1'b0;
-		box5 = 1'b0;
-		box6 = 1'b0;
-		box7 = 1'b0;
-		box8 = 1'b0;
-		box9 = 1'b0;
-		box10 = 1'b0;
-		box11 = 1'b0;
-		box12 = 1'b0;
-		box13 = 1'b0;
-		box14 = 1'b0;
-		box15 = 1'b0;
-		box16 = 1'b0;
-		box17 = 1'b0;
-		box18 = 1'b0;
-		box19 = 1'b0;
-		box20 = 1'b0;
-		box21 = 1'b0;
-		box22 = 1'b0;
-		box23 = 1'b0;
-		box24 = 1'b0;
-		box25 = 1'b0;
-		box26 = 1'b0;
-		box27 = 1'b1;
-		box28 = 1'b0;
-		box29 = 1'b0;
-		box30 = 1'b0;
-		box31 = 1'b0;
-		box32 = 1'b0;
-		box33 = 1'b0;
-		box34 = 1'b0;
-		box35 = 1'b0;
-		box36 = 1'b0;
-		box37 = 1'b0;
+		box1 = 1'b0;		box2 = 1'b0;		box3 = 1'b0;		box4 = 1'b0;		box5 = 1'b0;		box6 = 1'b0;		box7 = 1'b0;		box8 = 1'b0;		box9 = 1'b0;		box10 = 1'b0;		box11 = 1'b0;		box12 = 1'b0;		box13 = 1'b0;		box14 = 1'b0;		box15 = 1'b0;		box16 = 1'b0;		box17 = 1'b0;		box18 = 1'b0;		box19 = 1'b0;		box20 = 1'b0;		box21 = 1'b0;		box22 = 1'b0;		box23 = 1'b0;		box24 = 1'b0;		box25 = 1'b0;		box26 = 1'b0;		box27 = 1'b1;		box28 = 1'b0;		box29 = 1'b0;		box30 = 1'b0;		box31 = 1'b0;		box32 = 1'b0;		box33 = 1'b0;		box34 = 1'b0;		box35 = 1'b0;		box36 = 1'b0;		box37 = 1'b0;
 		end
 		else if(Object28) begin 
-		box1 = 1'b0;
-		box2 = 1'b0;
-		box3 = 1'b0;
-		box4 = 1'b0;
-		box5 = 1'b0;
-		box6 = 1'b0;
-		box7 = 1'b0;
-		box8 = 1'b0;
-		box9 = 1'b0;
-		box10 = 1'b0;
-		box11 = 1'b0;
-		box12 = 1'b0;
-		box13 = 1'b0;
-		box14 = 1'b0;
-		box15 = 1'b0;
-		box16 = 1'b0;
-		box17 = 1'b0;
-		box18 = 1'b0;
-		box19 = 1'b0;
-		box20 = 1'b0;
-		box21 = 1'b0;
-		box22 = 1'b0;
-		box23 = 1'b0;
-		box24 = 1'b0;
-		box25 = 1'b0;
-		box26 = 1'b0;
-		box27 = 1'b0;
-		box28 = 1'b1;
-		box29 = 1'b0;
-		box30 = 1'b0;
-		box31 = 1'b0;
-		box32 = 1'b0;
-		box33 = 1'b0;
-		box34 = 1'b0;
-		box35 = 1'b0;
-		box36 = 1'b0;
-		box37 = 1'b0;
+		box1 = 1'b0;		box2 = 1'b0;		box3 = 1'b0;		box4 = 1'b0;		box5 = 1'b0;		box6 = 1'b0;		box7 = 1'b0;	box8 = 1'b0;box9 = 1'b0;		box10 = 1'b0;		box11 = 1'b0;		box12 = 1'b0;		box13 = 1'b0;		box14 = 1'b0;		box15 = 1'b0;		box16 = 1'b0;		box17 = 1'b0;		box18 = 1'b0;		box19 = 1'b0;		box20 = 1'b0;		box21 = 1'b0;		box22 = 1'b0;		box23 = 1'b0;		box24 = 1'b0;		box25 = 1'b0;		box26 = 1'b0;		box27 = 1'b0;		box28 = 1'b1;		box29 = 1'b0;		box30 = 1'b0;		box31 = 1'b0;		box32 = 1'b0;		box33 = 1'b0;		box34 = 1'b0;		box35 = 1'b0;		box36 = 1'b0;		box37 = 1'b0;
 		end
 		else if(Object29) begin 
-		box1 = 1'b0;
-		box2 = 1'b0;
-		box3 = 1'b0;
-		box4 = 1'b0;
-		box5 = 1'b0;
-		box6 = 1'b0;
-		box7 = 1'b0;
-		box8 = 1'b0;
-		box9 = 1'b0;
-		box10 = 1'b0;
-		box11 = 1'b0;
-		box12 = 1'b0;
-		box13 = 1'b0;
-		box14 = 1'b0;
-		box15 = 1'b0;
-		box16 = 1'b0;
-		box17 = 1'b0;
-		box18 = 1'b0;
-		box19 = 1'b0;
-		box20 = 1'b0;
-		box21 = 1'b0;
-		box22 = 1'b0;
-		box23 = 1'b0;
-		box24 = 1'b0;
-		box25 = 1'b0;
-		box26 = 1'b0;
-		box27 = 1'b0;
-		box28 = 1'b0;
-		box29 = 1'b1;
-		box30 = 1'b0;
-		box31 = 1'b0;
-		box32 = 1'b0;
-		box33 = 1'b0;
-		box34 = 1'b0;
-		box35 = 1'b0;
-		box36 = 1'b0;
-		box37 = 1'b0;
+		box1 = 1'b0;		box2 = 1'b0;		box3 = 1'b0;		box4 = 1'b0;		box5 = 1'b0;		box6 = 1'b0;		box7 = 1'b0;		box8 = 1'b0;		box9 = 1'b0;		box10 = 1'b0;		box11 = 1'b0;		box12 = 1'b0;		box13 = 1'b0;		box14 = 1'b0;		box15 = 1'b0;		box16 = 1'b0;		box17 = 1'b0;		box18 = 1'b0;		box19 = 1'b0;		box20 = 1'b0;		box21 = 1'b0;		box22 = 1'b0;		box23 = 1'b0;		box24 = 1'b0;		box25 = 1'b0;		box26 = 1'b0;		box27 = 1'b0;		box28 = 1'b0;		box29 = 1'b1;		box30 = 1'b0;		box31 = 1'b0;		box32 = 1'b0;		box33 = 1'b0;		box34 = 1'b0;		box35 = 1'b0;		box36 = 1'b0;		box37 = 1'b0;
 		end
 		else if(Object30) begin 
-		box1 = 1'b0;
-		box2 = 1'b0;
-		box3 = 1'b0;
-		box4 = 1'b0;
-		box5 = 1'b0;
-		box6 = 1'b0;
-		box7 = 1'b0;
-		box8 = 1'b0;
-		box9 = 1'b0;
-		box10 = 1'b0;
-		box11 = 1'b0;
-		box12 = 1'b0;
-		box13 = 1'b0;
-		box14 = 1'b0;
-		box15 = 1'b0;
-		box16 = 1'b0;
-		box17 = 1'b0;
-		box18 = 1'b0;
-		box19 = 1'b0;
-		box20 = 1'b0;
-		box21 = 1'b0;
-		box22 = 1'b0;
-		box23 = 1'b0;
-		box24 = 1'b0;
-		box25 = 1'b0;
-		box26 = 1'b0;
-		box27 = 1'b0;
-		box28 = 1'b0;
-		box29 = 1'b0;
-		box30 = 1'b1;
-		box31 = 1'b0;
-		box32 = 1'b0;
-		box33 = 1'b0;
-		box34 = 1'b0;
-		box35 = 1'b0;
-		box36 = 1'b0;
-		box37 = 1'b0;
+		box1 = 1'b0;		box2 = 1'b0;		box3 = 1'b0;		box4 = 1'b0;		box5 = 1'b0;		box6 = 1'b0;		box7 = 1'b0;		box8 = 1'b0;		box9 = 1'b0;		box10 = 1'b0;		box11 = 1'b0;		box12 = 1'b0;		box13 = 1'b0;		box14 = 1'b0;		box15 = 1'b0;		box16 = 1'b0;		box17 = 1'b0;		box18 = 1'b0;		box19 = 1'b0;		box20 = 1'b0;		box21 = 1'b0;		box22 = 1'b0;		box23 = 1'b0;		box24 = 1'b0;		box25 = 1'b0;		box26 = 1'b0;		box27 = 1'b0;		box28 = 1'b0;		box29 = 1'b0;		box30 = 1'b1;		box31 = 1'b0;		box32 = 1'b0;		box33 = 1'b0;		box34 = 1'b0;		box35 = 1'b0;		box36 = 1'b0;		box37 = 1'b0;
 		end
 		else if(Object31) begin 
-		box1 = 1'b0;
-		box2 = 1'b0;
-		box3 = 1'b0;
-		box4 = 1'b0;
-		box5 = 1'b0;
-		box6 = 1'b0;
-		box7 = 1'b0;
-		box8 = 1'b0;
-		box9 = 1'b0;
-		box10 = 1'b0;
-		box11 = 1'b0;
-		box12 = 1'b0;
-		box13 = 1'b0;
-		box14 = 1'b0;
-		box15 = 1'b0;
-		box16 = 1'b0;
-		box17 = 1'b0;
-		box18 = 1'b0;
-		box19 = 1'b0;
-		box20 = 1'b0;
-		box21 = 1'b0;
-		box22 = 1'b0;
-		box23 = 1'b0;
-		box24 = 1'b0;
-		box25 = 1'b0;
-		box26 = 1'b0;
-		box27 = 1'b0;
-		box28 = 1'b0;
-		box29 = 1'b0;
-		box30 = 1'b0;
-		box31 = 1'b1;
-		box32 = 1'b0;
-		box33 = 1'b0;
-		box34 = 1'b0;
-		box35 = 1'b0;
-		box36 = 1'b0;
-		box37 = 1'b0;
+		box1 = 1'b0;		box2 = 1'b0;		box3 = 1'b0;		box4 = 1'b0;		box5 = 1'b0;		box6 = 1'b0;		box7 = 1'b0;		box8 = 1'b0;		box9 = 1'b0;		box10 = 1'b0;		box11 = 1'b0;		box12 = 1'b0;		box13 = 1'b0;		box14 = 1'b0;		box15 = 1'b0;		box16 = 1'b0;		box17 = 1'b0;		box18 = 1'b0;		box19 = 1'b0;		box20 = 1'b0;		box21 = 1'b0;		box22 = 1'b0;		box23 = 1'b0;		box24 = 1'b0;		box25 = 1'b0;		box26 = 1'b0;		box27 = 1'b0;		box28 = 1'b0;		box29 = 1'b0;		box30 = 1'b0;		box31 = 1'b1;		box32 = 1'b0;		box33 = 1'b0;		box34 = 1'b0;		box35 = 1'b0;		box36 = 1'b0;		box37 = 1'b0;
 		end
 		else if(Object32) begin 
-		box1 = 1'b0;
-		box2 = 1'b0;
-		box3 = 1'b0;
-		box4 = 1'b0;
-		box5 = 1'b0;
-		box6 = 1'b0;
-		box7 = 1'b0;
-		box8 = 1'b0;
-		box9 = 1'b0;
-		box10 = 1'b0;
-		box11 = 1'b0;
-		box12 = 1'b0;
-		box13 = 1'b0;
-		box14 = 1'b0;
-		box15 = 1'b0;
-		box16 = 1'b0;
-		box17 = 1'b0;
-		box18 = 1'b0;
-		box19 = 1'b0;
-		box20 = 1'b0;
-		box21 = 1'b0;
-		box22 = 1'b0;
-		box23 = 1'b0;
-		box24 = 1'b0;
-		box25 = 1'b0;
-		box26 = 1'b0;
-		box27 = 1'b0;
-		box28 = 1'b0;
-		box29 = 1'b0;
-		box30 = 1'b0;
-		box31 = 1'b0;
-		box32 = 1'b1;
-		box33 = 1'b0;
-		box34 = 1'b0;
-		box35 = 1'b0;
-		box36 = 1'b0;
-		box37 = 1'b0;
+		box1 = 1'b0;		box2 = 1'b0;		box3 = 1'b0;		box4 = 1'b0;		box5 = 1'b0;		box6 = 1'b0;		box7 = 1'b0;		box8 = 1'b0;		box9 = 1'b0;		box10 = 1'b0;		box11 = 1'b0;		box12 = 1'b0;		box13 = 1'b0;		box14 = 1'b0;		box15 = 1'b0;		box16 = 1'b0;		box17 = 1'b0;		box18 = 1'b0;		box19 = 1'b0;		box20 = 1'b0;		box21 = 1'b0;		box22 = 1'b0;		box23 = 1'b0;		box24 = 1'b0;		box25 = 1'b0;box26 = 1'b0;		box27 = 1'b0;		box28 = 1'b0;		box29 = 1'b0;		box30 = 1'b0;		box31 = 1'b0;		box32 = 1'b1;		box33 = 1'b0;		box34 = 1'b0;		box35 = 1'b0;		box36 = 1'b0;		box37 = 1'b0;
 		end
 		else if(Object33) begin 
-		box1 = 1'b0;
-		box2 = 1'b0;
-		box3 = 1'b0;
-		box4 = 1'b0;
-		box5 = 1'b0;
-		box6 = 1'b0;
-		box7 = 1'b0;
-		box8 = 1'b0;
-		box9 = 1'b0;
-		box10 = 1'b0;
-		box11 = 1'b0;
-		box12 = 1'b0;
-		box13 = 1'b0;
-		box14 = 1'b0;
-		box15 = 1'b0;
-		box16 = 1'b0;
-		box17 = 1'b0;
-		box18 = 1'b0;
-		box19 = 1'b0;
-		box20 = 1'b0;
-		box21 = 1'b0;
-		box22 = 1'b0;
-		box23 = 1'b0;
-		box24 = 1'b0;
-		box25 = 1'b0;
-		box26 = 1'b0;
-		box27 = 1'b0;
-		box28 = 1'b0;
-		box29 = 1'b0;
-		box30 = 1'b0;
-		box31 = 1'b0;
-		box32 = 1'b0;
-		box33 = 1'b1;
-		box34 = 1'b0;
-		box35 = 1'b0;
-		box36 = 1'b0;
-		box37 = 1'b0;
+		box1 = 1'b0;		box2 = 1'b0;		box3 = 1'b0;		box4 = 1'b0;		box5 = 1'b0;		box6 = 1'b0;		box7 = 1'b0;		box8 = 1'b0;box9 = 1'b0;box10 = 1'b0;		box11 = 1'b0;		box12 = 1'b0;		box13 = 1'b0;		box14 = 1'b0;		box15 = 1'b0;		box16 = 1'b0;		box17 = 1'b0;		box18 = 1'b0;		box19 = 1'b0;		box20 = 1'b0;		box21 = 1'b0;		box22 = 1'b0;		box23 = 1'b0;		box24 = 1'b0;		box25 = 1'b0;		box26 = 1'b0;		box27 = 1'b0;		box28 = 1'b0;		box29 = 1'b0;		box30 = 1'b0;		box31 = 1'b0;		box32 = 1'b0;		box33 = 1'b1;		box34 = 1'b0;		box35 = 1'b0;		box36 = 1'b0;box37 = 1'b0;
 		end
 		else if(Object34) begin 
-		box1 = 1'b0;
-		box2 = 1'b0;
-		box3 = 1'b0;
-		box4 = 1'b0;
-		box5 = 1'b0;
-		box6 = 1'b0;
-		box7 = 1'b0;
-		box8 = 1'b0;
-		box9 = 1'b0;
-		box10 = 1'b0;
-		box11 = 1'b0;
-		box12 = 1'b0;
-		box13 = 1'b0;
-		box14 = 1'b0;
-		box15 = 1'b0;
-		box16 = 1'b0;
-		box17 = 1'b0;
-		box18 = 1'b0;
-		box19 = 1'b0;
-		box20 = 1'b0;
-		box21 = 1'b0;
-		box22 = 1'b0;
-		box23 = 1'b0;
-		box24 = 1'b0;
-		box25 = 1'b0;
-		box26 = 1'b0;
-		box27 = 1'b0;
-		box28 = 1'b0;
-		box29 = 1'b0;
-		box30 = 1'b0;
-		box31 = 1'b0;
-		box32 = 1'b0;
-		box33 = 1'b0;
-		box34 = 1'b1;
-		box35 = 1'b0;
-		box36 = 1'b0;
-		box37 = 1'b0;
+		box1 = 1'b0;	box2 = 1'b0;		box3 = 1'b0;		box4 = 1'b0;		box5 = 1'b0;		box6 = 1'b0;		box7 = 1'b0;		box8 = 1'b0;		box9 = 1'b0;		box10 = 1'b0;		box11 = 1'b0;		box12 = 1'b0;		box13 = 1'b0;		box14 = 1'b0;		box15 = 1'b0;		box16 = 1'b0;		box17 = 1'b0;		box18 = 1'b0;		box19 = 1'b0;		box20 = 1'b0;	box21 = 1'b0;		box22 = 1'b0;		box23 = 1'b0;		box24 = 1'b0;		box25 = 1'b0;		box26 = 1'b0;		box27 = 1'b0;		box28 = 1'b0;		box29 = 1'b0;		box30 = 1'b0;		box31 = 1'b0;		box32 = 1'b0;		box33 = 1'b0;		box34 = 1'b1;		box35 = 1'b0;		box36 = 1'b0;		box37 = 1'b0;
 		end
 		else if(Object35) begin 
-		box1 = 1'b0;
-		box2 = 1'b0;
-		box3 = 1'b0;
-		box4 = 1'b0;
-		box5 = 1'b0;
-		box6 = 1'b0;
-		box7 = 1'b0;
-		box8 = 1'b0;
-		box9 = 1'b0;
-		box10 = 1'b0;
-		box11 = 1'b0;
-		box12 = 1'b0;
-		box13 = 1'b0;
-		box14 = 1'b0;
-		box15 = 1'b0;
-		box16 = 1'b0;
-		box17 = 1'b0;
-		box18 = 1'b0;
-		box19 = 1'b0;
-		box20 = 1'b0;
-		box21 = 1'b0;
-		box22 = 1'b0;
-		box23 = 1'b0;
-		box24 = 1'b0;
-		box25 = 1'b0;
-		box26 = 1'b0;
-		box27 = 1'b0;
-		box28 = 1'b0;
-		box29 = 1'b0;
-		box30 = 1'b0;
-		box31 = 1'b0;
-		box32 = 1'b0;
-		box33 = 1'b0;
-		box34 = 1'b0;
-		box35 = 1'b1;
-		box36 = 1'b0;
-		box37 = 1'b0;
+		box1 = 1'b0;	box2 = 1'b0;		box3 = 1'b0;		box4 = 1'b0;		box5 = 1'b0;		box6 = 1'b0;		box7 = 1'b0;		box8 = 1'b0;		box9 = 1'b0;		box10 = 1'b0;		box11 = 1'b0;		box12 = 1'b0;		box13 = 1'b0;		box14 = 1'b0;		box15 = 1'b0;		box16 = 1'b0;		box17 = 1'b0;		box18 = 1'b0;		box19 = 1'b0;		box20 = 1'b0;	box21 = 1'b0;		box22 = 1'b0;		box23 = 1'b0;		box24 = 1'b0;		box25 = 1'b0;		box26 = 1'b0;		box27 = 1'b0;		box28 = 1'b0;		box29 = 1'b0;		box30 = 1'b0;		box31 = 1'b0;		box32 = 1'b0;		box33 = 1'b0;		box34 = 1'b0;		box35 = 1'b1;		box36 = 1'b0;		box37 = 1'b0;
 		end
 		else if(Object36) begin 
-		box1 = 1'b0;
-		box2 = 1'b0;
-		box3 = 1'b0;
-		box4 = 1'b0;
-		box5 = 1'b0;
-		box6 = 1'b0;
-		box7 = 1'b0;
-		box8 = 1'b0;
-		box9 = 1'b0;
-		box10 = 1'b0;
-		box11 = 1'b0;
-		box12 = 1'b0;
-		box13 = 1'b0;
-		box14 = 1'b0;
-		box15 = 1'b0;
-		box16 = 1'b0;
-		box17 = 1'b0;
-		box18 = 1'b0;
-		box19 = 1'b0;
-		box20 = 1'b0;
-		box21 = 1'b0;
-		box22 = 1'b0;
-		box23 = 1'b0;
-		box24 = 1'b0;
-		box25 = 1'b0;
-		box26 = 1'b0;
-		box27 = 1'b0;
-		box28 = 1'b0;
-		box29 = 1'b0;
-		box30 = 1'b0;
-		box31 = 1'b0;
-		box32 = 1'b0;
-		box33 = 1'b0;
-		box34 = 1'b0;
-		box35 = 1'b0;
-		box36 = 1'b1;
-		box37 = 1'b0;
+		box1 = 1'b0;		box2 = 1'b0;		box3 = 1'b0;		box4 = 1'b0;		box5 = 1'b0;		box6 = 1'b0;		box7 = 1'b0;		box8 = 1'b0;		box9 = 1'b0;		box10 = 1'b0;		box11 = 1'b0;		box12 = 1'b0;		box13 = 1'b0;		box14 = 1'b0;		box15 = 1'b0;		box16 = 1'b0;		box17 = 1'b0;		box18 = 1'b0;		box19 = 1'b0;		box20 = 1'b0;		box21 = 1'b0;		box22 = 1'b0;		box23 = 1'b0;		box24 = 1'b0;		box25 = 1'b0;		box26 = 1'b0;		box27 = 1'b0;		box28 = 1'b0;		box29 = 1'b0;		box30 = 1'b0;		box31 = 1'b0;		box32 = 1'b0;	box33 = 1'b0;box34 = 1'b0;		box35 = 1'b0;		box36 = 1'b1;box37 = 1'b0;
 		end
 		else if(Object37) begin 
-		box1 = 1'b0;
-		box2 = 1'b0;
-		box3 = 1'b0;
-		box4 = 1'b0;
-		box5 = 1'b0;
-		box6 = 1'b0;
-		box7 = 1'b0;
-		box8 = 1'b0;
-		box9 = 1'b0;
-		box10 = 1'b0;
-		box11 = 1'b0;
-		box12 = 1'b0;
-		box13 = 1'b0;
-		box14 = 1'b0;
-		box15 = 1'b0;
-		box16 = 1'b0;
-		box17 = 1'b0;
-		box18 = 1'b0;
-		box19 = 1'b0;
-		box20 = 1'b0;
-		box21 = 1'b0;
-		box22 = 1'b0;
-		box23 = 1'b0;
-		box24 = 1'b0;
-		box25 = 1'b0;
-		box26 = 1'b0;
-		box27 = 1'b0;
-		box28 = 1'b0;
-		box29 = 1'b0;
-		box30 = 1'b0;
-		box31 = 1'b0;
-		box32 = 1'b0;
-		box33 = 1'b0;
-		box34 = 1'b0;
-		box35 = 1'b0;
-		box36 = 1'b0;
-		box37 = 1'b1;
+		box1 = 1'b0;		box2 = 1'b0;		box3 = 1'b0;		box4 = 1'b0;		box5 = 1'b0;		box6 = 1'b0;		box7 = 1'b0;		box8 = 1'b0;		box9 = 1'b0;		box10 = 1'b0;		box11 = 1'b0;		box12 = 1'b0;		box13 = 1'b0;		box14 = 1'b0;		box15 = 1'b0;		box16 = 1'b0;		box17 = 1'b0;		box18 = 1'b0;		box19 = 1'b0;		box20 = 1'b0;		box21 = 1'b0;		box22 = 1'b0;		box23 = 1'b0;		box24 = 1'b0;		box25 = 1'b0;		box26 = 1'b0;		box27 = 1'b0;		box28 = 1'b0;		box29 = 1'b0;		box30 = 1'b0;		box31 = 1'b0;		box32 = 1'b0;		box33 = 1'b0;		box34 = 1'b0;		box35 = 1'b0;		box36 = 1'b0;box37 = 1'b1;
 		end
 
 	else begin
@@ -1715,7 +1444,7 @@ end
 end */
 //======Modified Borrowed Code======//
 //Determines the color output based on the decision from the priority block
-color(clk, VGA_R, VGA_B, VGA_G, box1, ccbox1, box2, box3, box4, box5, box6, box7, box8, box9, box10, box11, box12, box13, box14, box15, box16, box17, box18, box19, box20, box21, box22, box23, box24, box25, box26, box27, box28, box29, box30, box31, box32, box33, box34, box35, box36, box37);//ADD HERE
+color(clk, VGA_R, VGA_B, VGA_G, box1, box2, erasebox2, bombAT2, caution2, warning2, box3, erasebox3, bombAT3, caution3, warning3, box4, erasebox4, bombAT4, caution4, box5, erasebox5, bombAT5, caution5, box6, erasebox6, bombAT6, caution6, box7, erasebox7, bombAT7, caution7, box8, erasebox8, bombAT8, caution8, box9, erasebox9, bombAT9, caution9, box10, erasebox10, bombAT10, caution10, box11, erasebox11, bombAT11, caution11, box12, erasebox12, bombAT12, caution12, box13, erasebox13, bombAT13, caution13, box14, erasebox14, bombAT14, caution14, box15, erasebox15, bombAT15, caution15, box16, erasebox16, bombAT16, caution16, box17, erasebox17, bombAT17, caution17, box18, erasebox18, bombAT18, caution18, box19, erasebox19, bombAT19, caution19, box20, erasebox20, bombAT20, caution20, box21, erasebox21, bombAT21, caution21, box22, erasebox22, bombAT22, caution22, box23, erasebox23, bombAT23, caution23, box24, erasebox24, bombAT24, caution24, box25, erasebox25, bombAT25, caution25, box26, erasebox26, bombAT26, caution26, box27, erasebox27, bombAT27, caution27, box28, erasebox28, bombAT28, caution28, box29, erasebox29, bombAT29, caution29, box30, erasebox30, bombAT30, caution30, box31, erasebox31, bombAT31, caution31, box32, erasebox32, bombAT32, caution32, box33, erasebox33, bombAT33, caution33, box34, erasebox34, bombAT34, caution34, box35, erasebox35, bombAT35, caution35, box36, erasebox36, bombAT36, caution36, box37, erasebox37, bombAT37, caution37, box38);//ADD here
 
 //======Borrowed code======//
 //======DO NOT EDIT========//
@@ -1748,210 +1477,655 @@ endmodule
 //======Formatted like Borrowed code, adjust you own parameters======//
 //============================//
 //========== COLOR ===========//
-//============================//
-module color(clk, red, blue, green, box1, stay1, box2, box3, box4, box5, box6, box7, box8, box9, box10, box11, box12, box13, box14, box15, box16, box17, box18, box19, box20, box21, box22, box23, box24, box25, box26, box27, box28, box29, box30, box31, box32, box33, box34, box35, box36, box37, box38);//ADD HERE
-
+//============================//  look below at this design, be very careful with it
+module color(clk, red, blue, green, box1, box2, erase2, bomb2, caution2, warning2, box3, erase3, bomb3, caution3, warning3,  box4, erase4, bomb4, caution4, box5, erase5, bomb5, caution5, box6, erase6, bomb6, caution6, box7, erase7, bomb7, caution7, box8, erase8, bomb8, caution8, box9, erase9, bomb9, caution9, box10, erase10, bomb10, caution10, box11, erase11, bomb11, caution11, box12, erase12, bomb12, caution12, box13, erase13, bomb13, caution13, box14, erase14, bomb14, caution14, box15, erase15, bomb15, caution15, box16, erase16, bomb16, caution16, box17, erase17, bomb17, caution17, box18, erase18, bomb18, caution18, box19, erase19, bomb19, caution19, box20, erase20, bomb20, caution20, box21, erase21, bomb21, caution21, box22, erase22, bomb22, caution22, box23, erase23, bomb23, caution23, box24, erase24, bomb24, caution24, box25, erase25, bomb25, caution25, box26, erase26, bomb26, caution26, box27, erase27, bomb27, caution27, box28, erase28, bomb28, caution28, box29, erase29, bomb29, caution29, box30, erase30, bomb30, caution30, box31, erase31, bomb31, caution31, box32, erase32, bomb32, caution32, box33, erase33, bomb33, caution33, box34, erase34, bomb34, caution34, box35, erase35, bomb35, caution35, box36, erase36, bomb36, caution36, box37, erase37, bomb37, caution37, box38);
 input clk, box1, box2, box3, box4, box5, box6, box7, box8, box9, box10, box11, box12, box13, box14, box15, box16, box17, box18, box19, box20, box21, box22, box23, box24, box25, box26, box27, box28, box29, box30, box31, box32, box33, box34, box35, box36, box37, box38;
-input stay1;
+
+input erase2, erase3, erase4, erase5, erase6, erase7, erase8, erase9, erase10, erase11, erase12, erase13, erase14, erase15, erase16, erase17, erase18, erase19, erase20, erase21, erase22, erase23, erase24, erase25, erase26, erase27, erase28, erase29, erase30, erase31, erase32, erase33, erase34, erase35, erase36, erase37; 
+input bomb2, bomb3, bomb4, bomb5, bomb6, bomb7, bomb8, bomb9, bomb10, bomb11, bomb12, bomb13, bomb14, bomb15, bomb16, bomb17, bomb18, bomb19, bomb20, bomb21, bomb22, bomb23, bomb24, bomb25, bomb26, bomb27, bomb28, bomb29, bomb30, bomb31, bomb32, bomb33, bomb34, bomb35, bomb36, bomb37;
+input caution2, caution3, caution4, caution5, caution6, caution7, caution8, caution9, caution10, caution11, caution12, caution13, caution14, caution15, caution16, caution17, caution18, caution19, caution20, caution21, caution22, caution23, caution24, caution25, caution26, caution27, caution28, caution29, caution30, caution31, caution32, caution33, caution34, caution35, caution36, caution37;
+input warning2, warning3;
 output [7:0] red, blue, green;
 reg[7:0] red, green, blue;
 
-always@(*)
+always@(*)  //just add color change to yellow also
 begin
 	if(box1) begin
 		red = 8'd255;
 		blue = 8'd255;
 		green = 8'd255;
 		end
+	
 	else if(box2) begin
-		 if(stay1 == 1) begin
-		red = 8'd000;
-		blue = 8'd000;
-		green = 8'd000;
-		end
-		else begin
-		red = 8'd000;
-		blue = 8'd000;
-		green = 8'd255;
-		end
-	end
-		else if(box3) begin
-		red = 8'd000;
-		blue = 8'd000;
-		green = 8'd255;
-		end
-		else if(box4) begin 
-		 red = 8'd000; 
-		 blue = 8'd000; 
-		 green = 8'd255; 
-		 end
-		else if(box5) begin 
-		 red = 8'd000; 
-		 blue = 8'd000; 
-		 green = 8'd255; 
-		 end
-		else if(box6) begin 
-		 red = 8'd000; 
-		 blue = 8'd000; 
-		 green = 8'd255; 
-		 end
-		else if(box7) begin 
-		 red = 8'd000; 
-		 blue = 8'd000; 
-		 green = 8'd255; 
-		end
-		else if(box8) begin 
-		 red = 8'd000; 
-		 blue = 8'd000; 
-		 green = 8'd255; 
-		 end
-		else if(box9) begin 
-		 red = 8'd000; 
-		 blue = 8'd000; 
-		 green = 8'd255; 
-		 end
-		else if(box10) begin 
-		 red = 8'd000; 
-		 blue = 8'd000; 
-		 green = 8'd255; 
-		 end
-		else if(box11) begin 
-		 red = 8'd000; 
-		 blue = 8'd000; 
-		 green = 8'd255; 
-		 end
-		else if(box12) begin 
-		 red = 8'd000; 
-		 blue = 8'd000; 
-		 green = 8'd255; 
-		 end
-		else if(box13) begin 
-		 red = 8'd000; 
-		 blue = 8'd000; 
-		 green = 8'd255; 
-		 end
-		else if(box14) begin 
-		 red = 8'd000; 
-		 blue = 8'd000; 
-		 green = 8'd255; 
-		 end
-		else if(box15) begin 
-		 red = 8'd000; 
-		 blue = 8'd000; 
-		 green = 8'd255; 
-		 end
-		else if(box16) begin 
-		 red = 8'd000; 
-		 blue = 8'd000; 
-		 green = 8'd255; 
-		 end
-		else if(box17) begin 
-		 red = 8'd000; 
-		 blue = 8'd000; 
-		 green = 8'd255; 
-		 end
-		else if(box18) begin 
-		 red = 8'd000; 
-		 blue = 8'd000; 
-		 green = 8'd255; 
-		 end
-		else if(box19) begin 
-		 red = 8'd000; 
-		 blue = 8'd000; 
-		 green = 8'd255; 
-		 end
-		else if(box20) begin 
-		 red = 8'd000; 
-		 blue = 8'd000; 
-		 green = 8'd255; 
-		 end
-		else if(box21) begin 
-		 red = 8'd000; 
-		 blue = 8'd000; 
-		 green = 8'd255; 
-		 end
-		else if(box22) begin 
-		 red = 8'd000; 
-		 blue = 8'd000; 
-		 green = 8'd255; 
-		 end
-		else if(box23) begin 
-		 red = 8'd000; 
-		 blue = 8'd000; 
-		 green = 8'd255; 
-		 end
-		else if(box24) begin 
-		 red = 8'd000; 
-		 blue = 8'd000; 
-		 green = 8'd255; 
-		 end
-		else if(box25) begin 
-		 red = 8'd000; 
-		 blue = 8'd000; 
-		 green = 8'd255; 
-		 end
-		else if(box26) begin 
-		 red = 8'd000; 
-		 blue = 8'd000; 
-		 green = 8'd255; 
-		 end
-		else if(box27) begin 
-		 red = 8'd000; 
-		 blue = 8'd000; 
-		 green = 8'd255; 
-		 end
-		else if(box28) begin 
-		 red = 8'd000; 
-		 blue = 8'd000; 
-		 green = 8'd255; 
-		 end
-		else if(box29) begin 
-		 red = 8'd000; 
-		 blue = 8'd000; 
-		 green = 8'd255; 
-		 end
-		else if(box30) begin 
-		 red = 8'd000; 
-		 blue = 8'd000; 
-		 green = 8'd255; 
-		 end
-		else if(box31) begin 
-		 red = 8'd000; 
-		 blue = 8'd000; 
-		 green = 8'd255; 
-		 end
-		else if(box32) begin 
-		 red = 8'd000; 
-		 blue = 8'd000; 
-		 green = 8'd255; 
-		 end
-		else if(box33) begin 
-		 red = 8'd000; 
-		 blue = 8'd000; 
-		 green = 8'd255; 
-		 end
-		else if(box34) begin 
-		 red = 8'd000; 
-		 blue = 8'd000; 
-		 green = 8'd255; 
-		 end
-		else if(box35) begin 
-		 red = 8'd000; 
-		 blue = 8'd000; 
-		 green = 8'd255; 
-		 end
-		else if(box36) begin 
-		 red = 8'd000; 
-		 blue = 8'd000; 
-		 green = 8'd255; 
-		 end
-		else if(box37) begin 
-		 red = 8'd000; 
-		 blue = 8'd000; 
-		 green = 8'd255; 
-		 end
+  if(erase2 == 1'b1) begin
+        red = 8'd000;
+        blue = 8'd000;
+        green = 8'd000;
+ end
+ else if(bomb2 == 1'b1) begin
+          red = 8'd255;
+          blue = 8'd000;
+          green = 8'd000;
+    end
+    else begin
+        red = 8'd000;
+        blue = 8'd000;
+       green = 8'd255;
+    end //else if here
+end
+else if(box3) begin
+  if(erase3 == 1'b1) begin
+        red = 8'd000;
+        blue = 8'd000;
+        green = 8'd000;
+ end
+ else if(bomb3 == 1'b1) begin
+          red = 8'd255;
+          blue = 8'd000;
+          green = 8'd000;
+    end
+else if(caution3 == 1'b1) begin
+          red = 8'd255;
+          blue = 8'd000;
+          green = 8'd255;
+    end
+else if(warning3 == 1'b1) begin
+          red = 8'd250;
+          blue = 8'd255;
+          green = 8'd51;
+    end
+    else begin
+        red = 8'd000;
+        blue = 8'd000;
+       green = 8'd255;
+    end
+end
+else if(box4) begin
+  if(erase4 == 1'b1) begin
+        red = 8'd000;
+        blue = 8'd000;
+        green = 8'd000;
+ end
+ else if(bomb4 == 1'b1) begin
+          red = 8'd255;
+          blue = 8'd000;
+          green = 8'd000;
+    end
+    else begin
+        red = 8'd000;
+        blue = 8'd000;
+       green = 8'd255;
+    end
+end
+else if(box5) begin
+  if(erase5 == 1'b1) begin
+        red = 8'd000;
+        blue = 8'd000;
+        green = 8'd000;
+ end
+ else if(bomb5 == 1'b1) begin
+          red = 8'd255;
+          blue = 8'd000;
+          green = 8'd000;
+    end
+    else begin
+        red = 8'd000;
+        blue = 8'd000;
+       green = 8'd255;
+    end
+end
+else if(box6) begin
+  if(erase6 == 1'b1) begin
+        red = 8'd000;
+        blue = 8'd000;
+        green = 8'd000;
+ end
+ else if(bomb6 == 1'b1) begin
+          red = 8'd255;
+          blue = 8'd000;
+          green = 8'd000;
+    end
+    else begin
+        red = 8'd000;
+        blue = 8'd000;
+       green = 8'd255;
+    end
+end
+else if(box7) begin
+  if(erase7 == 1'b1) begin
+        red = 8'd000;
+        blue = 8'd000;
+        green = 8'd000;
+ end
+ else if(bomb7 == 1'b1) begin
+          red = 8'd255;
+          blue = 8'd000;
+          green = 8'd000;
+    end
+    else begin
+        red = 8'd000;
+        blue = 8'd000;
+       green = 8'd255;
+    end
+end
+else if(box8) begin
+  if(erase8 == 1'b1) begin
+        red = 8'd000;
+        blue = 8'd000;
+        green = 8'd000;
+ end
+ else if(bomb8 == 1'b1) begin
+          red = 8'd255;
+          blue = 8'd000;
+          green = 8'd000;
+    end
+    else begin
+        red = 8'd000;
+        blue = 8'd000;
+       green = 8'd255;
+    end
+end
+else if(box9) begin
+  if(erase9 == 1'b1) begin
+        red = 8'd000;
+        blue = 8'd000;
+        green = 8'd000;
+ end
+ else if(bomb9 == 1'b1) begin
+          red = 8'd255;
+          blue = 8'd000;
+          green = 8'd000;
+    end
+    else begin
+        red = 8'd000;
+        blue = 8'd000;
+       green = 8'd255;
+    end
+end
+else if(box10) begin
+  if(erase10 == 1'b1) begin
+        red = 8'd000;
+        blue = 8'd000;
+        green = 8'd000;
+ end
+ else if(bomb10 == 1'b1) begin
+          red = 8'd255;
+          blue = 8'd000;
+          green = 8'd000;
+    end
+    else begin
+        red = 8'd000;
+        blue = 8'd000;
+       green = 8'd255;
+    end
+end
+else if(box11) begin
+  if(erase11 == 1'b1) begin
+        red = 8'd000;
+        blue = 8'd000;
+        green = 8'd000;
+ end
+ else if(bomb11 == 1'b1) begin
+          red = 8'd255;
+          blue = 8'd000;
+          green = 8'd000;
+    end
+    else begin
+        red = 8'd000;
+        blue = 8'd000;
+       green = 8'd255;
+    end
+end
+else if(box12) begin
+  if(erase12 == 1'b1) begin
+        red = 8'd000;
+        blue = 8'd000;
+        green = 8'd000;
+ end
+ else if(bomb12 == 1'b1) begin
+          red = 8'd255;
+          blue = 8'd000;
+          green = 8'd000;
+    end
+    else begin
+        red = 8'd000;
+        blue = 8'd000;
+       green = 8'd255;
+    end
+end
+else if(box13) begin
+  if(erase13 == 1'b1) begin
+        red = 8'd000;
+        blue = 8'd000;
+        green = 8'd000;
+ end
+ else if(bomb13 == 1'b1) begin
+          red = 8'd255;
+          blue = 8'd000;
+          green = 8'd000;
+    end
+    else begin
+        red = 8'd000;
+        blue = 8'd000;
+       green = 8'd255;
+    end
+end
+else if(box14) begin
+  if(erase14 == 1'b1) begin
+        red = 8'd000;
+        blue = 8'd000;
+        green = 8'd000;
+ end
+ else if(bomb14 == 1'b1) begin
+          red = 8'd255;
+          blue = 8'd000;
+          green = 8'd000;
+    end
+    else begin
+        red = 8'd000;
+        blue = 8'd000;
+       green = 8'd255;
+    end
+end
+else if(box15) begin
+  if(erase15 == 1'b1) begin
+        red = 8'd000;
+        blue = 8'd000;
+        green = 8'd000;
+ end
+ else if(bomb15 == 1'b1) begin
+          red = 8'd255;
+          blue = 8'd000;
+          green = 8'd000;
+    end
+    else begin
+        red = 8'd000;
+        blue = 8'd000;
+       green = 8'd255;
+    end
+end
+else if(box16) begin
+  if(erase16 == 1'b1) begin
+        red = 8'd000;
+        blue = 8'd000;
+        green = 8'd000;
+ end
+ else if(bomb16 == 1'b1) begin
+          red = 8'd255;
+          blue = 8'd000;
+          green = 8'd000;
+    end
+    else begin
+        red = 8'd000;
+        blue = 8'd000;
+       green = 8'd255;
+    end
+end
+else if(box17) begin
+  if(erase17 == 1'b1) begin
+        red = 8'd000;
+        blue = 8'd000;
+        green = 8'd000;
+ end
+ else if(bomb17 == 1'b1) begin
+          red = 8'd255;
+          blue = 8'd000;
+          green = 8'd000;
+    end
+    else begin
+        red = 8'd000;
+        blue = 8'd000;
+       green = 8'd255;
+    end
+end
+else if(box18) begin
+  if(erase18 == 1'b1) begin
+        red = 8'd000;
+        blue = 8'd000;
+        green = 8'd000;
+ end
+ else if(bomb18 == 1'b1) begin
+          red = 8'd255;
+          blue = 8'd000;
+          green = 8'd000;
+    end
+    else begin
+        red = 8'd000;
+        blue = 8'd000;
+       green = 8'd255;
+    end
+end
+else if(box19) begin
+  if(erase19 == 1'b1) begin
+        red = 8'd000;
+        blue = 8'd000;
+        green = 8'd000;
+ end
+ else if(bomb19 == 1'b1) begin
+          red = 8'd255;
+          blue = 8'd000;
+          green = 8'd000;
+    end
+    else begin
+        red = 8'd000;
+        blue = 8'd000;
+       green = 8'd255;
+    end
+end
+else if(box20) begin
+  if(erase20 == 1'b1) begin
+        red = 8'd000;
+        blue = 8'd000;
+        green = 8'd000;
+ end
+ else if(bomb20 == 1'b1) begin
+          red = 8'd255;
+          blue = 8'd000;
+          green = 8'd000;
+    end
+    else begin
+        red = 8'd000;
+        blue = 8'd000;
+       green = 8'd255;
+    end
+end
+else if(box21) begin
+  if(erase21 == 1'b1) begin
+        red = 8'd000;
+        blue = 8'd000;
+        green = 8'd000;
+ end
+ else if(bomb21 == 1'b1) begin
+          red = 8'd255;
+          blue = 8'd000;
+          green = 8'd000;
+    end
+    else begin
+        red = 8'd000;
+        blue = 8'd000;
+       green = 8'd255;
+    end
+end
+else if(box22) begin
+  if(erase22 == 1'b1) begin
+        red = 8'd000;
+        blue = 8'd000;
+        green = 8'd000;
+ end
+ else if(bomb22 == 1'b1) begin
+          red = 8'd255;
+          blue = 8'd000;
+          green = 8'd000;
+    end
+    else begin
+        red = 8'd000;
+        blue = 8'd000;
+       green = 8'd255;
+    end
+end
+else if(box23) begin
+  if(erase23 == 1'b1) begin
+        red = 8'd000;
+        blue = 8'd000;
+        green = 8'd000;
+ end
+ else if(bomb23 == 1'b1) begin
+          red = 8'd255;
+          blue = 8'd000;
+          green = 8'd000;
+    end
+    else begin
+        red = 8'd000;
+        blue = 8'd000;
+       green = 8'd255;
+    end
+end
+else if(box24) begin
+  if(erase24 == 1'b1) begin
+        red = 8'd000;
+        blue = 8'd000;
+        green = 8'd000;
+ end
+ else if(bomb24 == 1'b1) begin
+          red = 8'd255;
+          blue = 8'd000;
+          green = 8'd000;
+    end
+    else begin
+        red = 8'd000;
+        blue = 8'd000;
+       green = 8'd255;
+    end
+end
+else if(box25) begin
+  if(erase25 == 1'b1) begin
+        red = 8'd000;
+        blue = 8'd000;
+        green = 8'd000;
+ end
+ else if(bomb25 == 1'b1) begin
+          red = 8'd255;
+          blue = 8'd000;
+          green = 8'd000;
+    end
+    else begin
+        red = 8'd000;
+        blue = 8'd000;
+       green = 8'd255;
+    end
+end
+else if(box26) begin
+  if(erase26 == 1'b1) begin
+        red = 8'd000;
+        blue = 8'd000;
+        green = 8'd000;
+ end
+ else if(bomb26 == 1'b1) begin
+          red = 8'd255;
+          blue = 8'd000;
+          green = 8'd000;
+    end
+    else begin
+        red = 8'd000;
+        blue = 8'd000;
+       green = 8'd255;
+    end
+end
+else if(box27) begin
+  if(erase27 == 1'b1) begin
+        red = 8'd000;
+        blue = 8'd000;
+        green = 8'd000;
+ end
+ else if(bomb27 == 1'b1) begin
+          red = 8'd255;
+          blue = 8'd000;
+          green = 8'd000;
+    end
+    else begin
+        red = 8'd000;
+        blue = 8'd000;
+       green = 8'd255;
+    end
+end
+else if(box28) begin
+  if(erase28 == 1'b1) begin
+        red = 8'd000;
+        blue = 8'd000;
+        green = 8'd000;
+ end
+ else if(bomb28 == 1'b1) begin
+          red = 8'd255;
+          blue = 8'd000;
+          green = 8'd000;
+    end
+    else begin
+        red = 8'd000;
+        blue = 8'd000;
+       green = 8'd255;
+    end
+end
+else if(box29) begin
+  if(erase29 == 1'b1) begin
+        red = 8'd000;
+        blue = 8'd000;
+        green = 8'd000;
+ end
+ else if(bomb29 == 1'b1) begin
+          red = 8'd255;
+          blue = 8'd000;
+          green = 8'd000;
+    end
+    else begin
+        red = 8'd000;
+        blue = 8'd000;
+       green = 8'd255;
+    end
+end
+else if(box30) begin
+  if(erase30 == 1'b1) begin
+        red = 8'd000;
+        blue = 8'd000;
+        green = 8'd000;
+ end
+ else if(bomb30 == 1'b1) begin
+          red = 8'd255;
+          blue = 8'd000;
+          green = 8'd000;
+    end
+    else begin
+        red = 8'd000;
+        blue = 8'd000;
+       green = 8'd255;
+    end
+end
+else if(box31) begin
+  if(erase31 == 1'b1) begin
+        red = 8'd000;
+        blue = 8'd000;
+        green = 8'd000;
+ end
+ else if(bomb31 == 1'b1) begin
+          red = 8'd255;
+          blue = 8'd000;
+          green = 8'd000;
+    end
+    else begin
+        red = 8'd000;
+        blue = 8'd000;
+       green = 8'd255;
+    end
+end
+else if(box32) begin
+  if(erase32 == 1'b1) begin
+        red = 8'd000;
+        blue = 8'd000;
+        green = 8'd000;
+ end
+ else if(bomb32 == 1'b1) begin
+          red = 8'd255;
+          blue = 8'd000;
+          green = 8'd000;
+    end
+    else begin
+        red = 8'd000;
+        blue = 8'd000;
+       green = 8'd255;
+    end
+end
+else if(box33) begin
+  if(erase33 == 1'b1) begin
+        red = 8'd000;
+        blue = 8'd000;
+        green = 8'd000;
+ end
+ else if(bomb33 == 1'b1) begin
+          red = 8'd255;
+          blue = 8'd000;
+          green = 8'd000;
+    end
+    else begin
+        red = 8'd000;
+        blue = 8'd000;
+       green = 8'd255;
+    end
+end
+else if(box34) begin
+  if(erase34 == 1'b1) begin
+        red = 8'd000;
+        blue = 8'd000;
+        green = 8'd000;
+ end
+ else if(bomb34 == 1'b1) begin
+          red = 8'd255;
+          blue = 8'd000;
+          green = 8'd000;
+    end
+    else begin
+        red = 8'd000;
+        blue = 8'd000;
+       green = 8'd255;
+    end
+end
+else if(box35) begin
+  if(erase35 == 1'b1) begin
+        red = 8'd000;
+        blue = 8'd000;
+        green = 8'd000;
+ end
+ else if(bomb35 == 1'b1) begin
+          red = 8'd255;
+          blue = 8'd000;
+          green = 8'd000;
+    end
+    else begin
+        red = 8'd000;
+        blue = 8'd000;
+       green = 8'd255;
+    end
+end
+else if(box36) begin
+  if(erase36 == 1'b1) begin
+        red = 8'd000;
+        blue = 8'd000;
+        green = 8'd000;
+ end
+ else if(bomb36 == 1'b1) begin
+          red = 8'd255;
+          blue = 8'd000;
+          green = 8'd000;
+    end
+    else begin
+        red = 8'd000;
+        blue = 8'd000;
+       green = 8'd255;
+    end
+end
+else if(box37) begin
+  if(erase37 == 1'b1) begin
+        red = 8'd000;
+        blue = 8'd000;
+        green = 8'd000;
+ end
+ else if(bomb37 == 1'b1) begin
+          red = 8'd255;
+          blue = 8'd000;
+          green = 8'd000;
+    end
+    else begin
+        red = 8'd000;
+        blue = 8'd000;
+       green = 8'd255;
+    end
+end
+
+
+	
+	
+	
+	
 		 else if(box38) begin
-		red = 8'd255;
+		red = 8'd150;
 		blue = 8'd255;
 		green = 8'd000;
 		end
