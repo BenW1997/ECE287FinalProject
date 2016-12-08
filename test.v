@@ -748,23 +748,142 @@ always @ (posedge clk)
 			
 			///end of telling use whether space is empty or bomb occupied
 			//NOW TO TELL IF SPACE HAS BOMB AROUND IT, YELLOW(CAUTION REG "bOOLEAN")  = SPACE IS TOUCHING 1 BOMB AND (WARNING "BOOLEAN")ORANGE = SPACE IS TOUCHING 2 OR MORE BOMBS 
+			if(erasebox2 == 1 && (isBomb4 == 1 ^ isBomb9 == 1))//tells if one bomb by space  3, turns yellow
+				begin
+						caution3 = 1;
+				end
+			if(erasebox2 ==1 && (isBomb4 ==1 && isBomb9 ==1)) //tells if 2 bombs by space 3
+				begin	
+					warning3 = 1;
+			 	end	
+			
+			
 			if(erasebox2 == 1 && (isBomb4 == 1 ^ isBomb9 == 1))//tells if one bomb by space  3
 				begin
 						caution3 = 1;
 				end
-			if(erasebox2 ==1 && (isBomb4 ==1 && isBomb8 ==1)) //tells if 2 bombs by space 3
+			if(erasebox2 ==1 && (isBomb4 ==1 && isBomb9 ==1)) //tells if 2 bombs by space 3
 				begin	
 					warning3 = 1;
 			 	end		
-			if(erasebox2 == 1 && (isBomb4 == 1 ^ isBomb9 == 1))//tells if one bomb by space  3
-				begin
-						caution3 = 1;
-				end
-			if(erasebox2 ==1 && (isBomb4 ==1 && isBomb8 ==1)) //tells if 2 bombs by space 3
-				begin	
-					warning3 = 1;
-			 	end		
-		
+				
+				
+			//generating caution and warning for box9, and box left of it is selected	
+			if(erasebox8 == 1 && (isBomb3 == 1 ^ isBomb10 == 1 ^ isBomb15 ==1 ) )
+					begin
+						caution9 = 1;
+					end
+			if(erasebox8 ==1 && ((isBomb3 ==1 && isBomb10 ==1) | (isBomb3==1 && isBomb15 ==1) | (isBomb10 ==1 | isBomb15 ==1)))
+					begin
+						warning9 = 1;
+					end
+		if(erasebox4  == 1 && (isBomb2  == 1 ^ isBomb9  == 1))
+begin
+caution3 = 1;
+end
+if(erasebox4  == 1 && (isBomb2  == 1 && isBomb9  == 1))
+begin
+warning3 = 1;
+end
+
+if(erasebox9  == 1 && (isBomb2  == 1 ^ isBomb4  == 1))
+begin
+caution3 = 1;
+end
+if(erasebox9  == 1 && (isBomb2 == 1 && isBomb4  == 1))
+begin
+warning3 = 1;
+end
+
+if(erasebox3  == 1 && (isBomb5  == 1 ^ isBomb10  == 1))
+begin
+caution4 = 1;
+end
+if(erasebox3  == 1 && (isBomb5  == 1 && isBomb10  == 1))
+begin
+warning4 = 1;
+end
+
+if(erasebox5  == 1 && (isBomb3  == 1 ^ isBomb10  == 1))
+begin
+caution4 = 1;
+end
+if(erasebox5  == 1 && (isBomb3  == 1 && isBomb10  == 1))
+begin
+warning4 = 1;
+end
+
+if(erasebox10  == 1 && (isBomb5  == 1 ^ isBomb3  == 1))
+begin
+caution4 = 1;
+end
+if(erasebox10  == 1 && (isBomb5  == 1 && isBomb3  == 1))
+begin
+warning4 = 1;
+end
+
+if(erasebox4  == 1 && (isBomb6  == 1 ^ isBomb11  == 1))
+begin
+caution5 = 1;
+end
+if(erasebox4  == 1 && (isBomb6  == 1 && isBomb11  == 1))
+begin
+warning5 = 1;
+end
+
+if(erasebox6  == 1 && (isBomb4  == 1 ^ isBomb11  == 1))
+begin
+caution5 = 1;
+end
+if(erasebox6  == 1 && (isBomb4  == 1 && isBomb11  == 1))
+begin
+warning5 = 1;
+end
+
+if(erasebox11  == 1 && (isBomb6  == 1 ^ isBomb4  == 1))
+begin
+caution5 = 1;
+end
+if(erasebox11  == 1 && (isBomb6  == 1 && isBomb4  == 1))
+begin
+warning5 = 1;
+end
+
+if(erasebox5  == 1 && (isBomb7  == 1 ^ isBomb12  == 1))
+begin
+caution6 = 1;
+end
+if(erasebox5  == 1 && (isBomb7  == 1 && isBomb12  == 1))
+begin
+warning6 = 1;
+end
+
+if(erasebox7  == 1 && (isBomb5  == 1 ^ isBomb12  == 1))
+begin
+caution6 = 1;
+end
+if(erasebox7  == 1 && (isBomb5  == 1 && isBomb12  == 1))
+begin
+warning6 = 1;
+end
+
+if(erasebox12  == 1 && (isBomb7  == 1 ^ isBomb5  == 1))
+begin
+caution6 = 1;
+end
+if(erasebox12  == 1 && (isBomb7  == 1 && isBomb5  == 1))
+begin
+warning6 = 1;
+end
+
+if(erasebox6  == 1 && (isBomb13  == 1))
+begin
+caution7 = 1;
+end
+if(erasebox13  == 1 && (isBomb6 == 1))
+begin
+warning7 = 1;
+end
 		    
 	/*	else if(object38X >= 31'd422 && object38X <= 31'd572 - 31'd100 && object38Y <= 31'd166 -31'd100 && object38Y >= 31'd000 && select == 1'b1) 
 		begin
@@ -1517,6 +1636,16 @@ begin
           blue = 8'd000;
           green = 8'd000;
     end
+else if(caution2 == 1'b1) begin
+          red = 8'd255;  //makes it yellow
+          blue = 8'd000;
+          green = 8'd255;
+    end
+else if(warning2 == 1'b1) begin
+          red = 8'd250;
+          blue = 8'd255;
+          green = 8'd51;
+    end
     else begin
         red = 8'd000;
         blue = 8'd000;
@@ -1561,6 +1690,16 @@ else if(box4) begin
           blue = 8'd000;
           green = 8'd000;
     end
+else if(caution4 == 1'b1) begin
+          red = 8'd255;  //makes it yellow
+          blue = 8'd000;
+          green = 8'd255;
+    end
+else if(warning4 == 1'b1) begin
+          red = 8'd250;
+          blue = 8'd255;
+          green = 8'd51;
+    end
     else begin
         red = 8'd000;
         blue = 8'd000;
@@ -1577,6 +1716,16 @@ else if(box5) begin
           red = 8'd255;
           blue = 8'd000;
           green = 8'd000;
+    end
+else if(caution5 == 1'b1) begin
+          red = 8'd255;  //makes it yellow
+          blue = 8'd000;
+          green = 8'd255;
+    end
+else if(warning5 == 1'b1) begin
+          red = 8'd250;
+          blue = 8'd255;
+          green = 8'd51;
     end
     else begin
         red = 8'd000;
@@ -1595,6 +1744,16 @@ else if(box6) begin
           blue = 8'd000;
           green = 8'd000;
     end
+else if(caution6 == 1'b1) begin
+          red = 8'd255;  //makes it yellow
+          blue = 8'd000;
+          green = 8'd255;
+    end
+else if(warning6 == 1'b1) begin
+          red = 8'd250;
+          blue = 8'd255;
+          green = 8'd51;
+    end
     else begin
         red = 8'd000;
         blue = 8'd000;
@@ -1611,6 +1770,16 @@ else if(box7) begin
           red = 8'd255;
           blue = 8'd000;
           green = 8'd000;
+    end
+else if(caution7 == 1'b1) begin
+          red = 8'd255;  //makes it yellow
+          blue = 8'd000;
+          green = 8'd255;
+    end
+else if(warning7 == 1'b1) begin
+          red = 8'd250;
+          blue = 8'd255;
+          green = 8'd51;
     end
     else begin
         red = 8'd000;
@@ -1629,6 +1798,16 @@ else if(box8) begin
           blue = 8'd000;
           green = 8'd000;
     end
+else if(caution8 == 1'b1) begin
+          red = 8'd255;  //makes it yellow
+          blue = 8'd000;
+          green = 8'd255;
+    end
+else if(warning8 == 1'b1) begin
+          red = 8'd250;
+          blue = 8'd255;
+          green = 8'd51;
+    end
     else begin
         red = 8'd000;
         blue = 8'd000;
@@ -1645,6 +1824,16 @@ else if(box9) begin
           red = 8'd255;
           blue = 8'd000;
           green = 8'd000;
+    end
+else if(caution9 == 1'b1) begin
+          red = 8'd255;  //makes it yellow
+          blue = 8'd000;
+          green = 8'd255;
+    end
+else if(warning9 == 1'b1) begin
+          red = 8'd250;
+          blue = 8'd255;
+          green = 8'd51;
     end
     else begin
         red = 8'd000;
