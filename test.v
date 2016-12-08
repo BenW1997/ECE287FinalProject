@@ -777,7 +777,9 @@ always @ (posedge clk)
 					begin
 						warning9 = 1;
 					end
-		if(erasebox4  == 1 && (isBomb2  == 1 ^ isBomb9  == 1))
+
+//generates caution and warning for the top row of boxes					
+if(erasebox4  == 1 && (isBomb2  == 1 ^ isBomb9  == 1))
 begin
 caution3 = 1;
 end
@@ -1852,6 +1854,16 @@ else if(box10) begin
           blue = 8'd000;
           green = 8'd000;
     end
+else if(caution10 == 1'b1) begin
+          red = 8'd255;  //makes it yellow
+          blue = 8'd000;
+          green = 8'd255;
+    end
+else if(warning10 == 1'b1) begin
+          red = 8'd250;
+          blue = 8'd255;
+          green = 8'd51;
+    end
     else begin
         red = 8'd000;
         blue = 8'd000;
@@ -1868,6 +1880,16 @@ else if(box11) begin
           red = 8'd255;
           blue = 8'd000;
           green = 8'd000;
+    end
+else if(caution11 == 1'b1) begin
+          red = 8'd255;  //makes it yellow
+          blue = 8'd000;
+          green = 8'd255;
+    end
+else if(warning11 == 1'b1) begin
+          red = 8'd250;
+          blue = 8'd255;
+          green = 8'd51;
     end
     else begin
         red = 8'd000;
@@ -1886,6 +1908,16 @@ else if(box12) begin
           blue = 8'd000;
           green = 8'd000;
     end
+else if(caution12 == 1'b1) begin
+          red = 8'd255;  //makes it yellow
+          blue = 8'd000;
+          green = 8'd255;
+    end
+else if(warning12 == 1'b1) begin
+          red = 8'd250;
+          blue = 8'd255;
+          green = 8'd51;
+    end
     else begin
         red = 8'd000;
         blue = 8'd000;
@@ -1902,6 +1934,16 @@ else if(box13) begin
           red = 8'd255;
           blue = 8'd000;
           green = 8'd000;
+    end
+else if(caution13 == 1'b1) begin
+          red = 8'd255;  //makes it yellow
+          blue = 8'd000;
+          green = 8'd255;
+    end
+else if(warning13 == 1'b1) begin
+          red = 8'd250;
+          blue = 8'd255;
+          green = 8'd51;
     end
     else begin
         red = 8'd000;
@@ -1920,6 +1962,16 @@ else if(box14) begin
           blue = 8'd000;
           green = 8'd000;
     end
+else if(caution14 == 1'b1) begin
+          red = 8'd255;  //makes it yellow
+          blue = 8'd000;
+          green = 8'd255;
+    end
+else if(warning14 == 1'b1) begin
+          red = 8'd250;
+          blue = 8'd255;
+          green = 8'd51;
+    end
     else begin
         red = 8'd000;
         blue = 8'd000;
@@ -1936,6 +1988,16 @@ else if(box15) begin
           red = 8'd255;
           blue = 8'd000;
           green = 8'd000;
+    end
+else if(caution15 == 1'b1) begin
+          red = 8'd255;  //makes it yellow
+          blue = 8'd000;
+          green = 8'd255;
+    end
+else if(warning15 == 1'b1) begin
+          red = 8'd250;
+          blue = 8'd255;
+          green = 8'd51;
     end
     else begin
         red = 8'd000;
@@ -1954,6 +2016,16 @@ else if(box16) begin
           blue = 8'd000;
           green = 8'd000;
     end
+else if(caution16 == 1'b1) begin
+          red = 8'd255;  //makes it yellow
+          blue = 8'd000;
+          green = 8'd255;
+    end
+else if(warning16 == 1'b1) begin
+          red = 8'd250;
+          blue = 8'd255;
+          green = 8'd51;
+    end
     else begin
         red = 8'd000;
         blue = 8'd000;
@@ -1970,6 +2042,16 @@ else if(box17) begin
           red = 8'd255;
           blue = 8'd000;
           green = 8'd000;
+    end
+else if(caution17 == 1'b1) begin
+          red = 8'd255;  //makes it yellow
+          blue = 8'd000;
+          green = 8'd255;
+    end
+else if(warning17 == 1'b1) begin
+          red = 8'd250;
+          blue = 8'd255;
+          green = 8'd51;
     end
     else begin
         red = 8'd000;
@@ -1988,6 +2070,16 @@ else if(box18) begin
           blue = 8'd000;
           green = 8'd000;
     end
+else if(caution18 == 1'b1) begin
+          red = 8'd255;  //makes it yellow
+          blue = 8'd000;
+          green = 8'd255;
+    end
+else if(warning18 == 1'b1) begin
+          red = 8'd250;
+          blue = 8'd255;
+          green = 8'd51;
+    end
     else begin
         red = 8'd000;
         blue = 8'd000;
@@ -2004,6 +2096,16 @@ else if(box19) begin
           red = 8'd255;
           blue = 8'd000;
           green = 8'd000;
+    end
+else if(caution19 == 1'b1) begin
+          red = 8'd255;  //makes it yellow
+          blue = 8'd000;
+          green = 8'd255;
+    end
+else if(warning19 == 1'b1) begin
+          red = 8'd250;
+          blue = 8'd255;
+          green = 8'd51;
     end
     else begin
         red = 8'd000;
@@ -2022,6 +2124,16 @@ else if(box20) begin
           blue = 8'd000;
           green = 8'd000;
     end
+else if(caution20 == 1'b1) begin
+          red = 8'd255;  //makes it yellow
+          blue = 8'd000;
+          green = 8'd255;
+    end
+else if(warning20 == 1'b1) begin
+          red = 8'd250;
+          blue = 8'd255;
+          green = 8'd51;
+    end
     else begin
         red = 8'd000;
         blue = 8'd000;
@@ -2038,6 +2150,16 @@ else if(box21) begin
           red = 8'd255;
           blue = 8'd000;
           green = 8'd000;
+    end
+else if(caution21 == 1'b1) begin
+          red = 8'd255;  //makes it yellow
+          blue = 8'd000;
+          green = 8'd255;
+    end
+else if(warning21 == 1'b1) begin
+          red = 8'd250;
+          blue = 8'd255;
+          green = 8'd51;
     end
     else begin
         red = 8'd000;
@@ -2056,6 +2178,16 @@ else if(box22) begin
           blue = 8'd000;
           green = 8'd000;
     end
+else if(caution22 == 1'b1) begin
+          red = 8'd255;  //makes it yellow
+          blue = 8'd000;
+          green = 8'd255;
+    end
+else if(warning22 == 1'b1) begin
+          red = 8'd250;
+          blue = 8'd255;
+          green = 8'd51;
+    end
     else begin
         red = 8'd000;
         blue = 8'd000;
@@ -2072,6 +2204,16 @@ else if(box23) begin
           red = 8'd255;
           blue = 8'd000;
           green = 8'd000;
+    end
+else if(caution23 == 1'b1) begin
+          red = 8'd255;  //makes it yellow
+          blue = 8'd000;
+          green = 8'd255;
+    end
+else if(warning23 == 1'b1) begin
+          red = 8'd250;
+          blue = 8'd255;
+          green = 8'd51;
     end
     else begin
         red = 8'd000;
@@ -2090,6 +2232,16 @@ else if(box24) begin
           blue = 8'd000;
           green = 8'd000;
     end
+else if(caution24 == 1'b1) begin
+          red = 8'd255;  //makes it yellow
+          blue = 8'd000;
+          green = 8'd255;
+    end
+else if(warning24 == 1'b1) begin
+          red = 8'd250;
+          blue = 8'd255;
+          green = 8'd51;
+    end
     else begin
         red = 8'd000;
         blue = 8'd000;
@@ -2106,6 +2258,16 @@ else if(box25) begin
           red = 8'd255;
           blue = 8'd000;
           green = 8'd000;
+    end
+else if(caution25 == 1'b1) begin
+          red = 8'd255;  //makes it yellow
+          blue = 8'd000;
+          green = 8'd255;
+    end
+else if(warning25 == 1'b1) begin
+          red = 8'd250;
+          blue = 8'd255;
+          green = 8'd51;
     end
     else begin
         red = 8'd000;
@@ -2124,6 +2286,16 @@ else if(box26) begin
           blue = 8'd000;
           green = 8'd000;
     end
+else if(caution26 == 1'b1) begin
+          red = 8'd255;  //makes it yellow
+          blue = 8'd000;
+          green = 8'd255;
+    end
+else if(warning26 == 1'b1) begin
+          red = 8'd250;
+          blue = 8'd255;
+          green = 8'd51;
+    end
     else begin
         red = 8'd000;
         blue = 8'd000;
@@ -2140,6 +2312,16 @@ else if(box27) begin
           red = 8'd255;
           blue = 8'd000;
           green = 8'd000;
+    end
+else if(caution27 == 1'b1) begin
+          red = 8'd255;  //makes it yellow
+          blue = 8'd000;
+          green = 8'd255;
+    end
+else if(warning27 == 1'b1) begin
+          red = 8'd250;
+          blue = 8'd255;
+          green = 8'd51;
     end
     else begin
         red = 8'd000;
@@ -2158,6 +2340,16 @@ else if(box28) begin
           blue = 8'd000;
           green = 8'd000;
     end
+else if(caution28 == 1'b1) begin
+          red = 8'd255;  //makes it yellow
+          blue = 8'd000;
+          green = 8'd255;
+    end
+else if(warning28 == 1'b1) begin
+          red = 8'd250;
+          blue = 8'd255;
+          green = 8'd51;
+    end
     else begin
         red = 8'd000;
         blue = 8'd000;
@@ -2174,6 +2366,16 @@ else if(box29) begin
           red = 8'd255;
           blue = 8'd000;
           green = 8'd000;
+    end
+else if(caution29 == 1'b1) begin
+          red = 8'd255;  //makes it yellow
+          blue = 8'd000;
+          green = 8'd255;
+    end
+else if(warning29 == 1'b1) begin
+          red = 8'd250;
+          blue = 8'd255;
+          green = 8'd51;
     end
     else begin
         red = 8'd000;
@@ -2192,6 +2394,16 @@ else if(box30) begin
           blue = 8'd000;
           green = 8'd000;
     end
+else if(caution30 == 1'b1) begin
+          red = 8'd255;  //makes it yellow
+          blue = 8'd000;
+          green = 8'd255;
+    end
+else if(warning30 == 1'b1) begin
+          red = 8'd250;
+          blue = 8'd255;
+          green = 8'd51;
+    end
     else begin
         red = 8'd000;
         blue = 8'd000;
@@ -2208,6 +2420,16 @@ else if(box31) begin
           red = 8'd255;
           blue = 8'd000;
           green = 8'd000;
+    end
+else if(caution31 == 1'b1) begin
+          red = 8'd255;  //makes it yellow
+          blue = 8'd000;
+          green = 8'd255;
+    end
+else if(warning31 == 1'b1) begin
+          red = 8'd250;
+          blue = 8'd255;
+          green = 8'd51;
     end
     else begin
         red = 8'd000;
@@ -2226,6 +2448,16 @@ else if(box32) begin
           blue = 8'd000;
           green = 8'd000;
     end
+else if(caution32 == 1'b1) begin
+          red = 8'd255;  //makes it yellow
+          blue = 8'd000;
+          green = 8'd255;
+    end
+else if(warning32 == 1'b1) begin
+          red = 8'd250;
+          blue = 8'd255;
+          green = 8'd51;
+    end
     else begin
         red = 8'd000;
         blue = 8'd000;
@@ -2242,6 +2474,16 @@ else if(box33) begin
           red = 8'd255;
           blue = 8'd000;
           green = 8'd000;
+    end
+else if(caution33 == 1'b1) begin
+          red = 8'd255;  //makes it yellow
+          blue = 8'd000;
+          green = 8'd255;
+    end
+else if(warning33 == 1'b1) begin
+          red = 8'd250;
+          blue = 8'd255;
+          green = 8'd51;
     end
     else begin
         red = 8'd000;
@@ -2260,6 +2502,16 @@ else if(box34) begin
           blue = 8'd000;
           green = 8'd000;
     end
+else if(caution34 == 1'b1) begin
+          red = 8'd255;  //makes it yellow
+          blue = 8'd000;
+          green = 8'd255;
+    end
+else if(warning34 == 1'b1) begin
+          red = 8'd250;
+          blue = 8'd255;
+          green = 8'd51;
+    end
     else begin
         red = 8'd000;
         blue = 8'd000;
@@ -2276,6 +2528,16 @@ else if(box35) begin
           red = 8'd255;
           blue = 8'd000;
           green = 8'd000;
+    end
+else if(caution35 == 1'b1) begin
+          red = 8'd255;  //makes it yellow
+          blue = 8'd000;
+          green = 8'd255;
+    end
+else if(warning35 == 1'b1) begin
+          red = 8'd250;
+          blue = 8'd255;
+          green = 8'd51;
     end
     else begin
         red = 8'd000;
@@ -2294,6 +2556,16 @@ else if(box36) begin
           blue = 8'd000;
           green = 8'd000;
     end
+else if(caution36 == 1'b1) begin
+          red = 8'd255;  //makes it yellow
+          blue = 8'd000;
+          green = 8'd255;
+    end
+else if(warning36 == 1'b1) begin
+          red = 8'd250;
+          blue = 8'd255;
+          green = 8'd51;
+    end
     else begin
         red = 8'd000;
         blue = 8'd000;
@@ -2310,6 +2582,16 @@ else if(box37) begin
           red = 8'd255;
           blue = 8'd000;
           green = 8'd000;
+    end
+else if(caution37 == 1'b1) begin
+          red = 8'd255;  //makes it yellow
+          blue = 8'd000;
+          green = 8'd255;
+    end
+else if(warning37 == 1'b1) begin
+          red = 8'd250;
+          blue = 8'd255;
+          green = 8'd51;
     end
     else begin
         red = 8'd000;
