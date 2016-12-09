@@ -18,7 +18,7 @@ Parameters were set by Ben.
 //===========================================//
 //====================VGA====================//
 //===========================================//
-module test(clk, KB_clk, data, button1, button2, button3, button4, select, resetGame, in1, in2, in3, in4, in5, in6, in7, in8, in9, in10, in11, in12, in13, in14, in15,  VGA_R, VGA_B, VGA_G, VGA_BLANK_N, VGA_SYNC_N , VGA_HS, VGA_VS, rst, VGA_CLK);
+module test(clk, button1, button2, button3, button4, select, resetGame, in1, in2, in3, in4, in5, in6, in7, in8, in9, in10, in11, in12, in13, in14, in15,  VGA_R, VGA_B, VGA_G, VGA_BLANK_N, VGA_SYNC_N , VGA_HS, VGA_VS, rst, VGA_CLK, kbCLK, data);
 
 //outputs the colors, determined from the color module.
 output [7:0] VGA_R, VGA_B, VGA_G;
@@ -26,7 +26,7 @@ input button1, button2, button3, button4, select;
 input in1, in2, in3, in4, in5, in6, in7, in8, in9, in10, in11, in12, in13, in14, in15; //these are all the switches for the bombs
 //Makes sure the screen is synced right.
 output VGA_HS, VGA_VS, VGA_BLANK_N, VGA_CLK, VGA_SYNC_N;
-
+input kbCLK, data;
 input clk, rst; //clk is taken from the onboard clock 50MHz. rst is taken from a switch, SW[17].
 //input testEn; 
 wire CLK108; //Clock for the VGA
@@ -37,13 +37,13 @@ Coordinates of the pixel being assigned. Moves top to bottom, left to right.
 wire [30:0]X, Y;
 input resetGame;
 wire reset; 
-input KB_clk; //needs pins
-input data;
+ //needs pins
+
 wire [4:0]direction;
 wire update;
 
 
-kbInput kbIn(KB_clk, data, direction, reset);
+
 //Not sure what these are, probably have to do with the display output system.
 wire [7:0]countRef;
 wire [31:0]countSample;
@@ -1958,46 +1958,62 @@ always @ (posedge clk)
 
 			//end of corners			 
 		end //end of the always BLOCK
-//END OF GIVING SQUARES WARNINGS AND CAUTIONS	
-		
+//END OF GIVING SQUARES WARNINGS AND CAUTIONS
+
+
+//wire clkUPdate;	 DELETE THIS
+//updateCLK myupdateclk(clk, clkUPdate);
+//kbInput kbIn(kbCLK, data, direction, reset);	
+wire [7:0]keyVal;
+keyboard myKeyBoard(clk, data, kbCLK, keyVal);
 // MOVEMENT OF THE SELECTOR BLOck
 	reg [19:0]count;	
 	//this moves our selector block  
 		always@(posedge clk)
 			begin
 				count <= count + 1;
-				if(count==833334 && button1==1'b0)// this has to be like this
+				if(count == 833334 && keyVal ==8'h1C)// this has to be like this
 					begin
 						if(object38X >= 10) //restrictions to movement
 							begin
 								object38X=object38X-32'd10;
 							end
 					end
-				if(count==833334 && button2==1'b0)
+				if(count == 833334&& keyVal ==8'h1D)
 					begin
 						if(object38Y >= 10)
 						begin
 							object38Y=object38Y-32'd10;
 						end
 					end
-				if(count==833334 && button3==1'b0)
+				if(count==833334 && keyVal==8'h1B)
 					begin
 						if(object38Y <= 914)
 						begin
 							object38Y=object38Y+32'd10;
 						end
 					end
-				if(count==833334 && button4==1'b0)
+				if(count==833334 && keyVal ==8'h23)
 					begin
 						if(object38X <= 1170)
 						begin
 							object38X=object38X+32'd10; 
 						end
-					end
-				else
+					end 
+				/*case(direction)
+					5'b00010: object38Y <= object38Y - 11'd15;
+					5'b00100: object38X <= object38X - 11'd15;
+					5'b01000: object38Y <= object38Y + 11'd15;
+					5'b10000: object38X <= object38X + 11'd15;
+					5'b10100: begin  might not need
+								 object38X <= object38X; 
+								 object38Y <= object38Y;
+								end */
+					
+				/*else
 					begin	
 					object38X = object38X;
-				end
+				/*end */ 
 			end
 //END OF MOVEMENT BLOCK
 
@@ -2143,6 +2159,8 @@ begin
 		box1 = 1'b0;box2 = 1'b0;box3 = 1'b0;box4 = 1'b0;box5 = 1'b0;box6 = 1'b0; box7 = 1'b0; box8 = 1'b0;box9 = 1'b0;box10 = 1'b0;box11 = 1'b0;box12 = 1'b0;box13 = 1'b0;box14 = 1'b0;box15 = 1'b0;box16 = 1'b0;box17 = 1'b0;box18 = 1'b0;box19 = 1'b0;box20 = 1'b0;box21 = 1'b0;box22 = 1'b0;box23 = 1'b0;box24 = 1'b0;box25 = 1'b0;box26 = 1'b0;box27 = 1'b0;box28 = 1'b0;	box29 = 1'b0;box30 = 1'b0; box31 = 1'b0;box32 = 1'b0; box33 = 1'b0; box34 = 1'b0; box35 = 1'b0; box36 = 1'b0;	box37 = 1'b0;
 		end
 	end 
+
+	
 
 	
 //This is movement
