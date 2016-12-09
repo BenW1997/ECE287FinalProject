@@ -1,38 +1,44 @@
 |Minesweeper
 clk => clk.IN3
-VGA_R[0] <= color:comb_1091.port1
-VGA_R[1] <= color:comb_1091.port1
-VGA_R[2] <= color:comb_1091.port1
-VGA_R[3] <= color:comb_1091.port1
-VGA_R[4] <= color:comb_1091.port1
-VGA_R[5] <= color:comb_1091.port1
-VGA_R[6] <= color:comb_1091.port1
-VGA_R[7] <= color:comb_1091.port1
-VGA_B[0] <= color:comb_1091.port2
-VGA_B[1] <= color:comb_1091.port2
-VGA_B[2] <= color:comb_1091.port2
-VGA_B[3] <= color:comb_1091.port2
-VGA_B[4] <= color:comb_1091.port2
-VGA_B[5] <= color:comb_1091.port2
-VGA_B[6] <= color:comb_1091.port2
-VGA_B[7] <= color:comb_1091.port2
-VGA_G[0] <= color:comb_1091.port3
-VGA_G[1] <= color:comb_1091.port3
-VGA_G[2] <= color:comb_1091.port3
-VGA_G[3] <= color:comb_1091.port3
-VGA_G[4] <= color:comb_1091.port3
-VGA_G[5] <= color:comb_1091.port3
-VGA_G[6] <= color:comb_1091.port3
-VGA_G[7] <= color:comb_1091.port3
+KB_clk => ~NO_FANOUT~
+data => ~NO_FANOUT~
+button1 => always0.IN1
+button2 => always0.IN1
+button3 => always0.IN1
+button4 => always0.IN1
+VGA_R[0] <= color:comb_1577.port1
+VGA_R[1] <= color:comb_1577.port1
+VGA_R[2] <= color:comb_1577.port1
+VGA_R[3] <= color:comb_1577.port1
+VGA_R[4] <= color:comb_1577.port1
+VGA_R[5] <= color:comb_1577.port1
+VGA_R[6] <= color:comb_1577.port1
+VGA_R[7] <= color:comb_1577.port1
+VGA_B[0] <= color:comb_1577.port2
+VGA_B[1] <= color:comb_1577.port2
+VGA_B[2] <= color:comb_1577.port2
+VGA_B[3] <= color:comb_1577.port2
+VGA_B[4] <= color:comb_1577.port2
+VGA_B[5] <= color:comb_1577.port2
+VGA_B[6] <= color:comb_1577.port2
+VGA_B[7] <= color:comb_1577.port2
+VGA_G[0] <= color:comb_1577.port3
+VGA_G[1] <= color:comb_1577.port3
+VGA_G[2] <= color:comb_1577.port3
+VGA_G[3] <= color:comb_1577.port3
+VGA_G[4] <= color:comb_1577.port3
+VGA_G[5] <= color:comb_1577.port3
+VGA_G[6] <= color:comb_1577.port3
+VGA_G[7] <= color:comb_1577.port3
 VGA_BLANK_N <= VGA_BLANK_N.DB_MAX_OUTPUT_PORT_TYPE
 VGA_SYNC_N <= <GND>
-VGA_HS <= H_SYNC:comb_347.port1
-VGA_VS <= V_SYNC:comb_348.port1
+VGA_HS <= H_SYNC:comb_833.port1
+VGA_VS <= V_SYNC:comb_834.port1
 rst => rst.IN1
 VGA_CLK <= CLK_108.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Minesweeper|countingRefresh:comb_345
+|Minesweeper|countingRefresh:comb_831
 X[0] => Equal0.IN31
 X[1] => Equal0.IN30
 X[2] => Equal0.IN29
@@ -115,14 +121,14 @@ count[6] <= count[6]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 count[7] <= count[7]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Minesweeper|clock108:comb_346
+|Minesweeper|clock108:comb_832
 areset => areset.IN1
 inclk0 => sub_wire1[0].IN1
 c0 <= altpll:altpll_component.clk
 locked <= altpll:altpll_component.locked
 
 
-|Minesweeper|clock108:comb_346|altpll:altpll_component
+|Minesweeper|clock108:comb_832|altpll:altpll_component
 inclk[0] => clock108_altpll:auto_generated.inclk[0]
 inclk[1] => clock108_altpll:auto_generated.inclk[1]
 fbin => ~NO_FANOUT~
@@ -182,7 +188,7 @@ fref <= <GND>
 icdrclk <= <GND>
 
 
-|Minesweeper|clock108:comb_346|altpll:altpll_component|clock108_altpll:auto_generated
+|Minesweeper|clock108:comb_832|altpll:altpll_component|clock108_altpll:auto_generated
 areset => pll_lock_sync.ACLR
 areset => pll1.ARESET
 clk[0] <= pll1.CLK
@@ -195,7 +201,7 @@ inclk[1] => pll1.CLK1
 locked <= locked.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Minesweeper|H_SYNC:comb_347
+|Minesweeper|H_SYNC:comb_833
 clk => count[0].CLK
 clk => count[1].CLK
 clk => count[2].CLK
@@ -265,7 +271,7 @@ Xcount[30] <= count[30].DB_MAX_OUTPUT_PORT_TYPE
 Xcount[31] <= count[31].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Minesweeper|V_SYNC:comb_348
+|Minesweeper|V_SYNC:comb_834
 clk => count[0].CLK
 clk => count[1].CLK
 clk => count[2].CLK
@@ -334,7 +340,7 @@ Ycount[30] <= count[30].DB_MAX_OUTPUT_PORT_TYPE
 Ycount[31] <= count[31].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Minesweeper|color:comb_1091
+|Minesweeper|color:comb_1577
 clk => ~NO_FANOUT~
 red[0] <= red.DB_MAX_OUTPUT_PORT_TYPE
 red[1] <= red.DB_MAX_OUTPUT_PORT_TYPE

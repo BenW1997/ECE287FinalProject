@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Minesweeper
-Sat Dec 03 17:19:57 2016
+Sat Dec 03 19:19:29 2016
 Quartus Prime Version 16.1.0 Build 196 10/24/2016 SJ Lite Edition
 
 
@@ -14,16 +14,17 @@ Quartus Prime Version 16.1.0 Build 196 10/24/2016 SJ Lite Edition
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
   8. General Register Statistics
-  9. Parameter Settings for User Entity Instance: clock108:comb_346|altpll:altpll_component
+  9. Parameter Settings for User Entity Instance: clock108:comb_832|altpll:altpll_component
  10. altpll Parameter Settings by Entity Instance
- 11. Port Connectivity Checks: "color:comb_1091"
- 12. Port Connectivity Checks: "V_SYNC:comb_348"
- 13. Port Connectivity Checks: "H_SYNC:comb_347"
- 14. Port Connectivity Checks: "clock108:comb_346"
- 15. Port Connectivity Checks: "countingRefresh:comb_345"
+ 11. Port Connectivity Checks: "color:comb_1577"
+ 12. Port Connectivity Checks: "V_SYNC:comb_834"
+ 13. Port Connectivity Checks: "H_SYNC:comb_833"
+ 14. Port Connectivity Checks: "clock108:comb_832"
+ 15. Port Connectivity Checks: "countingRefresh:comb_831"
  16. Post-Synthesis Netlist Statistics for Top Partition
  17. Elapsed Time Per Partition
  18. Analysis & Synthesis Messages
+ 19. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -50,16 +51,16 @@ agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sat Dec 03 17:19:57 2016       ;
+; Analysis & Synthesis Status        ; Successful - Sat Dec 03 19:19:29 2016       ;
 ; Quartus Prime Version              ; 16.1.0 Build 196 10/24/2016 SJ Lite Edition ;
 ; Revision Name                      ; Minesweeper                                 ;
 ; Top-level Entity Name              ; Minesweeper                                 ;
 ; Family                             ; Cyclone IV E                                ;
-; Total logic elements               ; 175                                         ;
-;     Total combinational functions  ; 175                                         ;
-;     Dedicated logic registers      ; 64                                          ;
-; Total registers                    ; 64                                          ;
-; Total pins                         ; 31                                          ;
+; Total logic elements               ; 546                                         ;
+;     Total combinational functions  ; 546                                         ;
+;     Dedicated logic registers      ; 146                                         ;
+; Total registers                    ; 146                                         ;
+; Total pins                         ; 37                                          ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 0                                           ;
 ; Embedded Multiplier 9-bit elements ; 0                                           ;
@@ -185,39 +186,39 @@ agreement for further details.
 +----------------------------------+-----------------+------------------------------+--------------------------------------------------------------------------+---------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary                                                                                             ;
-+---------------------------------------------+-------------------------------------------------------------------------------------------+
-; Resource                                    ; Usage                                                                                     ;
-+---------------------------------------------+-------------------------------------------------------------------------------------------+
-; Estimated Total logic elements              ; 175                                                                                       ;
-;                                             ;                                                                                           ;
-; Total combinational functions               ; 175                                                                                       ;
-; Logic element usage by number of LUT inputs ;                                                                                           ;
-;     -- 4 input functions                    ; 84                                                                                        ;
-;     -- 3 input functions                    ; 18                                                                                        ;
-;     -- <=2 input functions                  ; 73                                                                                        ;
-;                                             ;                                                                                           ;
-; Logic elements by mode                      ;                                                                                           ;
-;     -- normal mode                          ; 113                                                                                       ;
-;     -- arithmetic mode                      ; 62                                                                                        ;
-;                                             ;                                                                                           ;
-; Total registers                             ; 64                                                                                        ;
-;     -- Dedicated logic registers            ; 64                                                                                        ;
-;     -- I/O registers                        ; 0                                                                                         ;
-;                                             ;                                                                                           ;
-; I/O pins                                    ; 31                                                                                        ;
-;                                             ;                                                                                           ;
-; Embedded Multiplier 9-bit elements          ; 0                                                                                         ;
-;                                             ;                                                                                           ;
-; Total PLLs                                  ; 1                                                                                         ;
-;     -- PLLs                                 ; 1                                                                                         ;
-;                                             ;                                                                                           ;
-; Maximum fan-out node                        ; clock108:comb_346|altpll:altpll_component|clock108_altpll:auto_generated|wire_pll1_clk[0] ;
-; Maximum fan-out                             ; 34                                                                                        ;
-; Total fan-out                               ; 788                                                                                       ;
-; Average fan-out                             ; 2.61                                                                                      ;
-+---------------------------------------------+-------------------------------------------------------------------------------------------+
++---------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary             ;
++---------------------------------------------+-----------+
+; Resource                                    ; Usage     ;
++---------------------------------------------+-----------+
+; Estimated Total logic elements              ; 546       ;
+;                                             ;           ;
+; Total combinational functions               ; 546       ;
+; Logic element usage by number of LUT inputs ;           ;
+;     -- 4 input functions                    ; 123       ;
+;     -- 3 input functions                    ; 201       ;
+;     -- <=2 input functions                  ; 222       ;
+;                                             ;           ;
+; Logic elements by mode                      ;           ;
+;     -- normal mode                          ; 172       ;
+;     -- arithmetic mode                      ; 374       ;
+;                                             ;           ;
+; Total registers                             ; 146       ;
+;     -- Dedicated logic registers            ; 146       ;
+;     -- I/O registers                        ; 0         ;
+;                                             ;           ;
+; I/O pins                                    ; 37        ;
+;                                             ;           ;
+; Embedded Multiplier 9-bit elements          ; 0         ;
+;                                             ;           ;
+; Total PLLs                                  ; 1         ;
+;     -- PLLs                                 ; 1         ;
+;                                             ;           ;
+; Maximum fan-out node                        ; clk~input ;
+; Maximum fan-out                             ; 83        ;
+; Total fan-out                               ; 1955      ;
+; Average fan-out                             ; 2.55      ;
++---------------------------------------------+-----------+
 
 
 +-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -225,13 +226,13 @@ agreement for further details.
 +-------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------+-----------------+--------------+
 ; Compilation Hierarchy Node                ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                   ; Entity Name     ; Library Name ;
 +-------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------+-----------------+--------------+
-; |Minesweeper                              ; 175 (41)            ; 64 (0)                    ; 0           ; 0            ; 0       ; 0         ; 31   ; 0            ; |Minesweeper                                                                          ; Minesweeper     ; work         ;
-;    |H_SYNC:comb_347|                      ; 50 (50)             ; 32 (32)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Minesweeper|H_SYNC:comb_347                                                          ; H_SYNC          ; work         ;
-;    |V_SYNC:comb_348|                      ; 40 (40)             ; 32 (32)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Minesweeper|V_SYNC:comb_348                                                          ; V_SYNC          ; work         ;
-;    |clock108:comb_346|                    ; 0 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Minesweeper|clock108:comb_346                                                        ; clock108        ; work         ;
-;       |altpll:altpll_component|           ; 0 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Minesweeper|clock108:comb_346|altpll:altpll_component                                ; altpll          ; work         ;
-;          |clock108_altpll:auto_generated| ; 0 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Minesweeper|clock108:comb_346|altpll:altpll_component|clock108_altpll:auto_generated ; clock108_altpll ; work         ;
-;    |color:comb_1091|                      ; 44 (44)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Minesweeper|color:comb_1091                                                          ; color           ; work         ;
+; |Minesweeper                              ; 546 (432)           ; 146 (82)                  ; 0           ; 0            ; 0       ; 0         ; 37   ; 0            ; |Minesweeper                                                                          ; Minesweeper     ; work         ;
+;    |H_SYNC:comb_833|                      ; 50 (50)             ; 32 (32)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Minesweeper|H_SYNC:comb_833                                                          ; H_SYNC          ; work         ;
+;    |V_SYNC:comb_834|                      ; 44 (44)             ; 32 (32)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Minesweeper|V_SYNC:comb_834                                                          ; V_SYNC          ; work         ;
+;    |clock108:comb_832|                    ; 0 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Minesweeper|clock108:comb_832                                                        ; clock108        ; work         ;
+;       |altpll:altpll_component|           ; 0 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Minesweeper|clock108:comb_832|altpll:altpll_component                                ; altpll          ; work         ;
+;          |clock108_altpll:auto_generated| ; 0 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Minesweeper|clock108:comb_832|altpll:altpll_component|clock108_altpll:auto_generated ; clock108_altpll ; work         ;
+;    |color:comb_1577|                      ; 20 (20)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Minesweeper|color:comb_1577                                                          ; color           ; work         ;
 +-------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------+-----------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -241,7 +242,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 64    ;
+; Total registers                              ; 146   ;
 ; Number of registers using Synchronous Clear  ; 64    ;
 ; Number of registers using Synchronous Load   ; 0     ;
 ; Number of registers using Asynchronous Clear ; 0     ;
@@ -252,7 +253,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 
 
 +----------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: clock108:comb_346|altpll:altpll_component ;
+; Parameter Settings for User Entity Instance: clock108:comb_832|altpll:altpll_component ;
 +-------------------------------+----------------------------+---------------------------+
 ; Parameter Name                ; Value                      ; Type                      ;
 +-------------------------------+----------------------------+---------------------------+
@@ -631,7 +632,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Name                          ; Value                                     ;
 +-------------------------------+-------------------------------------------+
 ; Number of entity instances    ; 1                                         ;
-; Entity Instance               ; clock108:comb_346|altpll:altpll_component ;
+; Entity Instance               ; clock108:comb_832|altpll:altpll_component ;
 ;     -- OPERATION_MODE         ; NORMAL                                    ;
 ;     -- PLL_TYPE               ; AUTO                                      ;
 ;     -- PRIMARY_CLOCK          ; INCLK0                                    ;
@@ -643,7 +644,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 
 
 +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "color:comb_1091"                                                                                                                             ;
+; Port Connectivity Checks: "color:comb_1577"                                                                                                                             ;
 +-------+-------+----------+----------------------------------------------------------------------------------------------------------------------------------------------+
 ; Port  ; Type  ; Severity ; Details                                                                                                                                      ;
 +-------+-------+----------+----------------------------------------------------------------------------------------------------------------------------------------------+
@@ -652,7 +653,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 
 
 +------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "V_SYNC:comb_348"                                                                                                                ;
+; Port Connectivity Checks: "V_SYNC:comb_834"                                                                                                                ;
 +--------+--------+----------+-------------------------------------------------------------------------------------------------------------------------------+
 ; Port   ; Type   ; Severity ; Details                                                                                                                       ;
 +--------+--------+----------+-------------------------------------------------------------------------------------------------------------------------------+
@@ -662,7 +663,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 
 
 +------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "H_SYNC:comb_347"                                                                                                                ;
+; Port Connectivity Checks: "H_SYNC:comb_833"                                                                                                                ;
 +--------+--------+----------+-------------------------------------------------------------------------------------------------------------------------------+
 ; Port   ; Type   ; Severity ; Details                                                                                                                       ;
 +--------+--------+----------+-------------------------------------------------------------------------------------------------------------------------------+
@@ -672,7 +673,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 
 
 +------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "clock108:comb_346"                                                                    ;
+; Port Connectivity Checks: "clock108:comb_832"                                                                    ;
 +--------+--------+----------+-------------------------------------------------------------------------------------+
 ; Port   ; Type   ; Severity ; Details                                                                             ;
 +--------+--------+----------+-------------------------------------------------------------------------------------+
@@ -681,7 +682,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 
 
 +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "countingRefresh:comb_345"                                                                                                                      ;
+; Port Connectivity Checks: "countingRefresh:comb_831"                                                                                                                      ;
 +-------+--------+----------+-----------------------------------------------------------------------------------------------------------------------------------------------+
 ; Port  ; Type   ; Severity ; Details                                                                                                                                       ;
 +-------+--------+----------+-----------------------------------------------------------------------------------------------------------------------------------------------+
@@ -696,22 +697,24 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; boundary_port         ; 31                          ;
-; cycloneiii_ff         ; 64                          ;
+; boundary_port         ; 37                          ;
+; cycloneiii_ff         ; 146                         ;
 ;     SCLR              ; 64                          ;
-; cycloneiii_lcell_comb ; 177                         ;
-;     arith             ; 62                          ;
-;         2 data inputs ; 62                          ;
-;     normal            ; 115                         ;
+;     plain             ; 82                          ;
+; cycloneiii_lcell_comb ; 548                         ;
+;     arith             ; 374                         ;
+;         2 data inputs ; 193                         ;
+;         3 data inputs ; 181                         ;
+;     normal            ; 174                         ;
 ;         0 data inputs ; 1                           ;
-;         1 data inputs ; 3                           ;
-;         2 data inputs ; 9                           ;
-;         3 data inputs ; 18                          ;
-;         4 data inputs ; 84                          ;
+;         1 data inputs ; 9                           ;
+;         2 data inputs ; 21                          ;
+;         3 data inputs ; 20                          ;
+;         4 data inputs ; 123                         ;
 ; cycloneiii_pll        ; 1                           ;
 ;                       ;                             ;
-; Max LUT depth         ; 8.00                        ;
-; Average LUT depth     ; 5.11                        ;
+; Max LUT depth         ; 22.10                       ;
+; Average LUT depth     ; 10.59                       ;
 +-----------------------+-----------------------------+
 
 
@@ -730,7 +733,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 16.1.0 Build 196 10/24/2016 SJ Lite Edition
-    Info: Processing started: Sat Dec 03 17:19:36 2016
+    Info: Processing started: Sat Dec 03 19:19:12 2016
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Minesweeper -c Minesweeper
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
@@ -738,64 +741,65 @@ Info (12021): Found 1 design units, including 1 entities, in source file main.v
     Info (12023): Found entity 1: main File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/Main.v Line: 1
 Warning (12125): Using design file minesweeper.v, which is not specified as a design file for the current project, but contains definitions for 6 design units and 6 entities in project
     Info (12023): Found entity 1: Minesweeper File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 20
-    Info (12023): Found entity 2: countingRefresh File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 1953
-    Info (12023): Found entity 3: color File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 1976
-    Info (12023): Found entity 4: H_SYNC File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 2198
-    Info (12023): Found entity 5: V_SYNC File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 2249
-    Info (12023): Found entity 6: clock108 File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 2293
-Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(123): created implicit net for "Object1" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 123
-Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(131): created implicit net for "Object2" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 131
-Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(139): created implicit net for "Object3" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 139
-Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(146): created implicit net for "Object4" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 146
-Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(153): created implicit net for "Object5" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 153
-Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(160): created implicit net for "Object6" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 160
-Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(167): created implicit net for "Object7" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 167
-Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(174): created implicit net for "Object8" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 174
-Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(181): created implicit net for "Object9" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 181
-Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(188): created implicit net for "Object10" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 188
-Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(195): created implicit net for "Object11" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 195
-Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(202): created implicit net for "Object12" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 202
-Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(209): created implicit net for "Object13" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 209
-Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(216): created implicit net for "Object14" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 216
-Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(223): created implicit net for "Object15" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 223
-Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(230): created implicit net for "Object16" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 230
-Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(237): created implicit net for "Object17" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 237
-Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(244): created implicit net for "Object18" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 244
-Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(251): created implicit net for "Object19" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 251
-Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(258): created implicit net for "Object20" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 258
-Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(265): created implicit net for "Object21" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 265
-Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(272): created implicit net for "Object22" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 272
-Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(279): created implicit net for "Object23" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 279
-Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(286): created implicit net for "Object24" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 286
-Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(293): created implicit net for "Object25" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 293
-Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(300): created implicit net for "Object26" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 300
-Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(307): created implicit net for "Object27" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 307
-Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(314): created implicit net for "Object28" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 314
-Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(321): created implicit net for "Object29" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 321
-Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(328): created implicit net for "Object30" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 328
-Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(335): created implicit net for "Object31" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 335
-Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(342): created implicit net for "Object32" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 342
-Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(349): created implicit net for "Object33" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 349
-Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(356): created implicit net for "Object34" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 356
-Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(363): created implicit net for "Object35" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 363
-Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(370): created implicit net for "Object36" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 370
-Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(377): created implicit net for "Object37" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 377
-Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(387): created implicit net for "Object38" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 387
-Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(394): created implicit net for "CLK_108" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 394
-Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(394): created implicit net for "locked" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 394
-Critical Warning (10846): Verilog HDL Instantiation warning at minesweeper.v(393): instance has no name File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 393
-Critical Warning (10846): Verilog HDL Instantiation warning at minesweeper.v(394): instance has no name File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 394
-Critical Warning (10846): Verilog HDL Instantiation warning at minesweeper.v(399): instance has no name File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 399
-Critical Warning (10846): Verilog HDL Instantiation warning at minesweeper.v(400): instance has no name File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 400
-Critical Warning (10846): Verilog HDL Instantiation warning at minesweeper.v(1942): instance has no name File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 1942
+    Info (12023): Found entity 2: countingRefresh File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 1992
+    Info (12023): Found entity 3: color File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 2015
+    Info (12023): Found entity 4: H_SYNC File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 2236
+    Info (12023): Found entity 5: V_SYNC File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 2287
+    Info (12023): Found entity 6: clock108 File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 2331
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(124): created implicit net for "Object1" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 124
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(132): created implicit net for "Object2" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 132
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(140): created implicit net for "Object3" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 140
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(147): created implicit net for "Object4" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 147
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(154): created implicit net for "Object5" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 154
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(161): created implicit net for "Object6" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 161
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(168): created implicit net for "Object7" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 168
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(175): created implicit net for "Object8" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 175
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(182): created implicit net for "Object9" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 182
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(189): created implicit net for "Object10" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 189
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(196): created implicit net for "Object11" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 196
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(203): created implicit net for "Object12" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 203
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(210): created implicit net for "Object13" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 210
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(217): created implicit net for "Object14" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 217
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(224): created implicit net for "Object15" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 224
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(231): created implicit net for "Object16" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 231
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(238): created implicit net for "Object17" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 238
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(245): created implicit net for "Object18" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 245
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(252): created implicit net for "Object19" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 252
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(259): created implicit net for "Object20" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 259
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(266): created implicit net for "Object21" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 266
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(273): created implicit net for "Object22" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 273
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(280): created implicit net for "Object23" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 280
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(287): created implicit net for "Object24" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 287
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(294): created implicit net for "Object25" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 294
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(301): created implicit net for "Object26" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 301
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(308): created implicit net for "Object27" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 308
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(315): created implicit net for "Object28" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 315
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(322): created implicit net for "Object29" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 322
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(329): created implicit net for "Object30" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 329
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(336): created implicit net for "Object31" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 336
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(343): created implicit net for "Object32" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 343
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(350): created implicit net for "Object33" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 350
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(357): created implicit net for "Object34" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 357
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(364): created implicit net for "Object35" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 364
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(371): created implicit net for "Object36" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 371
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(378): created implicit net for "Object37" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 378
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(396): created implicit net for "Object38" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 396
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(423): created implicit net for "CLK_108" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 423
+Warning (10236): Verilog HDL Implicit Net warning at minesweeper.v(423): created implicit net for "locked" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 423
+Critical Warning (10846): Verilog HDL Instantiation warning at minesweeper.v(422): instance has no name File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 422
+Critical Warning (10846): Verilog HDL Instantiation warning at minesweeper.v(423): instance has no name File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 423
+Critical Warning (10846): Verilog HDL Instantiation warning at minesweeper.v(428): instance has no name File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 428
+Critical Warning (10846): Verilog HDL Instantiation warning at minesweeper.v(429): instance has no name File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 429
+Critical Warning (10846): Verilog HDL Instantiation warning at minesweeper.v(1981): instance has no name File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 1981
 Info (12127): Elaborating entity "Minesweeper" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at minesweeper.v(408): object "box38" assigned a value but never read File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 408
-Info (12128): Elaborating entity "countingRefresh" for hierarchy "countingRefresh:comb_345" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 393
-Warning (10230): Verilog HDL assignment warning at minesweeper.v(1961): truncated value with size 32 to match size of target (8) File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 1961
-Info (12128): Elaborating entity "clock108" for hierarchy "clock108:comb_346" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 394
-Info (12128): Elaborating entity "altpll" for hierarchy "clock108:comb_346|altpll:altpll_component" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 2356
-Info (12130): Elaborated megafunction instantiation "clock108:comb_346|altpll:altpll_component" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 2356
-Info (12133): Instantiated megafunction "clock108:comb_346|altpll:altpll_component" with the following parameter: File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 2356
+Warning (10036): Verilog HDL or VHDL warning at minesweeper.v(437): object "box38" assigned a value but never read File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 437
+Warning (10230): Verilog HDL assignment warning at minesweeper.v(404): truncated value with size 32 to match size of target (20) File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 404
+Info (12128): Elaborating entity "countingRefresh" for hierarchy "countingRefresh:comb_831" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 422
+Warning (10230): Verilog HDL assignment warning at minesweeper.v(2000): truncated value with size 32 to match size of target (8) File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 2000
+Info (12128): Elaborating entity "clock108" for hierarchy "clock108:comb_832" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 423
+Info (12128): Elaborating entity "altpll" for hierarchy "clock108:comb_832|altpll:altpll_component" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 2394
+Info (12130): Elaborated megafunction instantiation "clock108:comb_832|altpll:altpll_component" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 2394
+Info (12133): Instantiated megafunction "clock108:comb_832|altpll:altpll_component" with the following parameter: File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 2394
     Info (12134): Parameter "bandwidth_type" = "AUTO"
     Info (12134): Parameter "clk0_divide_by" = "25"
     Info (12134): Parameter "clk0_duty_cycle" = "50"
@@ -853,25 +857,35 @@ Info (12133): Instantiated megafunction "clock108:comb_346|altpll:altpll_compone
     Info (12134): Parameter "width_clock" = "5"
 Info (12021): Found 1 design units, including 1 entities, in source file db/clock108_altpll.v
     Info (12023): Found entity 1: clock108_altpll File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/db/clock108_altpll.v Line: 31
-Info (12128): Elaborating entity "clock108_altpll" for hierarchy "clock108:comb_346|altpll:altpll_component|clock108_altpll:auto_generated" File: c:/intelfpga_lite/16.1/quartus/libraries/megafunctions/altpll.tdf Line: 898
-Info (12128): Elaborating entity "H_SYNC" for hierarchy "H_SYNC:comb_347" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 399
-Info (12128): Elaborating entity "V_SYNC" for hierarchy "V_SYNC:comb_348" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 400
-Info (12128): Elaborating entity "color" for hierarchy "color:comb_1091" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 1942
+Info (12128): Elaborating entity "clock108_altpll" for hierarchy "clock108:comb_832|altpll:altpll_component|clock108_altpll:auto_generated" File: c:/intelfpga_lite/16.1/quartus/libraries/megafunctions/altpll.tdf Line: 898
+Info (12128): Elaborating entity "H_SYNC" for hierarchy "H_SYNC:comb_833" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 428
+Info (12128): Elaborating entity "V_SYNC" for hierarchy "V_SYNC:comb_834" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 429
+Info (12128): Elaborating entity "color" for hierarchy "color:comb_1577" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 1981
 Warning (12241): 4 hierarchies have connectivity warnings - see the Connectivity Checks report folder
 Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "VGA_SYNC_N" is stuck at GND File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 26
 Info (286030): Timing-Driven Synthesis is running
+Info (144001): Generated suppressed messages file C:/Users/Ben/Documents/GitHub/ECE287FinalProject/output_files/Minesweeper.map.smsg
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 1 node(s), including 0 DDIO, 1 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 207 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 2 input pins
+Warning (21074): Design contains 2 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "KB_clk" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 38
+    Warning (15610): No output dependent on input pin "data" File: C:/Users/Ben/Documents/GitHub/ECE287FinalProject/minesweeper.v Line: 39
+Info (21057): Implemented 614 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 8 input pins
     Info (21059): Implemented 29 output pins
-    Info (21061): Implemented 175 logic cells
+    Info (21061): Implemented 576 logic cells
     Info (21065): Implemented 1 PLLs
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 52 warnings
-    Info: Peak virtual memory: 655 megabytes
-    Info: Processing ended: Sat Dec 03 17:19:57 2016
-    Info: Elapsed time: 00:00:21
-    Info: Total CPU time (on all processors): 00:00:42
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 56 warnings
+    Info: Peak virtual memory: 646 megabytes
+    Info: Processing ended: Sat Dec 03 19:19:29 2016
+    Info: Elapsed time: 00:00:17
+    Info: Total CPU time (on all processors): 00:00:37
+
+
++------------------------------------------+
+; Analysis & Synthesis Suppressed Messages ;
++------------------------------------------+
+The suppressed messages can be found in C:/Users/Ben/Documents/GitHub/ECE287FinalProject/output_files/Minesweeper.map.smsg.
 
 
