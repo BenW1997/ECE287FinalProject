@@ -381,7 +381,6 @@ localparam Object37_B = Object37_T + 31'd150;
 assign Object37 =((X >= Object37_L + object37X)&&(X <= Object37_R + object37X)&&(Y >= Object37_T+ object37Y)&&(Y <= Object37_B + object37Y));
 
 //object38_localParams
-
 localparam Object38_L = 31'd0;
 localparam Object38_R = Object38_L + 31'd100;
 localparam Object38_T = 31'd0;
@@ -401,17 +400,12 @@ reg warning2 = 0;  reg warning3 = 0;  reg warning4 = 0;  reg warning5 = 0;  reg 
 //this tells us if there is bomb there or not
 wire isBomb2, isBomb3, isBomb4, isBomb5, isBomb6, isBomb7, isBomb8, isBomb9, isBomb10, isBomb11, isBomb12, isBomb13, isBomb14, isBomb15, isBomb16, isBomb17, isBomb18, isBomb19, isBomb20, isBomb21, isBomb22, isBomb23, isBomb24, isBomb25, isBomb26, isBomb27, isBomb28, isBomb29, isBomb30, isBomb31, isBomb32, isBomb33, isBomb34, isBomb35, isBomb36, isBomb37;
 
-//these arent used
-wire stay1;
+//THIS WILL TELL IF GAME IS WON
 reg ccount;
-reg en;
-
 
 //this module generates the bombs
 randomGen bombGeneration(in1, in2, in3, in4, in5, in6, in7, in8, in9, in10, in11, in12, in13, in14, in15, isBomb2, isBomb3, isBomb4, isBomb5, isBomb6, isBomb7, isBomb8, isBomb9, isBomb10, isBomb11, isBomb12, isBomb13, isBomb14, isBomb15, isBomb16, isBomb17, isBomb18, isBomb19, isBomb20, isBomb21, isBomb22, isBomb23, isBomb24, isBomb25, isBomb26, isBomb27, isBomb28, isBomb29, isBomb30, isBomb31, isBomb32, isBomb33, isBomb34, isBomb35, isBomb36, isBomb37);
  
-//module that tells bomb is there 
-// wire isBomb2, ....
 
 ////SELECTOR MOUDLE //this Module Controls us selecting the each grid in the field, and tells us what will change
 always @ (posedge clk)
@@ -748,6 +742,7 @@ always @ (posedge clk)
 			
 			///end of telling use whether space is empty or bomb occupied
 			//NOW TO TELL IF SPACE HAS BOMB AROUND IT, YELLOW(CAUTION REG "bOOLEAN")  = SPACE IS TOUCHING 1 BOMB AND (WARNING "BOOLEAN")ORANGE = SPACE IS TOUCHING 2 OR MORE BOMBS 
+			//THIS PART LOOKS AT THE SQUARES IN THE MIDDLE OF THE BOARD,4 CASES FOR EACH
 			if(erasebox2 == 1 && (isBomb4 == 1 ^ isBomb9 == 1))//tells if one bomb by space  3, turns yellow
 				begin
 						caution3 = 1;
@@ -766,7 +761,606 @@ always @ (posedge clk)
 				begin	
 					warning3 = 1;
 			 	end		
-				
+			//generating caution and warning for box9, and box left of it is selected
+		if(erasebox8 == 1 && (isBomb3 == 1 ^ isBomb10 == 1 ^ isBomb15 ==1 ) )
+			begin
+				caution9 = 1;
+			end
+		if(erasebox8 ==1 && ((isBomb3 ==1 && isBomb10 ==1) | (isBomb3 ==1 && isBomb15 ==1) | (isBomb10 ==1 | isBomb15 ==1)))
+			begin
+				warning9 = 1;
+			end
+		//generating caution and warning for box10, and box left of it is selected
+				if(erasebox9 == 1 && (isBomb4 == 1 ^ isBomb11 == 1 ^ isBomb16 ==1 ) )
+					begin
+						caution10 = 1;
+					end
+				if(erasebox9 ==1 && ((isBomb4 ==1 && isBomb11 ==1) | (isBomb4 ==1 && isBomb16 ==1) | (isBomb11 ==1 | isBomb16 ==1)))
+					begin
+						warning10 = 1;
+					end
+		//generating caution and warning for box11, and box left of it is selected
+				if(erasebox10 == 1 && (isBomb5 == 1 ^ isBomb12 == 1 ^ isBomb17 ==1 ) )
+					begin
+						caution11 = 1;
+					end
+				if(erasebox10 ==1 && ((isBomb5 ==1 && isBomb12 ==1) | (isBomb5 ==1 && isBomb17 ==1) | (isBomb12 ==1 | isBomb17 ==1)))
+					begin
+						warning11 = 1;
+					end
+		//generating caution and warning for box12, and box left of it is selected
+				if(erasebox11 == 1 && (isBomb6 == 1 ^ isBomb13 == 1 ^ isBomb18 ==1 ) )
+					begin
+						caution12 = 1;
+					end
+				if(erasebox11 ==1 && ((isBomb6 ==1 && isBomb13 ==1) | (isBomb6 ==1 && isBomb18 ==1) | (isBomb13 ==1 | isBomb18 ==1)))
+					begin
+						warning12 = 1;
+					end
+		//generating caution and warning for box15, and box left of it is selected
+				if(erasebox14 == 1 && (isBomb9 == 1 ^ isBomb16 == 1 ^ isBomb21 ==1 ) )
+					begin
+						caution15 = 1;
+					end
+				if(erasebox14 ==1 && ((isBomb9 ==1 && isBomb16 ==1) | (isBomb9 ==1 && isBomb21 ==1) | (isBomb16 ==1 | isBomb21 ==1)))
+					begin
+						warning15 = 1;
+					end
+		//generating caution and warning for box16, and box left of it is selected
+				if(erasebox15 == 1 && (isBomb10 == 1 ^ isBomb17 == 1 ^ isBomb22 ==1 ) )
+					begin
+						caution16 = 1;
+					end
+				if(erasebox15 ==1 && ((isBomb10 ==1 && isBomb17 ==1) | (isBomb10 ==1 && isBomb22 ==1) | (isBomb17 ==1 | isBomb22 ==1)))
+					begin
+						warning16 = 1;
+					end
+		//generating caution and warning for box17, and box left of it is selected
+				if(erasebox16 == 1 && (isBomb11 == 1 ^ isBomb18 == 1 ^ isBomb23 ==1 ) )
+					begin
+						caution17 = 1;
+					end
+				if(erasebox16 ==1 && ((isBomb11 ==1 && isBomb18 ==1) | (isBomb11 ==1 && isBomb23 ==1) | (isBomb18 ==1 | isBomb23 ==1)))
+					begin
+						warning17 = 1;
+					end
+		//generating caution and warning for box18, and box left of it is selected
+				if(erasebox17 == 1 && (isBomb12 == 1 ^ isBomb19 == 1 ^ isBomb24 ==1 ) )
+					begin
+						caution18 = 1;
+					end
+				if(erasebox17 ==1 && ((isBomb12 ==1 && isBomb19 ==1) | (isBomb12 ==1 && isBomb24 ==1) | (isBomb19 ==1 | isBomb24 ==1)))
+					begin
+						warning18 = 1;
+					end
+		//generating caution and warning for box21, and box left of it is selected
+				if(erasebox20 == 1 && (isBomb15 == 1 ^ isBomb22 == 1 ^ isBomb27 ==1 ) )
+					begin
+						caution21 = 1;
+					end
+				if(erasebox20 ==1 && ((isBomb15 ==1 && isBomb22 ==1) | (isBomb15 ==1 && isBomb27 ==1) | (isBomb22 ==1 | isBomb27 ==1)))
+					begin
+						warning21 = 1;
+					end
+		//generating caution and warning for box22, and box left of it is selected
+				if(erasebox21 == 1 && (isBomb16 == 1 ^ isBomb23 == 1 ^ isBomb28 ==1 ) )
+					begin
+						caution22 = 1;
+					end
+				if(erasebox21 ==1 && ((isBomb16 ==1 && isBomb23 ==1) | (isBomb16 ==1 && isBomb28 ==1) | (isBomb23 ==1 | isBomb28 ==1)))
+					begin
+						warning22 = 1;
+					end
+		//generating caution and warning for box23, and box left of it is selected
+				if(erasebox22 == 1 && (isBomb17 == 1 ^ isBomb24 == 1 ^ isBomb29 ==1 ) )
+					begin
+						caution23 = 1;
+					end
+				if(erasebox22 ==1 && ((isBomb17 ==1 && isBomb24 ==1) | (isBomb17 ==1 && isBomb29 ==1) | (isBomb24 ==1 | isBomb29 ==1)))
+					begin
+						warning23 = 1;
+					end
+		//generating caution and warning for box24, and box left of it is selected
+				if(erasebox23 == 1 && (isBomb18 == 1 ^ isBomb25 == 1 ^ isBomb30 ==1 ) )
+					begin
+						caution24 = 1;
+					end
+				if(erasebox23 ==1 && ((isBomb18 ==1 && isBomb25 ==1) | (isBomb18 ==1 && isBomb30 ==1) | (isBomb25 ==1 | isBomb30 ==1)))
+					begin
+						warning24 = 1;
+					end
+		//generating caution and warning for box27, and box left of it is selected
+				if(erasebox26 == 1 && (isBomb21 == 1 ^ isBomb28 == 1 ^ isBomb33 ==1 ) )
+					begin
+						caution27 = 1;
+					end
+				if(erasebox26 ==1 && ((isBomb21 ==1 && isBomb28 ==1) | (isBomb21 ==1 && isBomb33 ==1) | (isBomb28 ==1 | isBomb33 ==1)))
+					begin
+						warning27 = 1;
+					end
+		//generating caution and warning for box28, and box left of it is selected
+				if(erasebox27 == 1 && (isBomb22 == 1 ^ isBomb29 == 1 ^ isBomb34 ==1 ) )
+					begin
+						caution28 = 1;
+					end
+				if(erasebox27 ==1 && ((isBomb22 ==1 && isBomb29 ==1) | (isBomb22 ==1 && isBomb34 ==1) | (isBomb29 ==1 | isBomb34 ==1)))
+					begin
+						warning28 = 1;
+					end
+		//generating caution and warning for box29, and box left of it is selected
+				if(erasebox28 == 1 && (isBomb23 == 1 ^ isBomb30 == 1 ^ isBomb35 ==1 ) )
+					begin
+						caution29 = 1;
+					end
+				if(erasebox28 ==1 && ((isBomb23 ==1 && isBomb30 ==1) | (isBomb23 ==1 && isBomb35 ==1) | (isBomb30 ==1 | isBomb35 ==1)))
+					begin
+						warning29 = 1;
+					end
+		//generating caution and warning for box30, and box left of it is selected
+				if(erasebox29 == 1 && (isBomb24 == 1 ^ isBomb31 == 1 ^ isBomb36 ==1 ) )
+					begin
+						caution30 = 1;
+					end
+				if(erasebox29 ==1 && ((isBomb24 ==1 && isBomb31 ==1) | (isBomb24 ==1 && isBomb36 ==1) | (isBomb31 ==1 | isBomb36 ==1)))
+					begin
+						warning30 = 1;
+					end
+
+
+		// this is if the left block is selected 
+
+
+
+
+
+
+
+		//this looks at the box above
+
+		//generating caution and warning for box9, and box above of it is selected
+				if(erasebox3 == 1 && (isBomb8 == 1 ^ isBomb10 == 1 ^ isBomb15 ==1 ) )
+					begin
+						caution9 = 1;
+					end
+				if(erasebox3 ==1 && ((isBomb8 ==1 && isBomb10 ==1) | (isBomb8 ==1 && isBomb15 ==1) | (isBomb10 ==1 | isBomb15 ==1)))
+					begin
+						warning9 = 1;
+					end
+		//generating caution and warning for box10, and box above of it is selected
+				if(erasebox4 == 1 && (isBomb9 == 1 ^ isBomb11 == 1 ^ isBomb16 ==1 ) )
+					begin
+						caution10 = 1;
+					end
+				if(erasebox4 ==1 && ((isBomb9 ==1 && isBomb11 ==1) | (isBomb9 ==1 && isBomb16 ==1) | (isBomb11 ==1 | isBomb16 ==1)))
+					begin
+						warning10 = 1;
+					end
+		//generating caution and warning for box11, and box above of it is selected
+				if(erasebox5 == 1 && (isBomb10 == 1 ^ isBomb12 == 1 ^ isBomb17 ==1 ) )
+					begin
+						caution11 = 1;
+					end
+				if(erasebox5 ==1 && ((isBomb10 ==1 && isBomb12 ==1) | (isBomb10 ==1 && isBomb17 ==1) | (isBomb12 ==1 | isBomb17 ==1)))
+					begin
+						warning11 = 1;
+					end
+		//generating caution and warning for box12, and box above of it is selected
+				if(erasebox6 == 1 && (isBomb11 == 1 ^ isBomb13 == 1 ^ isBomb18 ==1 ) )
+					begin
+						caution12 = 1;
+					end
+				if(erasebox6 ==1 && ((isBomb11 ==1 && isBomb13 ==1) | (isBomb11 ==1 && isBomb18 ==1) | (isBomb13 ==1 | isBomb18 ==1)))
+					begin
+						warning12 = 1;
+					end
+		//generating caution and warning for box15, and box above of it is selected
+				if(erasebox9 == 1 && (isBomb14 == 1 ^ isBomb16 == 1 ^ isBomb21 ==1 ) )
+					begin
+						caution15 = 1;
+					end
+				if(erasebox9 ==1 && ((isBomb14 ==1 && isBomb16 ==1) | (isBomb14 ==1 && isBomb21 ==1) | (isBomb16 ==1 | isBomb21 ==1)))
+					begin
+						warning15 = 1;
+					end
+		//generating caution and warning for box16, and box above of it is selected
+				if(erasebox10 == 1 && (isBomb15 == 1 ^ isBomb17 == 1 ^ isBomb22 ==1 ) )
+					begin
+						caution16 = 1;
+					end
+				if(erasebox10 ==1 && ((isBomb15 ==1 && isBomb17 ==1) | (isBomb15 ==1 && isBomb22 ==1) | (isBomb17 ==1 | isBomb22 ==1)))
+					begin
+						warning16 = 1;
+					end
+		//generating caution and warning for box17, and box above of it is selected
+				if(erasebox11 == 1 && (isBomb16 == 1 ^ isBomb18 == 1 ^ isBomb23 ==1 ) )
+					begin
+						caution17 = 1;
+					end
+				if(erasebox11 ==1 && ((isBomb16 ==1 && isBomb18 ==1) | (isBomb16 ==1 && isBomb23 ==1) | (isBomb18 ==1 | isBomb23 ==1)))
+					begin
+						warning17 = 1;
+					end
+		//generating caution and warning for box18, and box above of it is selected
+				if(erasebox12 == 1 && (isBomb17 == 1 ^ isBomb19 == 1 ^ isBomb24 ==1 ) )
+					begin
+						caution18 = 1;
+					end
+				if(erasebox12 ==1 && ((isBomb17 ==1 && isBomb19 ==1) | (isBomb17 ==1 && isBomb24 ==1) | (isBomb19 ==1 | isBomb24 ==1)))
+					begin
+						warning18 = 1;
+					end
+		//generating caution and warning for box21, and box above of it is selected
+				if(erasebox15 == 1 && (isBomb20 == 1 ^ isBomb22 == 1 ^ isBomb27 ==1 ) )
+					begin
+						caution21 = 1;
+					end
+				if(erasebox15 ==1 && ((isBomb20 ==1 && isBomb22 ==1) | (isBomb20 ==1 && isBomb27 ==1) | (isBomb22 ==1 | isBomb27 ==1)))
+					begin
+						warning21 = 1;
+					end
+		//generating caution and warning for box22, and box above of it is selected
+				if(erasebox16 == 1 && (isBomb21 == 1 ^ isBomb23 == 1 ^ isBomb28 ==1 ) )
+					begin
+						caution22 = 1;
+					end
+				if(erasebox16 ==1 && ((isBomb21 ==1 && isBomb23 ==1) | (isBomb21 ==1 && isBomb28 ==1) | (isBomb23 ==1 | isBomb28 ==1)))
+					begin
+						warning22 = 1;
+					end
+		//generating caution and warning for box23, and box above of it is selected
+				if(erasebox17 == 1 && (isBomb22 == 1 ^ isBomb24 == 1 ^ isBomb29 ==1 ) )
+					begin
+						caution23 = 1;
+					end
+				if(erasebox17 ==1 && ((isBomb22 ==1 && isBomb24 ==1) | (isBomb22 ==1 && isBomb29 ==1) | (isBomb24 ==1 | isBomb29 ==1)))
+					begin
+						warning23 = 1;
+					end
+		//generating caution and warning for box24, and box above of it is selected
+				if(erasebox18 == 1 && (isBomb23 == 1 ^ isBomb25 == 1 ^ isBomb30 ==1 ) )
+					begin
+						caution24 = 1;
+					end
+				if(erasebox18 ==1 && ((isBomb23 ==1 && isBomb25 ==1) | (isBomb23 ==1 && isBomb30 ==1) | (isBomb25 ==1 | isBomb30 ==1)))
+					begin
+						warning24 = 1;
+					end
+		//generating caution and warning for box27, and box above of it is selected
+				if(erasebox21 == 1 && (isBomb26 == 1 ^ isBomb28 == 1 ^ isBomb33 ==1 ) )
+					begin
+						caution27 = 1;
+					end
+				if(erasebox21 ==1 && ((isBomb26 ==1 && isBomb28 ==1) | (isBomb26 ==1 && isBomb33 ==1) | (isBomb28 ==1 | isBomb33 ==1)))
+					begin
+						warning27 = 1;
+					end
+		//generating caution and warning for box28, and box above of it is selected
+				if(erasebox22 == 1 && (isBomb27 == 1 ^ isBomb29 == 1 ^ isBomb34 ==1 ) )
+					begin
+						caution28 = 1;
+					end
+				if(erasebox22 ==1 && ((isBomb27 ==1 && isBomb29 ==1) | (isBomb27 ==1 && isBomb34 ==1) | (isBomb29 ==1 | isBomb34 ==1)))
+					begin
+						warning28 = 1;
+					end
+		//generating caution and warning for box29, and box above of it is selected
+				if(erasebox23 == 1 && (isBomb28 == 1 ^ isBomb30 == 1 ^ isBomb35 ==1 ) )
+					begin
+						caution29 = 1;
+					end
+				if(erasebox23 ==1 && ((isBomb28 ==1 && isBomb30 ==1) | (isBomb28 ==1 && isBomb35 ==1) | (isBomb30 ==1 | isBomb35 ==1)))
+					begin
+						warning29 = 1;
+					end
+		//generating caution and warning for box30, and box above of it is selected
+				if(erasebox24 == 1 && (isBomb29 == 1 ^ isBomb31 == 1 ^ isBomb36 ==1 ) )
+					begin
+						caution30 = 1;
+					end
+				if(erasebox24 ==1 && ((isBomb29 ==1 && isBomb31 ==1) | (isBomb29 ==1 && isBomb36 ==1) | (isBomb31 ==1 | isBomb36 ==1)))
+					begin
+						warning30 = 1;
+					end
+		//looking at the box above
+
+
+		//looking at the box to the right
+
+		//generating caution and warning for box9, and box to right of it is selected
+				if(erasebox10 == 1 && (isBomb8 == 1 ^ isBomb3 == 1 ^ isBomb15 ==1 ) )
+					begin
+						caution9 = 1;
+					end
+				if(erasebox10 ==1 && ((isBomb8 ==1 && isBomb3 ==1) | (isBomb8 ==1 && isBomb15 ==1) | (isBomb3 ==1 | isBomb15 ==1)))
+					begin
+						warning9 = 1;
+					end
+		//generating caution and warning for box10, and box to right of it is selected
+				if(erasebox11 == 1 && (isBomb9 == 1 ^ isBomb4 == 1 ^ isBomb16 ==1 ) )
+					begin
+						caution10 = 1;
+					end
+				if(erasebox11 ==1 && ((isBomb9 ==1 && isBomb4 ==1) | (isBomb9 ==1 && isBomb16 ==1) | (isBomb4 ==1 | isBomb16 ==1)))
+					begin
+						warning10 = 1;
+					end
+		//generating caution and warning for box11, and box to right of it is selected
+				if(erasebox12 == 1 && (isBomb10 == 1 ^ isBomb5 == 1 ^ isBomb17 ==1 ) )
+					begin
+						caution11 = 1;
+					end
+				if(erasebox12 ==1 && ((isBomb10 ==1 && isBomb5 ==1) | (isBomb10 ==1 && isBomb17 ==1) | (isBomb5 ==1 | isBomb17 ==1)))
+					begin
+						warning11 = 1;
+					end
+		//generating caution and warning for box12, and box to right of it is selected
+				if(erasebox13 == 1 && (isBomb11 == 1 ^ isBomb6 == 1 ^ isBomb18 ==1 ) )
+					begin
+						caution12 = 1;
+					end
+				if(erasebox13 ==1 && ((isBomb11 ==1 && isBomb6 ==1) | (isBomb11 ==1 && isBomb18 ==1) | (isBomb6 ==1 | isBomb18 ==1)))
+					begin
+						warning12 = 1;
+					end
+		//generating caution and warning for box15, and box to right of it is selected
+				if(erasebox16 == 1 && (isBomb14 == 1 ^ isBomb9 == 1 ^ isBomb21 ==1 ) )
+					begin
+						caution15 = 1;
+					end
+				if(erasebox16 ==1 && ((isBomb14 ==1 && isBomb9 ==1) | (isBomb14 ==1 && isBomb21 ==1) | (isBomb9 ==1 | isBomb21 ==1)))
+					begin
+						warning15 = 1;
+					end
+		//generating caution and warning for box16, and box to right of it is selected
+				if(erasebox17 == 1 && (isBomb15 == 1 ^ isBomb10 == 1 ^ isBomb22 ==1 ) )
+					begin
+						caution16 = 1;
+					end
+				if(erasebox17 ==1 && ((isBomb15 ==1 && isBomb10 ==1) | (isBomb15 ==1 && isBomb22 ==1) | (isBomb10 ==1 | isBomb22 ==1)))
+					begin
+						warning16 = 1;
+					end
+		//generating caution and warning for box17, and box to right of it is selected
+				if(erasebox18 == 1 && (isBomb16 == 1 ^ isBomb11 == 1 ^ isBomb23 ==1 ) )
+					begin
+						caution17 = 1;
+					end
+				if(erasebox18 ==1 && ((isBomb16 ==1 && isBomb11 ==1) | (isBomb16 ==1 && isBomb23 ==1) | (isBomb11 ==1 | isBomb23 ==1)))
+					begin
+						warning17 = 1;
+					end
+		//generating caution and warning for box18, and box to right of it is selected
+				if(erasebox19 == 1 && (isBomb17 == 1 ^ isBomb12 == 1 ^ isBomb24 ==1 ) )
+					begin
+						caution18 = 1;
+					end
+				if(erasebox19 ==1 && ((isBomb17 ==1 && isBomb12 ==1) | (isBomb17 ==1 && isBomb24 ==1) | (isBomb12 ==1 | isBomb24 ==1)))
+					begin
+						warning18 = 1;
+					end
+		//generating caution and warning for box21, and box to right of it is selected
+				if(erasebox22 == 1 && (isBomb20 == 1 ^ isBomb15 == 1 ^ isBomb27 ==1 ) )
+					begin
+						caution21 = 1;
+					end
+				if(erasebox22 ==1 && ((isBomb20 ==1 && isBomb15 ==1) | (isBomb20 ==1 && isBomb27 ==1) | (isBomb15 ==1 | isBomb27 ==1)))
+					begin
+						warning21 = 1;
+					end
+		//generating caution and warning for box22, and box to right of it is selected
+				if(erasebox23 == 1 && (isBomb21 == 1 ^ isBomb16 == 1 ^ isBomb28 ==1 ) )
+					begin
+						caution22 = 1;
+					end
+				if(erasebox23 ==1 && ((isBomb21 ==1 && isBomb16 ==1) | (isBomb21 ==1 && isBomb28 ==1) | (isBomb16 ==1 | isBomb28 ==1)))
+					begin
+						warning22 = 1;
+					end
+		//generating caution and warning for box23, and box to right of it is selected
+				if(erasebox24 == 1 && (isBomb22 == 1 ^ isBomb17 == 1 ^ isBomb29 ==1 ) )
+					begin
+						caution23 = 1;
+					end
+				if(erasebox24 ==1 && ((isBomb22 ==1 && isBomb17 ==1) | (isBomb22 ==1 && isBomb29 ==1) | (isBomb17 ==1 | isBomb29 ==1)))
+					begin
+						warning23 = 1;
+					end
+		//generating caution and warning for box24, and box to right of it is selected
+				if(erasebox25 == 1 && (isBomb23 == 1 ^ isBomb18 == 1 ^ isBomb30 ==1 ) )
+					begin
+						caution24 = 1;
+					end
+				if(erasebox25 ==1 && ((isBomb23 ==1 && isBomb18 ==1) | (isBomb23 ==1 && isBomb30 ==1) | (isBomb18 ==1 | isBomb30 ==1)))
+					begin
+						warning24 = 1;
+					end
+		//generating caution and warning for box27, and box to right of it is selected
+				if(erasebox28 == 1 && (isBomb26 == 1 ^ isBomb21 == 1 ^ isBomb33 ==1 ) )
+					begin
+						caution27 = 1;
+					end
+				if(erasebox28 ==1 && ((isBomb26 ==1 && isBomb21 ==1) | (isBomb26 ==1 && isBomb33 ==1) | (isBomb21 ==1 | isBomb33 ==1)))
+					begin
+						warning27 = 1;
+					end
+		//generating caution and warning for box28, and box to right of it is selected
+				if(erasebox29 == 1 && (isBomb27 == 1 ^ isBomb22 == 1 ^ isBomb34 ==1 ) )
+					begin
+						caution28 = 1;
+					end
+				if(erasebox29 ==1 && ((isBomb27 ==1 && isBomb22 ==1) | (isBomb27 ==1 && isBomb34 ==1) | (isBomb22 ==1 | isBomb34 ==1)))
+					begin
+						warning28 = 1;
+					end
+		//generating caution and warning for box29, and box to right of it is selected
+				if(erasebox30 == 1 && (isBomb28 == 1 ^ isBomb23 == 1 ^ isBomb35 ==1 ) )
+					begin
+						caution29 = 1;
+					end
+				if(erasebox30 ==1 && ((isBomb28 ==1 && isBomb23 ==1) | (isBomb28 ==1 && isBomb35 ==1) | (isBomb23 ==1 | isBomb35 ==1)))
+					begin
+						warning29 = 1;
+					end
+		//generating caution and warning for box30, and box to right of it is selected
+				if(erasebox31 == 1 && (isBomb29 == 1 ^ isBomb24 == 1 ^ isBomb36 ==1 ) )
+					begin
+						caution30 = 1;
+					end
+				if(erasebox31 ==1 && ((isBomb29 ==1 && isBomb24 ==1) | (isBomb29 ==1 && isBomb36 ==1) | (isBomb24 ==1 | isBomb36 ==1)))
+					begin
+						warning30 = 1;
+					end
+		// looking at the box to the right
+
+		// looking at the box below it 
+
+		//generating caution and warning for box9, and box to right of it is selected
+				if(erasebox10 == 1 && (isBomb8 == 1 ^ isBomb3 == 1 ^ isBomb15 ==1 ) )
+					begin
+						caution9 = 1;
+					end
+				if(erasebox10 ==1 && ((isBomb8 ==1 && isBomb3 ==1) | (isBomb8 ==1 && isBomb15 ==1) | (isBomb3 ==1 | isBomb15 ==1)))
+					begin
+						warning9 = 1;
+					end
+		//generating caution and warning for box10, and box to right of it is selected
+				if(erasebox11 == 1 && (isBomb9 == 1 ^ isBomb4 == 1 ^ isBomb16 ==1 ) )
+					begin
+						caution10 = 1;
+					end
+				if(erasebox11 ==1 && ((isBomb9 ==1 && isBomb4 ==1) | (isBomb9 ==1 && isBomb16 ==1) | (isBomb4 ==1 | isBomb16 ==1)))
+					begin
+						warning10 = 1;
+					end
+		//generating caution and warning for box11, and box to right of it is selected
+				if(erasebox12 == 1 && (isBomb10 == 1 ^ isBomb5 == 1 ^ isBomb17 ==1 ) )
+					begin
+						caution11 = 1;
+					end
+				if(erasebox12 ==1 && ((isBomb10 ==1 && isBomb5 ==1) | (isBomb10 ==1 && isBomb17 ==1) | (isBomb5 ==1 | isBomb17 ==1)))
+					begin
+						warning11 = 1;
+					end
+		//generating caution and warning for box12, and box to right of it is selected
+				if(erasebox13 == 1 && (isBomb11 == 1 ^ isBomb6 == 1 ^ isBomb18 ==1 ) )
+					begin
+						caution12 = 1;
+					end
+				if(erasebox13 ==1 && ((isBomb11 ==1 && isBomb6 ==1) | (isBomb11 ==1 && isBomb18 ==1) | (isBomb6 ==1 | isBomb18 ==1)))
+					begin
+						warning12 = 1;
+					end
+		//generating caution and warning for box15, and box to right of it is selected
+				if(erasebox16 == 1 && (isBomb14 == 1 ^ isBomb9 == 1 ^ isBomb21 ==1 ) )
+					begin
+						caution15 = 1;
+					end
+				if(erasebox16 ==1 && ((isBomb14 ==1 && isBomb9 ==1) | (isBomb14 ==1 && isBomb21 ==1) | (isBomb9 ==1 | isBomb21 ==1)))
+					begin
+						warning15 = 1;
+					end
+		//generating caution and warning for box16, and box to right of it is selected
+				if(erasebox17 == 1 && (isBomb15 == 1 ^ isBomb10 == 1 ^ isBomb22 ==1 ) )
+					begin
+						caution16 = 1;
+					end
+				if(erasebox17 ==1 && ((isBomb15 ==1 && isBomb10 ==1) | (isBomb15 ==1 && isBomb22 ==1) | (isBomb10 ==1 | isBomb22 ==1)))
+					begin
+						warning16 = 1;
+					end
+		//generating caution and warning for box17, and box to right of it is selected
+				if(erasebox18 == 1 && (isBomb16 == 1 ^ isBomb11 == 1 ^ isBomb23 ==1 ) )
+					begin
+						caution17 = 1;
+					end
+				if(erasebox18 ==1 && ((isBomb16 ==1 && isBomb11 ==1) | (isBomb16 ==1 && isBomb23 ==1) | (isBomb11 ==1 | isBomb23 ==1)))
+					begin
+						warning17 = 1;
+					end
+		//generating caution and warning for box18, and box to right of it is selected
+				if(erasebox19 == 1 && (isBomb17 == 1 ^ isBomb12 == 1 ^ isBomb24 ==1 ) )
+					begin
+						caution18 = 1;
+					end
+				if(erasebox19 ==1 && ((isBomb17 ==1 && isBomb12 ==1) | (isBomb17 ==1 && isBomb24 ==1) | (isBomb12 ==1 | isBomb24 ==1)))
+					begin
+						warning18 = 1;
+					end
+		//generating caution and warning for box21, and box to right of it is selected
+				if(erasebox22 == 1 && (isBomb20 == 1 ^ isBomb15 == 1 ^ isBomb27 ==1 ) )
+					begin
+						caution21 = 1;
+					end
+				if(erasebox22 ==1 && ((isBomb20 ==1 && isBomb15 ==1) | (isBomb20 ==1 && isBomb27 ==1) | (isBomb15 ==1 | isBomb27 ==1)))
+					begin
+						warning21 = 1;
+					end
+		//generating caution and warning for box22, and box to right of it is selected
+				if(erasebox23 == 1 && (isBomb21 == 1 ^ isBomb16 == 1 ^ isBomb28 ==1 ) )
+					begin
+						caution22 = 1;
+					end
+				if(erasebox23 ==1 && ((isBomb21 ==1 && isBomb16 ==1) | (isBomb21 ==1 && isBomb28 ==1) | (isBomb16 ==1 | isBomb28 ==1)))
+					begin
+						warning22 = 1;
+					end
+		//generating caution and warning for box23, and box to right of it is selected
+				if(erasebox24 == 1 && (isBomb22 == 1 ^ isBomb17 == 1 ^ isBomb29 ==1 ) )
+					begin
+						caution23 = 1;
+					end
+				if(erasebox24 ==1 && ((isBomb22 ==1 && isBomb17 ==1) | (isBomb22 ==1 && isBomb29 ==1) | (isBomb17 ==1 | isBomb29 ==1)))
+					begin
+						warning23 = 1;
+					end
+		//generating caution and warning for box24, and box to right of it is selected
+				if(erasebox25 == 1 && (isBomb23 == 1 ^ isBomb18 == 1 ^ isBomb30 ==1 ) )
+					begin
+						caution24 = 1;
+					end
+				if(erasebox25 ==1 && ((isBomb23 ==1 && isBomb18 ==1) | (isBomb23 ==1 && isBomb30 ==1) | (isBomb18 ==1 | isBomb30 ==1)))
+					begin
+						warning24 = 1;
+					end
+		//generating caution and warning for box27, and box to right of it is selected
+				if(erasebox28 == 1 && (isBomb26 == 1 ^ isBomb21 == 1 ^ isBomb33 ==1 ) )
+					begin
+						caution27 = 1;
+					end
+				if(erasebox28 ==1 && ((isBomb26 ==1 && isBomb21 ==1) | (isBomb26 ==1 && isBomb33 ==1) | (isBomb21 ==1 | isBomb33 ==1)))
+					begin
+						warning27 = 1;
+					end
+		//generating caution and warning for box28, and box to right of it is selected
+				if(erasebox29 == 1 && (isBomb27 == 1 ^ isBomb22 == 1 ^ isBomb34 ==1 ) )
+					begin
+						caution28 = 1;
+					end
+				if(erasebox29 ==1 && ((isBomb27 ==1 && isBomb22 ==1) | (isBomb27 ==1 && isBomb34 ==1) | (isBomb22 ==1 | isBomb34 ==1)))
+					begin
+						warning28 = 1;
+					end
+		//generating caution and warning for box29, and box to right of it is selected
+				if(erasebox30 == 1 && (isBomb28 == 1 ^ isBomb23 == 1 ^ isBomb35 ==1 ) )
+					begin
+						caution29 = 1;
+					end
+				if(erasebox30 ==1 && ((isBomb28 ==1 && isBomb23 ==1) | (isBomb28 ==1 && isBomb35 ==1) | (isBomb23 ==1 | isBomb35 ==1)))
+					begin
+						warning29 = 1;
+					end
+		//generating caution and warning for box30, and box to right of it is selected
+				if(erasebox31 == 1 && (isBomb29 == 1 ^ isBomb24 == 1 ^ isBomb36 ==1 ) )
+					begin
+						caution30 = 1;
+					end
+				if(erasebox31 ==1 && ((isBomb29 ==1 && isBomb24 ==1) | (isBomb29 ==1 && isBomb36 ==1) | (isBomb24 ==1 | isBomb36 ==1)))
+					begin
+						warning30 = 1;
+					end
+		// looking at the box below it
+
+
 				
 			//generating caution and warning for box9, and box left of it is selected	
 			if(erasebox8 == 1 && (isBomb3 == 1 ^ isBomb10 == 1 ^ isBomb15 ==1 ) )
@@ -778,196 +1372,634 @@ always @ (posedge clk)
 						warning9 = 1;
 					end
 
-//generates caution and warning for the top row of boxes					
-if(erasebox4  == 1 && (isBomb2  == 1 ^ isBomb9  == 1))
-begin
-caution3 = 1;
-end
-if(erasebox4  == 1 && (isBomb2  == 1 && isBomb9  == 1))
-begin
-warning3 = 1;
-end
+			//generates caution and warning for the top row of boxes					
+			if(erasebox4  == 1 && (isBomb2  == 1 ^ isBomb9  == 1))
+			begin
+			caution3 = 1;
+			end
+			if(erasebox4  == 1 && (isBomb2  == 1 && isBomb9  == 1))
+			begin
+			warning3 = 1;
+			end
 
-if(erasebox9  == 1 && (isBomb2  == 1 ^ isBomb4  == 1))
-begin
-caution3 = 1;
-end
-if(erasebox9  == 1 && (isBomb2 == 1 && isBomb4  == 1))
-begin
-warning3 = 1;
-end
+			if(erasebox9  == 1 && (isBomb2  == 1 ^ isBomb4  == 1))
+			begin
+			caution3 = 1;
+			end
+			if(erasebox9  == 1 && (isBomb2 == 1 && isBomb4  == 1))
+			begin
+			warning3 = 1;
+			end
 
-if(erasebox3  == 1 && (isBomb5  == 1 ^ isBomb10  == 1))
-begin
-caution4 = 1;
-end
-if(erasebox3  == 1 && (isBomb5  == 1 && isBomb10  == 1))
-begin
-warning4 = 1;
-end
+			if(erasebox3  == 1 && (isBomb5  == 1 ^ isBomb10  == 1))
+			begin
+			caution4 = 1;
+			end
+			if(erasebox3  == 1 && (isBomb5  == 1 && isBomb10  == 1))
+			begin
+			warning4 = 1;
+			end
 
-if(erasebox5  == 1 && (isBomb3  == 1 ^ isBomb10  == 1))
-begin
-caution4 = 1;
-end
-if(erasebox5  == 1 && (isBomb3  == 1 && isBomb10  == 1))
-begin
-warning4 = 1;
-end
+			if(erasebox5  == 1 && (isBomb3  == 1 ^ isBomb10  == 1))
+			begin
+			caution4 = 1;
+			end
+			if(erasebox5  == 1 && (isBomb3  == 1 && isBomb10  == 1))
+			begin
+			warning4 = 1;
+			end
 
-if(erasebox10  == 1 && (isBomb5  == 1 ^ isBomb3  == 1))
-begin
-caution4 = 1;
-end
-if(erasebox10  == 1 && (isBomb5  == 1 && isBomb3  == 1))
-begin
-warning4 = 1;
-end
+			if(erasebox10  == 1 && (isBomb5  == 1 ^ isBomb3  == 1))
+			begin
+			caution4 = 1;
+			end
+			if(erasebox10  == 1 && (isBomb5  == 1 && isBomb3  == 1))
+			begin
+			warning4 = 1;
+			end
 
-if(erasebox4  == 1 && (isBomb6  == 1 ^ isBomb11  == 1))
-begin
-caution5 = 1;
-end
-if(erasebox4  == 1 && (isBomb6  == 1 && isBomb11  == 1))
-begin
-warning5 = 1;
-end
+			if(erasebox4  == 1 && (isBomb6  == 1 ^ isBomb11  == 1))
+			begin
+			caution5 = 1;
+			end
+			if(erasebox4  == 1 && (isBomb6  == 1 && isBomb11  == 1))
+			begin
+			warning5 = 1;
+			end
 
-if(erasebox6  == 1 && (isBomb4  == 1 ^ isBomb11  == 1))
-begin
-caution5 = 1;
-end
-if(erasebox6  == 1 && (isBomb4  == 1 && isBomb11  == 1))
-begin
-warning5 = 1;
-end
+			if(erasebox6  == 1 && (isBomb4  == 1 ^ isBomb11  == 1))
+			begin
+			caution5 = 1;
+			end
+			if(erasebox6  == 1 && (isBomb4  == 1 && isBomb11  == 1))
+			begin
+			warning5 = 1;
+			end
 
-if(erasebox11  == 1 && (isBomb6  == 1 ^ isBomb4  == 1))
-begin
-caution5 = 1;
-end
-if(erasebox11  == 1 && (isBomb6  == 1 && isBomb4  == 1))
-begin
-warning5 = 1;
-end
+			if(erasebox11  == 1 && (isBomb6  == 1 ^ isBomb4  == 1))
+			begin
+			caution5 = 1;
+			end
+			if(erasebox11  == 1 && (isBomb6  == 1 && isBomb4  == 1))
+			begin
+			warning5 = 1;
+			end
 
-if(erasebox5  == 1 && (isBomb7  == 1 ^ isBomb12  == 1))
-begin
-caution6 = 1;
-end
-if(erasebox5  == 1 && (isBomb7  == 1 && isBomb12  == 1))
-begin
-warning6 = 1;
-end
+			if(erasebox5  == 1 && (isBomb7  == 1 ^ isBomb12  == 1))
+			begin
+			caution6 = 1;
+			end
+			if(erasebox5  == 1 && (isBomb7  == 1 && isBomb12  == 1))
+			begin
+			warning6 = 1;
+			end
 
-if(erasebox7  == 1 && (isBomb5  == 1 ^ isBomb12  == 1))
-begin
-caution6 = 1;
-end
-if(erasebox7  == 1 && (isBomb5  == 1 && isBomb12  == 1))
-begin
-warning6 = 1;
-end
+			if(erasebox7  == 1 && (isBomb5  == 1 ^ isBomb12  == 1))
+			begin
+			caution6 = 1;
+			end
+			if(erasebox7  == 1 && (isBomb5  == 1 && isBomb12  == 1))
+			begin
+			warning6 = 1;
+			end
 
-if(erasebox12  == 1 && (isBomb7  == 1 ^ isBomb5  == 1))
-begin
-caution6 = 1;
-end
-if(erasebox12  == 1 && (isBomb7  == 1 && isBomb5  == 1))
-begin
-warning6 = 1;
-end
+			if(erasebox12  == 1 && (isBomb7  == 1 ^ isBomb5  == 1))
+			begin
+			caution6 = 1;
+			end
+			if(erasebox12  == 1 && (isBomb7  == 1 && isBomb5  == 1))
+			begin
+			warning6 = 1;
+			end
 
-if(erasebox6  == 1 && (isBomb13  == 1))
-begin
-caution7 = 1;
-end
-if(erasebox13  == 1 && (isBomb6 == 1))
-begin
-warning7 = 1;
-end
-		    
-	/*	else if(object38X >= 31'd422 && object38X <= 31'd572 - 31'd100 && object38Y <= 31'd166 -31'd100 && object38Y >= 31'd000 && select == 1'b1) 
-		begin
-			erasebox3 = 1;
-	   end
-		if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd166 -31'd100 && object38Y >= 31'd000 && select == 1'b1 && isBomb3 == 1'b1) 
-		begin
-			bombAT3 = 1;
-	   end
+			if(erasebox6  == 1 && (isBomb13  == 1))
+			begin
+			caution7 = 1;
+			end
+			if(erasebox13  == 1 && (isBomb6 == 1))
+			begin
+			warning7 = 1;
+			end
+			//more of the code for side caution and warnings
+			if(erasebox4  == 1 && (isBomb2  == 1 ^ isBomb9  == 1))
+			begin
+			caution3 = 1;
+			end
+			if(erasebox4  == 1 && (isBomb2  == 1 && isBomb9  == 1))
+			begin
+			warning3 = 1;
+			end
+
+			if(erasebox9  == 1 && (isBomb2  == 1 ^ isBomb4  == 1))
+			begin
+			caution3 = 1;
+			end
+			if(erasebox9  == 1 && (isBomb2 == 1 && isBomb4  == 1))
+			begin
+			warning3 = 1;
+			end
+
+			if(erasebox3  == 1 && (isBomb5  == 1 ^ isBomb10  == 1))
+			begin
+			caution4 = 1;
+			end
+			if(erasebox3  == 1 && (isBomb5  == 1 && isBomb10  == 1))
+			begin
+			warning4 = 1;
+			end
+
+			if(erasebox5  == 1 && (isBomb3  == 1 ^ isBomb10  == 1))
+			begin
+			caution4 = 1;
+			end
+			if(erasebox5  == 1 && (isBomb3  == 1 && isBomb10  == 1))
+			begin
+			warning4 = 1;
+			end
+
+			if(erasebox10  == 1 && (isBomb5  == 1 ^ isBomb3  == 1))
+			begin
+			caution4 = 1;
+			end
+			if(erasebox10  == 1 && (isBomb5  == 1 && isBomb3  == 1))
+			begin
+			warning4 = 1;
+			end
+
+			if(erasebox4  == 1 && (isBomb6  == 1 ^ isBomb11  == 1))
+			begin
+			caution5 = 1;
+			end
+			if(erasebox4  == 1 && (isBomb6  == 1 && isBomb11  == 1))
+			begin
+			warning5 = 1;
+			end
+
+			if(erasebox6  == 1 && (isBomb4  == 1 ^ isBomb11  == 1))
+			begin
+			caution5 = 1;
+			end
+			if(erasebox6  == 1 && (isBomb4  == 1 && isBomb11  == 1))
+			begin
+			warning5 = 1;
+			end
+
+			if(erasebox11  == 1 && (isBomb6  == 1 ^ isBomb4  == 1))
+			begin
+			caution5 = 1;
+			end
+			if(erasebox11  == 1 && (isBomb6  == 1 && isBomb4  == 1))
+			begin
+			warning5 = 1;
+			end
+
+			if(erasebox5  == 1 && (isBomb7  == 1 ^ isBomb12  == 1))
+			begin
+			caution6 = 1;
+			end
+			if(erasebox5  == 1 && (isBomb7  == 1 && isBomb12  == 1))
+			begin
+			warning6 = 1;
+			end
+
+			if(erasebox7  == 1 && (isBomb5  == 1 ^ isBomb12  == 1))
+			begin
+			caution6 = 1;
+			end
+			if(erasebox7  == 1 && (isBomb5  == 1 && isBomb12  == 1))
+			begin
+			warning6 = 1;
+			end
+
+			if(erasebox12  == 1 && (isBomb7  == 1 ^ isBomb5  == 1))
+			begin
+			caution6 = 1;
+			end
+			if(erasebox12  == 1 && (isBomb7  == 1 && isBomb5  == 1))
+			begin
+			warning6 = 1;
+			end
+
+			// end of top row
+
+			if(erasebox32  == 1 && (isBomb27  == 1 ^ isBomb34  == 1))
+			begin
+			caution33 = 1;
+			end
+			if(erasebox32  == 1 && (isBomb27  == 1 && isBomb34  == 1))
+			begin
+			warning33 = 1;
+			end
+
+			if(erasebox27  == 1 && (isBomb32  == 1 ^ isBomb34  == 1))
+			begin
+			caution33 = 1;
+			end
+			if(erasebox27  == 1 && (isBomb32  == 1 && isBomb34  == 1))
+			begin
+			warning33 = 1;
+			end
+
+			if(erasebox34  == 1 && (isBomb32  == 1 ^ isBomb27  == 1))
+			begin
+			caution33 = 1;
+			end
+			if(erasebox34  == 1 && (isBomb32 == 1 && isBomb27  == 1))
+			begin
+			warning33 = 1;
+			end
+
+			if(erasebox33  == 1 && (isBomb35  == 1 ^ isBomb28  == 1))
+			begin
+			caution34 = 1;
+			end
+			if(erasebox33  == 1 && (isBomb35  == 1 && isBomb28  == 1))
+			begin
+			warning34 = 1;
+			end
+
+			if(erasebox35  == 1 && (isBomb33  == 1 ^ isBomb28  == 1))
+			begin
+			caution34 = 1;
+			end
+			if(erasebox35  == 1 && (isBomb33  == 1 && isBomb28  == 1))
+			begin
+			warning34 = 1;
+			end
+
+			if(erasebox28  == 1 && (isBomb35  == 1 ^ isBomb33  == 1))
+			begin
+			caution34 = 1;
+			end
+			if(erasebox28  == 1 && (isBomb35  == 1 && isBomb33  == 1))
+			begin
+			warning34 = 1;
+			end
+
+			if(erasebox34  == 1 && (isBomb36  == 1 ^ isBomb29  == 1))
+			begin
+			caution35 = 1;
+			end
+			if(erasebox4  == 1 && (isBomb6  == 1 && isBomb29  == 1))
+			begin
+			warning35 = 1;
+			end
+
+			if(erasebox36  == 1 && (isBomb34  == 1 ^ isBomb29  == 1))
+			begin
+			caution35 = 1;
+			end
+			if(erasebox36  == 1 && (isBomb34  == 1 && isBomb29  == 1))
+			begin
+			warning35 = 1;
+			end
+
+			if(erasebox29  == 1 && (isBomb36  == 1 ^ isBomb34  == 1))
+			begin
+			caution35 = 1;
+			end
+			if(erasebox29  == 1 && (isBomb36  == 1 && isBomb34  == 1))
+			begin
+			warning35 = 1;
+			end
+
+			if(erasebox35  == 1 && (isBomb37  == 1 ^ isBomb30  == 1))
+			begin
+			caution36 = 1;
+			end
+			if(erasebox35  == 1 && (isBomb37  == 1 && isBomb30  == 1))
+			begin
+			warning36 = 1;
+			end
+
+			if(erasebox37  == 1 && (isBomb35  == 1 ^ isBomb30  == 1))
+			begin
+			caution36 = 1;
+			end
+			if(erasebox37  == 1 && (isBomb35  == 1 && isBomb30  == 1))
+			begin
+			warning36 = 1;
+			end
+
+			if(erasebox30  == 1 && (isBomb35  == 1 ^ isBomb37  == 1))
+			begin
+			caution36 = 1;
+			end
+			if(erasebox30  == 1 && (isBomb35  == 1 && isBomb37  == 1))
+			begin
+			warning36 = 1;
+			end
+
+			//end of bottom row
+
+			if(erasebox2  == 1 && (isBomb9  == 1 ^ isBomb14  == 1))
+			begin
+			caution8 = 1;
+			end
+			if(erasebox2  == 1 && (isBomb9  == 1 && isBomb14  == 1))
+			begin
+			warning8 = 1;
+			end
+
+			if(erasebox9  == 1 && (isBomb2  == 1 ^ isBomb14  == 1))
+			begin
+			caution8 = 1;
+			end
+			if(erasebox9  == 1 && (isBomb2  == 1 && isBomb14  == 1))
+			begin
+			warning8 = 1;
+			end
+
+			if(erasebox14  == 1 && (isBomb2  == 1 ^ isBomb9  == 1))
+			begin
+			caution8 = 1;
+			end
+			if(erasebox14  == 1 && (isBomb2 == 1 && isBomb9  == 1))
+			begin
+			warning8 = 1;
+			end
+
+			if(erasebox8  == 1 && (isBomb15  == 1 ^ isBomb20  == 1))
+			begin
+			caution14 = 1;
+			end
+			if(erasebox8  == 1 && (isBomb15  == 1 && isBomb20  == 1))
+			begin
+			warning14 = 1;
+			end
+
+			if(erasebox15  == 1 && (isBomb8  == 1 ^ isBomb20  == 1))
+			begin
+			caution14 = 1;
+			end
+			if(erasebox15  == 1 && (isBomb8  == 1 && isBomb20  == 1))
+			begin
+			warning14 = 1;
+			end
+
+			if(erasebox20  == 1 && (isBomb15  == 1 ^ isBomb8  == 1))
+			begin
+			caution14 = 1;
+			end
+			if(erasebox20  == 1 && (isBomb15  == 1 && isBomb8  == 1))
+			begin
+			warning14 = 1;
+			end
+
+			if(erasebox14  == 1 && (isBomb26  == 1 ^ isBomb21  == 1))
+			begin
+			caution20 = 1;
+			end
+			if(erasebox14  == 1 && (isBomb26  == 1 && isBomb21  == 1))
+			begin
+			warning20 = 1;
+			end
+
+			if(erasebox26  == 1 && (isBomb14  == 1 ^ isBomb21  == 1))
+			begin
+			caution20 = 1;
+			end
+			if(erasebox26  == 1 && (isBomb14  == 1 && isBomb21  == 1))
+			begin
+			warning20 = 1;
+			end
+
+			if(erasebox21  == 1 && (isBomb26  == 1 ^ isBomb14  == 1))
+			begin
+			caution20 = 1;
+			end
+			if(erasebox21  == 1 && (isBomb26  == 1 && isBomb14  == 1))
+			begin
+			warning20 = 1;
+			end
+
+			if(erasebox20  == 1 && (isBomb27  == 1 ^ isBomb32  == 1))
+			begin
+			caution26 = 1;
+			end
+			if(erasebox20  == 1 && (isBomb27  == 1 && isBomb32  == 1))
+			begin
+			warning26 = 1;
+			end
+
+			if(erasebox27  == 1 && (isBomb32  == 1 ^ isBomb20  == 1))
+			begin
+			caution26 = 1;
+			end
+			if(erasebox27  == 1 && (isBomb32  == 1 && isBomb20  == 1))
+			begin
+			warning26 = 1;
+			end
+
+			if(erasebox32  == 1 && (isBomb27  == 1 ^ isBomb20  == 1))
+			begin
+			caution26 = 1;
+			end
+			if(erasebox32  == 1 && (isBomb27  == 1 && isBomb20  == 1))
+			begin
+			warning26 = 1;
+			end
+
+			//end of left row
+
+			if(erasebox12  == 1 && (isBomb7  == 1 ^ isBomb19  == 1))
+			begin
+			caution13 = 1;
+			end
+			if(erasebox12  == 1 && (isBomb7  == 1 && isBomb19  == 1))
+			begin
+			warning13 = 1;
+			end
+
+			if(erasebox7  == 1 && (isBomb12  == 1 ^ isBomb19  == 1))
+			begin
+			caution13 = 1;
+			end
+			if(erasebox7  == 1 && (isBomb12  == 1 && isBomb19  == 1))
+			begin
+			warning13 = 1;
+			end
+
+			if(erasebox19  == 1 && (isBomb12  == 1 ^ isBomb7  == 1))
+			begin
+			caution13 = 1;
+			end
+			if(erasebox19  == 1 && (isBomb12 == 1 && isBomb7  == 1))
+			begin
+			warning13 = 1;
+			end
+
+			if(erasebox13  == 1 && (isBomb25  == 1 ^ isBomb18  == 1))
+			begin
+			caution19 = 1;
+			end
+			if(erasebox13  == 1 && (isBomb25  == 1 && isBomb18  == 1))
+			begin
+			warning19 = 1;
+			end
+
+			if(erasebox25  == 1 && (isBomb13  == 1 ^ isBomb18  == 1))
+			begin
+			caution19 = 1;
+			end
+			if(erasebox25  == 1 && (isBomb13  == 1 && isBomb18  == 1))
+			begin
+			warning19 = 1;
+			end
+
+			if(erasebox18  == 1 && (isBomb25  == 1 ^ isBomb13  == 1))
+			begin
+			caution19 = 1;
+			end
+			if(erasebox18  == 1 && (isBomb25  == 1 && isBomb13  == 1))
+			begin
+			warning19 = 1;
+			end
+
+			if(erasebox31  == 1 && (isBomb26  == 1 ^ isBomb19  == 1))
+			begin
+			caution25 = 1;
+			end
+			if(erasebox31  == 1 && (isBomb26  == 1 && isBomb19  == 1))
+			begin
+			warning25 = 1;
+			end
+
+			if(erasebox24  == 1 && (isBomb31  == 1 ^ isBomb19  == 1))
+			begin
+			caution25 = 1;
+			end
+			if(erasebox24  == 1 && (isBomb31  == 1 && isBomb19  == 1))
+			begin
+			warning25 = 1;
+			end
+
+			if(erasebox19  == 1 && (isBomb26  == 1 ^ isBomb31  == 1))
+			begin
+			caution25 = 1;
+			end
+			if(erasebox19  == 1 && (isBomb26  == 1 && isBomb14  == 1))
+			begin
+			warning25 = 1;
+			end
+
+			if(erasebox25  == 1 && (isBomb37  == 1 ^ isBomb29  == 1))
+			begin
+			caution31 = 1;
+			end
+			if(erasebox25  == 1 && (isBomb37  == 1 && isBomb29  == 1))
+			begin
+			warning31 = 1;
+			end
+
+			if(erasebox37  == 1 && (isBomb25  == 1 ^ isBomb29  == 1))
+			begin
+			caution31 = 1;
+			end
+			if(erasebox37  == 1 && (isBomb25  == 1 && isBomb29  == 1))
+			begin
+			warning31 = 1;
+			end
+
+			if(erasebox29  == 1 && (isBomb25  == 1 ^ isBomb37  == 1))
+			begin
+			caution31 = 1;
+			end
+			if(erasebox29  == 1 && (isBomb25  == 1 && isBomb37  == 1))
+			begin
+			warning31 = 1;
+			end
+			//end of right row
+
+			if(erasebox30  == 1 && (isBomb37  == 1 ^ isBomb35  == 1))
+			begin
+			caution36 = 1;
+			end
+			if(erasebox30  == 1 && (isBomb37  == 1 && isBomb35  == 1))
+			begin
+			warning36 = 1;
+			end
+
+			if(erasebox6  == 1 && (isBomb13  == 1))
+			begin
+			caution7 = 1;
+			end
+			if(erasebox13  == 1 && (isBomb6 == 1))
+			begin
+			caution7 = 1;
+			end
+
+			if(erasebox3  == 1 && (isBomb8  == 1))
+			begin
+			caution2 = 1;
+			end
+			if(erasebox8  == 1 && (isBomb3 == 1))
+			begin
+			caution2 = 1;
+			end
+
+			if(erasebox26  == 1 && (isBomb33  == 1))
+			begin
+			caution32 = 1;
+			end
+			if(erasebox33  == 1 && (isBomb26 == 1))
+			begin
+			caution32 = 1;
+			end
+
+			if(erasebox32  == 1 && (isBomb36  == 1))
+			begin
+			caution37 = 1;
+			end
+			if(erasebox36  == 1 && (isBomb32 == 1))
+			begin
+			caution37 = 1;
+			end
+
+			//end of corners			 
+		end //end of the always BLOCK
+//END OF GIVING SQUARES WARNINGS AND CAUTIONS	
 		
-		if(object38X >= 31'd588 && object38X <= 31'd738 - 31'd100 && object38Y <= 31'd166 -31'd100 && object38Y >= 31'd000 && select == 1'b1) 
-		begin
-			erasebox4 = 1;
-	   end
-		if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd166 -31'd100 && object38Y >= 31'd000 && select == 1'b1 && isBomb4 == 1'b1) 
-		begin
-			bombAT4 = 1;
-	   end
-		
-		if(object38X >= 31'd754 && object38X <= 31'd904 - 31'd100 && object38Y <= 31'd166 -31'd100 && object38Y >= 31'd000 && select == 1'b1) 
-		begin
-			erasebox5 = 1;
-	   end
-		if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd166 -31'd100 && object38Y >= 31'd000 && select == 1'b1 && isBomb5 == 1'b1) 
-		begin
-			bombAT5 = 1;
-	   end
-		
-		if(object38X >= 31'd920 && object38X <= 31'd1070 - 31'd100 && object38Y <= 31'd166 -31'd100 && object38Y >= 31'd000 && select == 1'b1) 
-		begin
-			erasebox6 = 1;
-	   end
-		if(object38X >= 31'd1086 && object38X <= 31'd1246 - 31'd100 && object38Y <= 31'd166 -31'd100 && object38Y >= 31'd000 && select == 1'b1) 
-		begin
-			erasebox7 = 1;
-	   end
-			*/
-	end
-//gameReg ccbox1Reg(ccbox1, enablebox1, enTest, stay1);
-	
-
-				
- // MOVEMENT OF THE SELECTOR BLOck
+// MOVEMENT OF THE SELECTOR BLOck
 	reg [19:0]count;	
-//this moves our selector block  
-	always@(posedge clk)
-	begin
-		count <= count + 1;
-		if(count==833334 && button1==1'b0)// this has to be like this
-		begin
-			if(object38X >= 10) //restrictions to movement
+	//this moves our selector block  
+		always@(posedge clk)
 			begin
-				object38X=object38X-32'd10;
+				count <= count + 1;
+				if(count==833334 && button1==1'b0)// this has to be like this
+					begin
+						if(object38X >= 10) //restrictions to movement
+							begin
+								object38X=object38X-32'd10;
+							end
+					end
+				if(count==833334 && button2==1'b0)
+					begin
+						if(object38Y >= 10)
+						begin
+							object38Y=object38Y-32'd10;
+						end
+					end
+				if(count==833334 && button3==1'b0)
+					begin
+						if(object38Y <= 914)
+						begin
+							object38Y=object38Y+32'd10;
+						end
+					end
+				if(count==833334 && button4==1'b0)
+					begin
+						if(object38X <= 1170)
+						begin
+							object38X=object38X+32'd10; 
+						end
+					end
+				else
+					begin	
+					object38X = object38X;
+				end
 			end
-		end
-		if(count==833334 && button2==1'b0)
-		begin
-			if(object38Y >= 10)
-			begin
-				object38Y=object38Y-32'd10;
-			end
-		end
-		if(count==833334 && button3==1'b0)
-		begin
-			if(object38Y <= 914)
-			begin
-				object38Y=object38Y+32'd10;
-			end
-		end
-		if(count==833334 && button4==1'b0)
-		begin
-			if(object38X <= 1170)
-			begin
-				object38X=object38X+32'd10; 
-			end
-		end
-		else
-		begin
-		 object38X = object38X;
-		end
-	end
-
+//END OF MOVEMENT BLOCK
 
 //======Borrowed Code======//
 //==========DO NOT EDIT BELOW==========//
@@ -1026,499 +2058,49 @@ begin
 		box1 = 1'b0;		box2 = 1'b0;		box3 = 1'b0;		box4 = 1'b0;		box5 = 1'b0;		box6 = 1'b0;		box7 = 1'b0;		box8 = 1'b0;		box9 = 1'b0;		box10 = 1'b1;		box11 = 1'b0;		box12 = 1'b0;		box13 = 1'b0;		box14 = 1'b0;		box15 = 1'b0;		box16 = 1'b0;		box17 = 1'b0;		box18 = 1'b0;		box19 = 1'b0;		box20 = 1'b0;		box21 = 1'b0;		box22 = 1'b0;		box23 = 1'b0;		box24 = 1'b0;		box25 = 1'b0;		box26 = 1'b0;		box27 = 1'b0;		box28 = 1'b0;		box29 = 1'b0;		box30 = 1'b0;		box31 = 1'b0;		box32 = 1'b0;		box33 = 1'b0;		box34 = 1'b0;		box35 = 1'b0;		box36 = 1'b0;		box37 = 1'b0;
 		end
 		else if(Object11) begin 
-		box1 = 1'b0;
-		box2 = 1'b0;
-		box3 = 1'b0;
-		box4 = 1'b0;
-		box5 = 1'b0;
-		box6 = 1'b0;
-		box7 = 1'b0;
-		box8 = 1'b0;
-		box9 = 1'b0;
-		box10 = 1'b0;
-		box11 = 1'b1;
-		box12 = 1'b0;
-		box13 = 1'b0;
-		box14 = 1'b0;
-		box15 = 1'b0;
-		box16 = 1'b0;
-		box17 = 1'b0;
-		box18 = 1'b0;
-		box19 = 1'b0;
-		box20 = 1'b0;
-		box21 = 1'b0;
-		box22 = 1'b0;
-		box23 = 1'b0;
-		box24 = 1'b0;
-		box25 = 1'b0;
-		box26 = 1'b0;
-		box27 = 1'b0;
-		box28 = 1'b0;
-		box29 = 1'b0;
-		box30 = 1'b0;
-		box31 = 1'b0;
-		box32 = 1'b0;
-		box33 = 1'b0;
-		box34 = 1'b0;
-		box35 = 1'b0;
-		box36 = 1'b0;
-		box37 = 1'b0;
+		box1 = 1'b0;		box2 = 1'b0;		box3 = 1'b0;		box4 = 1'b0;		box5 = 1'b0;		box6 = 1'b0;		box7 = 1'b0;		box8 = 1'b0;		box9 = 1'b0;		box10 = 1'b0;		box11 = 1'b1;		box12 = 1'b0;		box13 = 1'b0;		box14 = 1'b0;		box15 = 1'b0;		box16 = 1'b0;		box17 = 1'b0;		box18 = 1'b0;		box19 = 1'b0;		box20 = 1'b0;		box21 = 1'b0;		box22 = 1'b0;		box23 = 1'b0;		box24 = 1'b0;		box25 = 1'b0;		box26 = 1'b0;		box27 = 1'b0;		box28 = 1'b0;		box29 = 1'b0;		box30 = 1'b0;		box31 = 1'b0;		box32 = 1'b0;		box33 = 1'b0;		box34 = 1'b0;		box35 = 1'b0;		box36 = 1'b0;		box37 = 1'b0;
 		end
 		else if(Object12) begin 
-		box1 = 1'b0;
-		box2 = 1'b0;
-		box3 = 1'b0;
-		box4 = 1'b0;
-		box5 = 1'b0;
-		box6 = 1'b0;
-		box7 = 1'b0;
-		box8 = 1'b0;
-		box9 = 1'b0;
-		box10 = 1'b0;
-		box11 = 1'b0;
-		box12 = 1'b1;
-		box13 = 1'b0;
-		box14 = 1'b0;
-		box15 = 1'b0;
-		box16 = 1'b0;
-		box17 = 1'b0;
-		box18 = 1'b0;
-		box19 = 1'b0;		box20 = 1'b0;	box21 = 1'b0;		box22 = 1'b0;		box23 = 1'b0;		box24 = 1'b0;		box25 = 1'b0;		box26 = 1'b0;		box27 = 1'b0;		box28 = 1'b0;		box29 = 1'b0;		box30 = 1'b0;		box31 = 1'b0;		box32 = 1'b0;		box33 = 1'b0;		box34 = 1'b0;		box35 = 1'b0;		box36 = 1'b0;box37 = 1'b0;
+		box1 = 1'b0;		box2 = 1'b0;		box3 = 1'b0;		box4 = 1'b0;		box5 = 1'b0;		box6 = 1'b0;		box7 = 1'b0;		box8 = 1'b0;		box9 = 1'b0;		box10 = 1'b0;		box11 = 1'b0;		box12 = 1'b1;		box13 = 1'b0;		box14 = 1'b0;		box15 = 1'b0;		box16 = 1'b0;		box17 = 1'b0;		box18 = 1'b0;box19 = 1'b0;		box20 = 1'b0;	box21 = 1'b0;		box22 = 1'b0;		box23 = 1'b0;		box24 = 1'b0;		box25 = 1'b0;		box26 = 1'b0;		box27 = 1'b0;		box28 = 1'b0;		box29 = 1'b0;		box30 = 1'b0;		box31 = 1'b0;		box32 = 1'b0;		box33 = 1'b0;		box34 = 1'b0;		box35 = 1'b0;		box36 = 1'b0;box37 = 1'b0;
 		end
 		else if(Object13) begin 
-		box1 = 1'b0;
-		box2 = 1'b0;
-		box3 = 1'b0;
-		box4 = 1'b0;
-		box5 = 1'b0;
-		box6 = 1'b0;
-		box7 = 1'b0;
-		box8 = 1'b0;
-		box9 = 1'b0;
-		box10 = 1'b0;
-		box11 = 1'b0;
-		box12 = 1'b0;
-		box13 = 1'b1;
-		box14 = 1'b0;
-		box15 = 1'b0;
-		box16 = 1'b0;
-		box17 = 1'b0;
-		box18 = 1'b0;
-		box19 = 1'b0;
-		box20 = 1'b0;
-		box21 = 1'b0;
-		box22 = 1'b0;
-		box23 = 1'b0;
-		box24 = 1'b0;
-		box25 = 1'b0;
-		box26 = 1'b0;
-		box27 = 1'b0;
-		box28 = 1'b0;
-		box29 = 1'b0;
-		box30 = 1'b0;
-		box31 = 1'b0;
-		box32 = 1'b0;
-		box33 = 1'b0;
-		box34 = 1'b0;
-		box35 = 1'b0;
-		box36 = 1'b0;
-		box37 = 1'b0;
+		box1 = 1'b0;		box2 = 1'b0;		box3 = 1'b0;		box4 = 1'b0;		box5 = 1'b0;		box6 = 1'b0;		box7 = 1'b0;		box8 = 1'b0;		box9 = 1'b0;		box10 = 1'b0;		box11 = 1'b0;		box12 = 1'b0;		box13 = 1'b1;		box14 = 1'b0;		box15 = 1'b0;		box16 = 1'b0;		box17 = 1'b0;		box18 = 1'b0;		box19 = 1'b0;		box20 = 1'b0;		box21 = 1'b0;		box22 = 1'b0;		box23 = 1'b0;		box24 = 1'b0;		box25 = 1'b0;		box26 = 1'b0;		box27 = 1'b0;		box28 = 1'b0;		box29 = 1'b0;		box30 = 1'b0;		box31 = 1'b0;		box32 = 1'b0;		box33 = 1'b0;		box34 = 1'b0;		box35 = 1'b0;		box36 = 1'b0;		box37 = 1'b0;
 		end
 		else if(Object14) begin 
 		box1 = 1'b0;		box2 = 1'b0;	box3 = 1'b0;		box4 = 1'b0;	box5 = 1'b0;		box6 = 1'b0;		box7 = 1'b0;		box8 = 1'b0;box9 = 1'b0;		box10 = 1'b0;		box11 = 1'b0;		box12 = 1'b0;box13 = 1'b0;		box14 = 1'b1;		box15 = 1'b0;		box16 = 1'b0;box17 = 1'b0;		box18 = 1'b0;		box19 = 1'b0;		box20 = 1'b0;	box21 = 1'b0;		box22 = 1'b0;		box23 = 1'b0;		box24 = 1'b0;	box25 = 1'b0;		box26 = 1'b0;		box27 = 1'b0;		box28 = 1'b0;		box29 = 1'b0;box30 = 1'b0;		box31 = 1'b0;		box32 = 1'b0;		box33 = 1'b0;		box34 = 1'b0;		box35 = 1'b0;		box36 = 1'b0;	box37 = 1'b0;
 	  end
 		else if(Object15) begin 
-		box1 = 1'b0;
-		box2 = 1'b0;
-		box3 = 1'b0;
-		box4 = 1'b0;
-		box5 = 1'b0;
-		box6 = 1'b0;
-		box7 = 1'b0;
-		box8 = 1'b0;
-		box9 = 1'b0;
-		box10 = 1'b0;
-		box11 = 1'b0;
-		box12 = 1'b0;
-		box13 = 1'b0;
-		box14 = 1'b0;
-		box15 = 1'b1;
-		box16 = 1'b0;
-		box17 = 1'b0;
-		box18 = 1'b0;
-		box19 = 1'b0;
-		box20 = 1'b0;
-		box21 = 1'b0;
-		box22 = 1'b0;
-		box23 = 1'b0;
-		box24 = 1'b0;
-		box25 = 1'b0;
-		box26 = 1'b0;
-		box27 = 1'b0;
-		box28 = 1'b0;
-		box29 = 1'b0;
-		box30 = 1'b0;
-		box31 = 1'b0;
-		box32 = 1'b0;
-		box33 = 1'b0;
-		box34 = 1'b0;
-		box35 = 1'b0;
-		box36 = 1'b0;
-		box37 = 1'b0;
+		box1 = 1'b0;		box2 = 1'b0;		box3 = 1'b0;		box4 = 1'b0;		box5 = 1'b0;		box6 = 1'b0;		box7 = 1'b0;		box8 = 1'b0;		box9 = 1'b0;		box10 = 1'b0;		box11 = 1'b0;		box12 = 1'b0;		box13 = 1'b0;		box14 = 1'b0;		box15 = 1'b1;		box16 = 1'b0;		box17 = 1'b0;		box18 = 1'b0;		box19 = 1'b0;		box20 = 1'b0;		box21 = 1'b0;		box22 = 1'b0;		box23 = 1'b0;		box24 = 1'b0;		box25 = 1'b0;		box26 = 1'b0;		box27 = 1'b0;	box28 = 1'b0;		box29 = 1'b0;		box30 = 1'b0;		box31 = 1'b0;		box32 = 1'b0;		box33 = 1'b0;	box34 = 1'b0;		box35 = 1'b0;		box36 = 1'b0;		box37 = 1'b0;
 		end
 		else if(Object16) begin 
-		box1 = 1'b0;
-		box2 = 1'b0;
-		box3 = 1'b0;
-		box4 = 1'b0;
-		box5 = 1'b0;
-		box6 = 1'b0;
-		box7 = 1'b0;
-		box8 = 1'b0;
-		box9 = 1'b0;
-		box10 = 1'b0;
-		box11 = 1'b0;
-		box12 = 1'b0;
-		box13 = 1'b0;
-		box14 = 1'b0;
-		box15 = 1'b0;
-		box16 = 1'b1;
-		box17 = 1'b0;
-		box18 = 1'b0;
-		box19 = 1'b0;
-		box20 = 1'b0;
-		box21 = 1'b0;
-		box22 = 1'b0;
-		box23 = 1'b0;
-		box24 = 1'b0;
-		box25 = 1'b0;
-		box26 = 1'b0;
-		box27 = 1'b0;
-		box28 = 1'b0;
-		box29 = 1'b0;
-		box30 = 1'b0;
-		box31 = 1'b0;
-		box32 = 1'b0;
-		box33 = 1'b0;
-		box34 = 1'b0;
-		box35 = 1'b0;
-		box36 = 1'b0;
-		box37 = 1'b0;
+		box1 = 1'b0;		box2 = 1'b0;		box3 = 1'b0;		box4 = 1'b0;		box5 = 1'b0;		box6 = 1'b0;		box7 = 1'b0;		box8 = 1'b0;		box9 = 1'b0;		box10 = 1'b0;		box11 = 1'b0;		box12 = 1'b0;		box13 = 1'b0;		box14 = 1'b0;		box15 = 1'b0;		box16 = 1'b1;		box17 = 1'b0;		box18 = 1'b0;		box19 = 1'b0;		box20 = 1'b0;		box21 = 1'b0;		box22 = 1'b0;		box23 = 1'b0;		box24 = 1'b0;		box25 = 1'b0;		box26 = 1'b0;		box27 = 1'b0;		box28 = 1'b0;		box29 = 1'b0;		box30 = 1'b0;		box31 = 1'b0;		box32 = 1'b0;		box33 = 1'b0;		box34 = 1'b0;		box35 = 1'b0;		box36 = 1'b0;	box37 = 1'b0;
 		end
 		else if(Object17) begin 
-		box1 = 1'b0;
-		box2 = 1'b0;
-		box3 = 1'b0;
-		box4 = 1'b0;
-		box5 = 1'b0;
-		box6 = 1'b0;
-		box7 = 1'b0;
-		box8 = 1'b0;
-		box9 = 1'b0;
-		box10 = 1'b0;
-		box11 = 1'b0;
-		box12 = 1'b0;
-		box13 = 1'b0;
-		box14 = 1'b0;
-		box15 = 1'b0;
-		box16 = 1'b0;
-		box17 = 1'b1;
-		box18 = 1'b0;
-		box19 = 1'b0;
-		box20 = 1'b0;
-		box21 = 1'b0;
-		box22 = 1'b0;
-		box23 = 1'b0;
-		box24 = 1'b0;
-		box25 = 1'b0;
-		box26 = 1'b0;
-		box27 = 1'b0;
-		box28 = 1'b0;
-		box29 = 1'b0;
-		box30 = 1'b0;
-		box31 = 1'b0;
-		box32 = 1'b0;
-		box33 = 1'b0;
-		box34 = 1'b0;
-		box35 = 1'b0;
-		box36 = 1'b0;
-		box37 = 1'b0;
+		box1 = 1'b0;		box2 = 1'b0;		box3 = 1'b0;		box4 = 1'b0;		box5 = 1'b0;		box6 = 1'b0;		box7 = 1'b0;		box8 = 1'b0;		box9 = 1'b0;		box10 = 1'b0;		box11 = 1'b0;		box12 = 1'b0;		box13 = 1'b0;		box14 = 1'b0;		box15 = 1'b0;		box16 = 1'b0;		box17 = 1'b1;		box18 = 1'b0;		box19 = 1'b0;		box20 = 1'b0;		box21 = 1'b0;		box22 = 1'b0;		box23 = 1'b0;		box24 = 1'b0;		box25 = 1'b0;		box26 = 1'b0;		box27 = 1'b0;		box28 = 1'b0;		box29 = 1'b0;		box30 = 1'b0;		box31 = 1'b0;		box32 = 1'b0;		box33 = 1'b0;		box34 = 1'b0;		box35 = 1'b0;		box36 = 1'b0;	box37 = 1'b0;
 		end
 		else if(Object18) begin 
 		box1 = 1'b0;		box2 = 1'b0; box3 = 1'b0;		box4 = 1'b0;box5 = 1'b0;		box6 = 1'b0; box7 = 1'b0;		box8 = 1'b0;		box9 = 1'b0;		box10 = 1'b0;		box11 = 1'b0;		box12 = 1'b0;		box13 = 1'b0;		box14 = 1'b0;		box15 = 1'b0;		box16 = 1'b0;		box17 = 1'b0;		box18 = 1'b1;		box19 = 1'b0;		box20 = 1'b0;		box21 = 1'b0;		box22 = 1'b0;		box23 = 1'b0;		box24 = 1'b0;		box25 = 1'b0;		box26 = 1'b0;		box27 = 1'b0;		box28 = 1'b0;		box29 = 1'b0;		box30 = 1'b0;		box31 = 1'b0;		box32 = 1'b0;		box33 = 1'b0;		box34 = 1'b0;		box35 = 1'b0;box36 = 1'b0;box37 = 1'b0;
 		end
 		else if(Object19) begin 
-		box1 = 1'b0;
-		box2 = 1'b0;
-		box3 = 1'b0;
-		box4 = 1'b0;
-		box5 = 1'b0;
-		box6 = 1'b0;
-		box7 = 1'b0;
-		box8 = 1'b0;
-		box9 = 1'b0;
-		box10 = 1'b0;
-		box11 = 1'b0;
-		box12 = 1'b0;
-		box13 = 1'b0;
-		box14 = 1'b0;
-		box15 = 1'b0;
-		box16 = 1'b0;
-		box17 = 1'b0;
-		box18 = 1'b0;
-		box19 = 1'b1;
-		box20 = 1'b0;
-		box21 = 1'b0;
-		box22 = 1'b0;
-		box23 = 1'b0;
-		box24 = 1'b0;
-		box25 = 1'b0;
-		box26 = 1'b0;
-		box27 = 1'b0;
-		box28 = 1'b0;
-		box29 = 1'b0;
-		box30 = 1'b0;
-		box31 = 1'b0;
-		box32 = 1'b0;
-		box33 = 1'b0;
-		box34 = 1'b0;
-		box35 = 1'b0;
-		box36 = 1'b0;
-		box37 = 1'b0;
+		box1 = 1'b0;		box2 = 1'b0;		box3 = 1'b0;		box4 = 1'b0;		box5 = 1'b0;		box6 = 1'b0;		box7 = 1'b0;		box8 = 1'b0;		box9 = 1'b0;		box10 = 1'b0;		box11 = 1'b0;		box12 = 1'b0;		box13 = 1'b0;		box14 = 1'b0;	box15 = 1'b0;		box16 = 1'b0;	box17 = 1'b0;		box18 = 1'b0;		box19 = 1'b1;		box20 = 1'b0;		box21 = 1'b0;		box22 = 1'b0;		box23 = 1'b0;		box24 = 1'b0;		box25 = 1'b0;		box26 = 1'b0;		box27 = 1'b0;		box28 = 1'b0;		box29 = 1'b0;		box30 = 1'b0;		box31 = 1'b0;		box32 = 1'b0;	box33 = 1'b0;	box34 = 1'b0;		box35 = 1'b0;		box36 = 1'b0;		box37 = 1'b0;
 		end
 		else if(Object20) begin 
-		box1 = 1'b0;
-		box2 = 1'b0;
-		box3 = 1'b0;
-		box4 = 1'b0;
-		box5 = 1'b0;
-		box6 = 1'b0;
-		box7 = 1'b0;
-		box8 = 1'b0;
-		box9 = 1'b0;
-		box10 = 1'b0;
-		box11 = 1'b0;
-		box12 = 1'b0;
-		box13 = 1'b0;
-		box14 = 1'b0;
-		box15 = 1'b0;
-		box16 = 1'b0;
-		box17 = 1'b0;
-		box18 = 1'b0;
-		box19 = 1'b0;
-		box20 = 1'b1;
-		box21 = 1'b0;
-		box22 = 1'b0;
-		box23 = 1'b0;
-		box24 = 1'b0;
-		box25 = 1'b0;
-		box26 = 1'b0;
-		box27 = 1'b0;
-		box28 = 1'b0;
-		box29 = 1'b0;
-		box30 = 1'b0;
-		box31 = 1'b0;
-		box32 = 1'b0;
-		box33 = 1'b0;
-		box34 = 1'b0;
-		box35 = 1'b0;
-		box36 = 1'b0;
-		box37 = 1'b0;
+		box1 = 1'b0;	box2 = 1'b0;		box3 = 1'b0;		box4 = 1'b0;		box5 = 1'b0;		box6 = 1'b0;	box7 = 1'b0;		box8 = 1'b0;		box9 = 1'b0;		box10 = 1'b0;		box11 = 1'b0;		box12 = 1'b0;		box13 = 1'b0;		box14 = 1'b0;		box15 = 1'b0;		box16 = 1'b0;		box17 = 1'b0;		box18 = 1'b0;		box19 = 1'b0;		box20 = 1'b1;		box21 = 1'b0;		box22 = 1'b0;		box23 = 1'b0;		box24 = 1'b0;		box25 = 1'b0;		box26 = 1'b0;		box27 = 1'b0;		box28 = 1'b0;	box29 = 1'b0;		box30 = 1'b0;		box31 = 1'b0;		box32 = 1'b0;	box33 = 1'b0;		box34 = 1'b0;		box35 = 1'b0;		box36 = 1'b0;		box37 = 1'b0;
 		end
 		else if(Object21) begin 
-		box1 = 1'b0;
-		box2 = 1'b0;
-		box3 = 1'b0;
-		box4 = 1'b0;
-		box5 = 1'b0;
-		box6 = 1'b0;
-		box7 = 1'b0;
-		box8 = 1'b0;
-		box9 = 1'b0;
-		box10 = 1'b0;
-		box11 = 1'b0;
-		box12 = 1'b0;
-		box13 = 1'b0;
-		box14 = 1'b0;
-		box15 = 1'b0;
-		box16 = 1'b0;
-		box17 = 1'b0;
-		box18 = 1'b0;
-		box19 = 1'b0;
-		box20 = 1'b0;
-		box21 = 1'b1;
-		box22 = 1'b0;
-		box23 = 1'b0;
-		box24 = 1'b0;
-		box25 = 1'b0;
-		box26 = 1'b0;
-		box27 = 1'b0;
-		box28 = 1'b0;
-		box29 = 1'b0;
-		box30 = 1'b0;
-		box31 = 1'b0;
-		box32 = 1'b0;
-		box33 = 1'b0;
-		box34 = 1'b0;
-		box35 = 1'b0;
-		box36 = 1'b0;
-		box37 = 1'b0;
+		box1 = 1'b0;		box2 = 1'b0;		box3 = 1'b0;		box4 = 1'b0;		box5 = 1'b0;		box6 = 1'b0;		box7 = 1'b0;		box8 = 1'b0;		box9 = 1'b0;		box10 = 1'b0;		box11 = 1'b0;		box12 = 1'b0;		box13 = 1'b0;		box14 = 1'b0;		box15 = 1'b0;		box16 = 1'b0;		box17 = 1'b0;		box18 = 1'b0;		box19 = 1'b0;		box20 = 1'b0;		box21 = 1'b1;		box22 = 1'b0;		box23 = 1'b0;		box24 = 1'b0;		box25 = 1'b0;		box26 = 1'b0;		box27 = 1'b0;		box28 = 1'b0;		box29 = 1'b0;		box30 = 1'b0;		box31 = 1'b0;box32 = 1'b0;		box33 = 1'b0;box34 = 1'b0;		box35 = 1'b0;		box36 = 1'b0;		box37 = 1'b0;
 		end
 		else if(Object22) begin 
-		box1 = 1'b0;
-		box2 = 1'b0;
-		box3 = 1'b0;
-		box4 = 1'b0;
-		box5 = 1'b0;
-		box6 = 1'b0;
-		box7 = 1'b0;
-		box8 = 1'b0;
-		box9 = 1'b0;
-		box10 = 1'b0;
-		box11 = 1'b0;
-		box12 = 1'b0;
-		box13 = 1'b0;
-		box14 = 1'b0;
-		box15 = 1'b0;
-		box16 = 1'b0;
-		box17 = 1'b0;
-		box18 = 1'b0;
-		box19 = 1'b0;
-		box20 = 1'b0;
-		box21 = 1'b0;
-		box22 = 1'b1;
-		box23 = 1'b0;
-		box24 = 1'b0;
-		box25 = 1'b0;
-		box26 = 1'b0;
-		box27 = 1'b0;
-		box28 = 1'b0;
-		box29 = 1'b0;
-		box30 = 1'b0;
-		box31 = 1'b0;
-		box32 = 1'b0;
-		box33 = 1'b0;
-		box34 = 1'b0;
-		box35 = 1'b0;
-		box36 = 1'b0;
-		box37 = 1'b0;
+		box1 = 1'b0;		box2 = 1'b0;		box3 = 1'b0;		box4 = 1'b0;		box5 = 1'b0;		box6 = 1'b0;		box7 = 1'b0;		box8 = 1'b0;	box9 = 1'b0;		box10 = 1'b0;		box11 = 1'b0;		box12 = 1'b0;		box13 = 1'b0;		box14 = 1'b0;		box15 = 1'b0;	box16 = 1'b0;box17 = 1'b0;		box18 = 1'b0;		box19 = 1'b0;		box20 = 1'b0;		box21 = 1'b0;		box22 = 1'b1;		box23 = 1'b0;		box24 = 1'b0;		box25 = 1'b0;		box26 = 1'b0;		box27 = 1'b0;		box28 = 1'b0;		box29 = 1'b0;		box30 = 1'b0;		box31 = 1'b0;		box32 = 1'b0;		box33 = 1'b0;		box34 = 1'b0;		box35 = 1'b0;		box36 = 1'b0;		box37 = 1'b0;
 		end
 		else if(Object23) begin 
-		box1 = 1'b0;
-		box2 = 1'b0;
-		box3 = 1'b0;
-		box4 = 1'b0;
-		box5 = 1'b0;
-		box6 = 1'b0;
-		box7 = 1'b0;
-		box8 = 1'b0;
-		box9 = 1'b0;
-		box10 = 1'b0;
-		box11 = 1'b0;
-		box12 = 1'b0;
-		box13 = 1'b0;
-		box14 = 1'b0;
-		box15 = 1'b0;
-		box16 = 1'b0;
-		box17 = 1'b0;
-		box18 = 1'b0;
-		box19 = 1'b0;
-		box20 = 1'b0;
-		box21 = 1'b0;
-		box22 = 1'b0;
-		box23 = 1'b1;
-		box24 = 1'b0;
-		box25 = 1'b0;
-		box26 = 1'b0;
-		box27 = 1'b0;
-		box28 = 1'b0;
-		box29 = 1'b0;
-		box30 = 1'b0;
-		box31 = 1'b0;
-		box32 = 1'b0;
-		box33 = 1'b0;
-		box34 = 1'b0;
-		box35 = 1'b0;
-		box36 = 1'b0;
-		box37 = 1'b0;
+		box1 = 1'b0;		box2 = 1'b0;		box3 = 1'b0;		box4 = 1'b0;		box5 = 1'b0;		box6 = 1'b0;		box7 = 1'b0;box8 = 1'b0;		box9 = 1'b0;		box10 = 1'b0;		box11 = 1'b0;		box12 = 1'b0;		box13 = 1'b0;		box14 = 1'b0;		box15 = 1'b0;		box16 = 1'b0;		box17 = 1'b0;		box18 = 1'b0;		box19 = 1'b0;		box20 = 1'b0;		box21 = 1'b0;	box22 = 1'b0;		box23 = 1'b1;		box24 = 1'b0;		box25 = 1'b0;		box26 = 1'b0;		box27 = 1'b0;		box28 = 1'b0;		box29 = 1'b0;		box30 = 1'b0;		box31 = 1'b0;		box32 = 1'b0;		box33 = 1'b0;		box34 = 1'b0;		box35 = 1'b0;		box36 = 1'b0;		box37 = 1'b0;
 		end
 		else if(Object24) begin 
-		box1 = 1'b0;
-		box2 = 1'b0;
-		box3 = 1'b0;
-		box4 = 1'b0;
-		box5 = 1'b0;
-		box6 = 1'b0;
-		box7 = 1'b0;
-		box8 = 1'b0;
-		box9 = 1'b0;
-		box10 = 1'b0;
-		box11 = 1'b0;
-		box12 = 1'b0;
-		box13 = 1'b0;
-		box14 = 1'b0;
-		box15 = 1'b0;
-		box16 = 1'b0;
-		box17 = 1'b0;
-		box18 = 1'b0;
-		box19 = 1'b0;
-		box20 = 1'b0;
-		box21 = 1'b0;
-		box22 = 1'b0;
-		box23 = 1'b0;
-		box24 = 1'b1;
-		box25 = 1'b0;
-		box26 = 1'b0;
-		box27 = 1'b0;
-		box28 = 1'b0;
-		box29 = 1'b0;
-		box30 = 1'b0;
-		box31 = 1'b0;
-		box32 = 1'b0;
-		box33 = 1'b0;
-		box34 = 1'b0;
-		box35 = 1'b0;
-		box36 = 1'b0;
-		box37 = 1'b0;
+		box1 = 1'b0;		box2 = 1'b0;		box3 = 1'b0;		box4 = 1'b0;		box5 = 1'b0;		box6 = 1'b0;		box7 = 1'b0;		box8 = 1'b0;		box9 = 1'b0;		box10 = 1'b0;		box11 = 1'b0;		box12 = 1'b0;		box13 = 1'b0;		box14 = 1'b0;		box15 = 1'b0;		box16 = 1'b0;		box17 = 1'b0;		box18 = 1'b0;		box19 = 1'b0;		box20 = 1'b0;		box21 = 1'b0;		box22 = 1'b0;		box23 = 1'b0;		box24 = 1'b1;		box25 = 1'b0;		box26 = 1'b0;		box27 = 1'b0;		box28 = 1'b0;		box29 = 1'b0;		box30 = 1'b0;		box31 = 1'b0;		box32 = 1'b0;		box33 = 1'b0;		box34 = 1'b0;		box35 = 1'b0;		box36 = 1'b0;		box37 = 1'b0;
 		end
 		else if(Object25) begin 
-		box1 = 1'b0;
-		box2 = 1'b0;
-		box3 = 1'b0;
-		box4 = 1'b0;
-		box5 = 1'b0;
-		box6 = 1'b0;
-		box7 = 1'b0;
-		box8 = 1'b0;
-		box9 = 1'b0;
-		box10 = 1'b0;
-		box11 = 1'b0;
-		box12 = 1'b0;
-		box13 = 1'b0;
-		box14 = 1'b0;
-		box15 = 1'b0;
-		box16 = 1'b0;
-		box17 = 1'b0;
-		box18 = 1'b0;
-		box19 = 1'b0;
-		box20 = 1'b0;
-		box21 = 1'b0;
-		box22 = 1'b0;
-		box23 = 1'b0;
-		box24 = 1'b0;
-		box25 = 1'b1;
-		box26 = 1'b0;
-		box27 = 1'b0;
-		box28 = 1'b0;
-		box29 = 1'b0;
-		box30 = 1'b0;
-		box31 = 1'b0;
-		box32 = 1'b0;
-		box33 = 1'b0;
-		box34 = 1'b0;
-		box35 = 1'b0;
-		box36 = 1'b0;
-		box37 = 1'b0;
+		box1 = 1'b0;		box2 = 1'b0;		box3 = 1'b0;		box4 = 1'b0;		box5 = 1'b0;		box6 = 1'b0;		box7 = 1'b0;		box8 = 1'b0;		box9 = 1'b0;		box10 = 1'b0;		box11 = 1'b0;		box12 = 1'b0;		box13 = 1'b0;		box14 = 1'b0;		box15 = 1'b0;		box16 = 1'b0;		box17 = 1'b0;		box18 = 1'b0;		box19 = 1'b0;		box20 = 1'b0;		box21 = 1'b0;		box22 = 1'b0;		box23 = 1'b0;		box24 = 1'b0;		box25 = 1'b1;		box26 = 1'b0;		box27 = 1'b0;		box28 = 1'b0;		box29 = 1'b0;		box30 = 1'b0;		box31 = 1'b0;		box32 = 1'b0;		box33 = 1'b0;		box34 = 1'b0;		box35 = 1'b0;		box36 = 1'b0;		box37 = 1'b0;
 		end
 		else if(Object26) begin 
 		box1 = 1'b0;		box2 = 1'b0;		box3 = 1'b0;		box4 = 1'b0;		box5 = 1'b0;		box6 = 1'b0;		box7 = 1'b0;		box8 = 1'b0;		box9 = 1'b0;		box10 = 1'b0;		box11 = 1'b0;		box12 = 1'b0;		box13 = 1'b0;		box14 = 1'b0;		box15 = 1'b0;		box16 = 1'b0;		box17 = 1'b0;		box18 = 1'b0;		box19 = 1'b0;		box20 = 1'b0;		box21 = 1'b0;		box22 = 1'b0;		box23 = 1'b0;		box24 = 1'b0;		box25 = 1'b0;		box26 = 1'b1;		box27 = 1'b0;		box28 = 1'b0;		box29 = 1'b0;		box30 = 1'b0;		box31 = 1'b0;		box32 = 1'b0;		box33 = 1'b0;		box34 = 1'b0;		box35 = 1'b0;		box36 = 1'b0;box37 = 1'b0;
