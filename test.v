@@ -3,9 +3,10 @@
 //===========================================//
 /*
 
-Our VGA Module: Modified by Collin Gardner and Ben Wong
-Also our minesweeper module by Collin Gardner
 
+MINESWEEPER implementation module by Collin Gardner and Ben Wong
+
+Our VGA Module: Modified by Collin Gardner and Ben Wong
 VGA MODULE: Modified by Parth Patel, Ian Baker, and Yi Zhan
 
 Most of all the code here is modified to basic VGA Displaying capabilities,
@@ -18,11 +19,11 @@ Parameters were set by Ben.
 //===========================================//
 //====================VGA====================//
 //===========================================//
-module test(clk, button1, button2, button3, button4, select, resetGame, in1, in2, in3, in4, in5, in6, in7, in8, in9, in10, in11, in12, in13, in14, in15,  VGA_R, VGA_B, VGA_G, VGA_BLANK_N, VGA_SYNC_N , VGA_HS, VGA_VS, rst, VGA_CLK, kbCLK, data);
+module test(clk, button1, button2, button3, button4, resetGame, in1, in2, in3, in4, in5, in6, in7, in8, in9, in10, in11, in12, in13, in14, in15,  VGA_R, VGA_B, VGA_G, VGA_BLANK_N, VGA_SYNC_N , VGA_HS, VGA_VS, rst, VGA_CLK, kbCLK, data);
 
 //outputs the colors, determined from the color module.
 output [7:0] VGA_R, VGA_B, VGA_G;
-input button1, button2, button3, button4, select;
+input button1, button2, button3, button4;//select
 input in1, in2, in3, in4, in5, in6, in7, in8, in9, in10, in11, in12, in13, in14, in15; //these are all the switches for the bombs
 //Makes sure the screen is synced right.
 output VGA_HS, VGA_VS, VGA_BLANK_N, VGA_CLK, VGA_SYNC_N;
@@ -402,11 +403,11 @@ wire isBomb2, isBomb3, isBomb4, isBomb5, isBomb6, isBomb7, isBomb8, isBomb9, isB
 
 //THIS WILL TELL IF GAME IS WON
 reg ccount;
+reg win;
 
 //this module generates the bombs
 randomGen bombGeneration(in1, in2, in3, in4, in5, in6, in7, in8, in9, in10, in11, in12, in13, in14, in15, isBomb2, isBomb3, isBomb4, isBomb5, isBomb6, isBomb7, isBomb8, isBomb9, isBomb10, isBomb11, isBomb12, isBomb13, isBomb14, isBomb15, isBomb16, isBomb17, isBomb18, isBomb19, isBomb20, isBomb21, isBomb22, isBomb23, isBomb24, isBomb25, isBomb26, isBomb27, isBomb28, isBomb29, isBomb30, isBomb31, isBomb32, isBomb33, isBomb34, isBomb35, isBomb36, isBomb37);
  
-
 ////SELECTOR MOUDLE //this Module Controls us selecting the each grid in the field, and tells us what will change
 always @ (posedge clk)
 	begin
@@ -417,325 +418,363 @@ always @ (posedge clk)
 			bombAT2 = 0; bombAT3 = 0; bombAT4 = 0; bombAT5 = 0; bombAT6 = 0; bombAT7 = 0; bombAT8 = 0; bombAT9 = 0; bombAT10 = 0; bombAT11 = 0; bombAT12 = 0; bombAT13 = 0; bombAT14 = 0; bombAT15 = 0; bombAT16 = 0; bombAT17 = 0; bombAT18 = 0; bombAT19 = 0; bombAT20 = 0; bombAT21 = 0; bombAT22 = 0; bombAT23 = 0; bombAT24 = 0; bombAT25 = 0; bombAT26 = 0; bombAT27 = 0; bombAT28 = 0; bombAT29 = 0; bombAT30 = 0; bombAT31 = 0; bombAT32 = 0; bombAT33 = 0; bombAT34 = 0; bombAT35 = 0; bombAT36 = 0; bombAT37 = 0; 
 			caution2 = 0; caution3 = 0; caution4 = 0; caution5 = 0; caution6 = 0; caution7 = 0; caution8 = 0; caution9 = 0; caution10 = 0; caution11 = 0; caution12 = 0; caution13 = 0; caution14 = 0; caution15 = 0; caution16 = 0; caution17 = 0; caution18 = 0; caution19 = 0; caution20 = 0; caution21 = 0; caution22 = 0; caution23 = 0; caution24 = 0; caution25 = 0; caution26 = 0; caution27 = 0; caution28 = 0; caution29 = 0; caution30 = 0; caution31 = 0; caution32 = 0; caution33 = 0; caution34 = 0; caution35 = 0; caution36 = 0; caution37 = 0; 
 		   warning2 = 0; warning3 = 0; warning4 = 0; warning5 = 0; warning6 = 0; warning7 = 0; warning8 = 0; warning9 = 0; warning10 = 0; warning11 = 0; warning12 = 0; warning13 = 0; warning14 = 0; warning15 = 0; warning16 = 0; warning17 = 0; warning18 = 0; warning19 = 0; warning20 = 0; warning21 = 0; warning22 = 0; warning23 = 0; warning24 = 0; warning25 = 0; warning26 = 0; warning27 = 0; warning28 = 0; warning29 = 0; warning30 = 0; warning31 = 0; warning32 = 0; warning33 = 0; warning34 = 0; warning35 = 0; warning36 = 0; warning37 = 0; 
+			ccount = 0;
+			win = 0;
 		end
 	
-		if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd166 -31'd100 && object38Y >= 31'd000 && select == 1'b1 && isBomb2 == 1'b0) 
+		if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd166 -31'd100 && object38Y >= 31'd000 && select == 8'h14 && isBomb2 == 1'b0) 
 		begin
 			erasebox2 = 1;
+			ccount = ccount + 1'b1;
 	   end
-	 	else if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd166 -31'd100 && object38Y >= 31'd000 && select == 1'b1 && isBomb2 == 1'b1) 
+	 	else if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd166 -31'd100 && object38Y >= 31'd000 && select ==8'h14 && isBomb2 == 1'b1) 
 		begin
 			bombAT2 = 1; //this would just change it to red, then change the color module down below
 	   end
 		//square3
-		if(object38X >= 31'd422 && object38X <= 31'd572 - 31'd100 && object38Y <= 31'd166 -31'd100 && object38Y >= 31'd000 && select == 1'b1 && isBomb3 == 1'b0)
+		if(object38X >= 31'd422 && object38X <= 31'd572 - 31'd100 && object38Y <= 31'd166 -31'd100 && object38Y >= 31'd000 && select == 8'h14&& isBomb3 == 1'b0)
 		begin
 			erasebox3= 1;
+			ccount = ccount + 1'b1;
 		end
-			if(object38X >= 31'd422 && object38X <= 31'd572 - 31'd100 && object38Y <= 31'd150 -31'd100 && object38Y >= 31'd000 && select == 1'b1 && isBomb3 == 1'b1)
+			if(object38X >= 31'd422 && object38X <= 31'd572 - 31'd100 && object38Y <= 31'd150 -31'd100 && object38Y >= 31'd000 && select == 8'h14&& isBomb3 == 1'b1)
 				begin
 					bombAT3 = 1;
 			end
 			//square4
-			if(object38X >= 31'd588 && object38X <= 31'd738 - 31'd100 && object38Y <= 31'd150 -31'd100 && object38Y >= 31'd000 && select == 1'b1 && isBomb4 == 1'b0)
+			if(object38X >= 31'd588 && object38X <= 31'd738 - 31'd100 && object38Y <= 31'd150 -31'd100 && object38Y >= 31'd000 && select == 8'h14&& isBomb4 == 1'b0)
 					begin
 						erasebox4= 1;
+						ccount = ccount + 1'b1;
 					end
-			if(object38X >= 31'd588 && object38X <= 31'd738 - 31'd100 && object38Y <= 31'd150 -31'd100 && object38Y >= 31'd000 && select == 1'b1 && isBomb4 == 1'b1)
+			if(object38X >= 31'd588 && object38X <= 31'd738 - 31'd100 && object38Y <= 31'd150 -31'd100 && object38Y >= 31'd000 && select == 8'h14&& isBomb4 == 1'b1)
 					begin
 						bombAT4 = 1;
 			end
 			//square5
-			if(object38X >= 31'd754 && object38X <= 31'd904 - 31'd100 && object38Y <= 31'd150 -31'd100 && object38Y >= 31'd000 && select == 1'b1 && isBomb5 == 1'b0)
+			if(object38X >= 31'd754 && object38X <= 31'd904 - 31'd100 && object38Y <= 31'd150 -31'd100 && object38Y >= 31'd000 && select == 8'h14&& isBomb5 == 1'b0)
 					begin
 						erasebox5= 1;
+						ccount = ccount + 1'b1;
 					end
-			if(object38X >= 31'd754 && object38X <= 31'd904 - 31'd100 && object38Y <= 31'd150 -31'd100 && object38Y >= 31'd000 && select == 1'b1 && isBomb5 == 1'b1)
+			if(object38X >= 31'd754 && object38X <= 31'd904 - 31'd100 && object38Y <= 31'd150 -31'd100 && object38Y >= 31'd000 && select ==8'h14&& isBomb5 == 1'b1)
 					begin
 						bombAT5 = 1;
 			end
 			//square6
-			if(object38X >= 31'd920 && object38X <= 31'd1070 - 31'd100 && object38Y <= 31'd150 -31'd100 && object38Y >= 31'd000 && select == 1'b1 && isBomb6 == 1'b0)
+			if(object38X >= 31'd920 && object38X <= 31'd1070 - 31'd100 && object38Y <= 31'd150 -31'd100 && object38Y >= 31'd000 && select ==8'h14 && isBomb6 == 1'b0)
 					begin
 						erasebox6= 1;
+						ccount = ccount + 1'b1;
 					end
-			if(object38X >= 31'd920 && object38X <= 31'd1070 - 31'd100 && object38Y <= 31'd150 -31'd100 && object38Y >= 31'd000 && select == 1'b1 && isBomb6 == 1'b1)
+			if(object38X >= 31'd920 && object38X <= 31'd1070 - 31'd100 && object38Y <= 31'd150 -31'd100 && object38Y >= 31'd000 && select == 8'h14 && isBomb6 == 1'b1)
 					begin
 						bombAT6 = 1;
+						
 			end
 			//square7
-			if(object38X >= 31'd1086 && object38X <= 31'd1236 - 31'd100 && object38Y <= 31'd150 -31'd100 && object38Y >= 31'd000 && select == 1'b1 && isBomb7 == 1'b0)
+			if(object38X >= 31'd1086 && object38X <= 31'd1236 - 31'd100 && object38Y <= 31'd150 -31'd100 && object38Y >= 31'd000 && select == 8'h14 && isBomb7 == 1'b0)
 					begin
 						erasebox7= 1;
 					end
-			if(object38X >= 31'd1086 && object38X <= 31'd1236 - 31'd100 && object38Y <= 31'd150 -31'd100 && object38Y >= 31'd000 && select == 1'b1 && isBomb7 == 1'b1)
+			if(object38X >= 31'd1086 && object38X <= 31'd1236 - 31'd100 && object38Y <= 31'd150 -31'd100 && object38Y >= 31'd000 && select == 8'h14 && isBomb7 == 1'b1)
 					begin
 						bombAT7 = 1;
 			end
 			//newSquare
-			if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd316 -31'd100 && object38Y >= 31'd166 && select == 1'b1 && isBomb8 == 1'b0)
+			if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd316 -31'd100 && object38Y >= 31'd166 && select == 8'h14 && isBomb8 == 1'b0)
 					begin
 						erasebox8= 1;
+						ccount = ccount + 1'b1;
 					end
-			if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd316 -31'd100 && object38Y >= 31'd166 && select == 1'b1 && isBomb8 == 1'b1)
+			if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd316 -31'd100 && object38Y >= 31'd166 && select == 8'h14&& isBomb8 == 1'b1)
 					begin
 						bombAT8 = 1;
 			end
 			//newSquare
-			if(object38X >= 31'd422 && object38X <= 31'd572 - 31'd100 && object38Y <= 31'd316 -31'd100 && object38Y >= 31'd166 && select == 1'b1 && isBomb9 == 1'b0)
+			if(object38X >= 31'd422 && object38X <= 31'd572 - 31'd100 && object38Y <= 31'd316 -31'd100 && object38Y >= 31'd166 && select == 8'h14&& isBomb9 == 1'b0)
 					begin
 						erasebox9= 1;
+						ccount = ccount + 1'b1;
 					end
-			if(object38X >= 31'd422 && object38X <= 31'd572 - 31'd100 && object38Y <= 31'd316 -31'd100 && object38Y >= 31'd166 && select == 1'b1 && isBomb9 == 1'b1)
+			if(object38X >= 31'd422 && object38X <= 31'd572 - 31'd100 && object38Y <= 31'd316 -31'd100 && object38Y >= 31'd166 && select == 8'h14 && isBomb9 == 1'b1)
 					begin
 						bombAT9 = 1;
 			end
 			//newSquare
-			if(object38X >= 31'd588 && object38X <= 31'd738 - 31'd100 && object38Y <= 31'd316 -31'd100 && object38Y >= 31'd166 && select == 1'b1 && isBomb10 == 1'b0)
+			if(object38X >= 31'd588 && object38X <= 31'd738 - 31'd100 && object38Y <= 31'd316 -31'd100 && object38Y >= 31'd166 && select == 8'h14 && isBomb10 == 1'b0)
 					begin
 						erasebox10= 1;
+						ccount = ccount + 1'b1;
 					end
-			if(object38X >= 31'd588 && object38X <= 31'd738 - 31'd100 && object38Y <= 31'd316 -31'd100 && object38Y >= 31'd166 && select == 1'b1 && isBomb10 == 1'b1)
+			if(object38X >= 31'd588 && object38X <= 31'd738 - 31'd100 && object38Y <= 31'd316 -31'd100 && object38Y >= 31'd166 && select == 8'h14 && isBomb10 == 1'b1)
 					begin
 						bombAT10 = 1;
 			end
 			//newSquare
-			if(object38X >= 31'd754 && object38X <= 31'd904 - 31'd100 && object38Y <= 31'd316 -31'd100 && object38Y >= 31'd166 && select == 1'b1 && isBomb11 == 1'b0)
+			if(object38X >= 31'd754 && object38X <= 31'd904 - 31'd100 && object38Y <= 31'd316 -31'd100 && object38Y >= 31'd166 && select == 8'h14&& isBomb11 == 1'b0)
 					begin
 						erasebox11= 1;
+						ccount = ccount + 1'b1;
 					end
-			if(object38X >= 31'd754 && object38X <= 31'd904 - 31'd100 && object38Y <= 31'd316 -31'd100 && object38Y >= 31'd166 && select == 1'b1 && isBomb11 == 1'b1)
+			if(object38X >= 31'd754 && object38X <= 31'd904 - 31'd100 && object38Y <= 31'd316 -31'd100 && object38Y >= 31'd166 && select == 8'h14 && isBomb11 == 1'b1)
 					begin
 						bombAT11 = 1;
 			end
 			//newSquare
-			if(object38X >= 31'd920 && object38X <= 31'd1070 - 31'd100 && object38Y <= 31'd316 -31'd100 && object38Y >= 31'd166 && select == 1'b1 && isBomb12 == 1'b0)
+			if(object38X >= 31'd920 && object38X <= 31'd1070 - 31'd100 && object38Y <= 31'd316 -31'd100 && object38Y >= 31'd166 && select == 8'h14&& isBomb12 == 1'b0)
 					begin
 						erasebox12= 1;
+						ccount = ccount + 1'b1;
 					end
-			if(object38X >= 31'd920 && object38X <= 31'd1070 - 31'd100 && object38Y <= 31'd316 -31'd100 && object38Y >= 31'd166 && select == 1'b1 && isBomb12 == 1'b1)
+			if(object38X >= 31'd920 && object38X <= 31'd1070 - 31'd100 && object38Y <= 31'd316 -31'd100 && object38Y >= 31'd166 && select == 8'h14 && isBomb12 == 1'b1)
 					begin
 						bombAT12 = 1;
 			end
 			//newSquare
-			if(object38X >= 31'd1086 && object38X <= 31'd1236 - 31'd100 && object38Y <= 31'd316 -31'd100 && object38Y >= 31'd166 && select == 1'b1 && isBomb13 == 1'b0)
+			if(object38X >= 31'd1086 && object38X <= 31'd1236 - 31'd100 && object38Y <= 31'd316 -31'd100 && object38Y >= 31'd166 && select ==8'h14&& isBomb13 == 1'b0)
 					begin
 						erasebox13= 1;
+						ccount = ccount + 1'b1;
 					end
-			if(object38X >= 31'd1086 && object38X <= 31'd1236 - 31'd100 && object38Y <= 31'd316 -31'd100 && object38Y >= 31'd166 && select == 1'b1 && isBomb13 == 1'b1)
+			if(object38X >= 31'd1086 && object38X <= 31'd1236 - 31'd100 && object38Y <= 31'd316 -31'd100 && object38Y >= 31'd166 && select == 8'h14 && isBomb13 == 1'b1)
 					begin
 						bombAT13 = 1;
 			end
 			//newSquare and new Row
-			if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd482 -31'd100 && object38Y >= 31'd332 && select == 1'b1 && isBomb14 == 1'b0)
+			if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd482 -31'd100 && object38Y >= 31'd332 && select == 8'h14 && isBomb14 == 1'b0)
 					begin
 						erasebox14= 1;
+						ccount = ccount + 1'b1;
 					end
-			if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd482 -31'd100 && object38Y >= 31'd332 && select == 1'b1 && isBomb14 == 1'b1)
+			if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd482 -31'd100 && object38Y >= 31'd332 && select == 8'h14&& isBomb14 == 1'b1)
 					begin
 						bombAT14 = 1;
 			end
 			//newSquare
-			if(object38X >= 31'd422 && object38X <= 31'd572 - 31'd100 && object38Y <= 31'd482 -31'd100 && object38Y >= 31'd332 && select == 1'b1 && isBomb15 == 1'b0)
+			if(object38X >= 31'd422 && object38X <= 31'd572 - 31'd100 && object38Y <= 31'd482 -31'd100 && object38Y >= 31'd332 && select ==8'h14 && isBomb15 == 1'b0)
 					begin
 						erasebox15= 1;
+						ccount = ccount + 1'b1;
 					end
-			if(object38X >= 31'd422 && object38X <= 31'd572 - 31'd100 && object38Y <= 31'd482 -31'd100 && object38Y >= 31'd332 && select == 1'b1 && isBomb15 == 1'b1)
+			if(object38X >= 31'd422 && object38X <= 31'd572 - 31'd100 && object38Y <= 31'd482 -31'd100 && object38Y >= 31'd332 && select == 8'h14&& isBomb15 == 1'b1)
 					begin
 						bombAT15 = 1;
 			end
 			//newSquare
-			if(object38X >= 31'd588 && object38X <= 31'd738 - 31'd100 && object38Y <= 31'd482 -31'd100 && object38Y >= 31'd332 && select == 1'b1 && isBomb16 == 1'b0)
+			if(object38X >= 31'd588 && object38X <= 31'd738 - 31'd100 && object38Y <= 31'd482 -31'd100 && object38Y >= 31'd332 && select == 8'h14 && isBomb16 == 1'b0)
 					begin
 						erasebox16= 1;
+						ccount = ccount + 1'b1;
 					end
-			if(object38X >= 31'd588 && object38X <= 31'd738 - 31'd100 && object38Y <= 31'd482 -31'd100 && object38Y >= 31'd332 && select == 1'b1 && isBomb16 == 1'b1)
+			if(object38X >= 31'd588 && object38X <= 31'd738 - 31'd100 && object38Y <= 31'd482 -31'd100 && object38Y >= 31'd332 && select == 8'h14&& isBomb16 == 1'b1)
 					begin
 						bombAT16 = 1;
 			end
 			//newSquare
-			if(object38X >= 31'd754 && object38X <= 31'd904 - 31'd100 && object38Y <= 31'd482 -31'd100 && object38Y >= 31'd332 && select == 1'b1 && isBomb17 == 1'b0)
+			if(object38X >= 31'd754 && object38X <= 31'd904 - 31'd100 && object38Y <= 31'd482 -31'd100 && object38Y >= 31'd332 && select == 8'h14 && isBomb17 == 1'b0)
 					begin
 						erasebox17= 1;
+						ccount = ccount + 1'b1;
 					end
-			if(object38X >= 31'd754 && object38X <= 31'd904 - 31'd100 && object38Y <= 31'd482 -31'd100 && object38Y >= 31'd332 && select == 1'b1 && isBomb17 == 1'b1)
+			if(object38X >= 31'd754 && object38X <= 31'd904 - 31'd100 && object38Y <= 31'd482 -31'd100 && object38Y >= 31'd332 && select == 8'h14 && isBomb17 == 1'b1)
 					begin
 						bombAT17 = 1;
 			end
 			//newSquare
-			if(object38X >= 31'd920 && object38X <= 31'd1070 - 31'd100 && object38Y <= 31'd482 -31'd100 && object38Y >= 31'd332 && select == 1'b1 && isBomb18 == 1'b0)
+			if(object38X >= 31'd920 && object38X <= 31'd1070 - 31'd100 && object38Y <= 31'd482 -31'd100 && object38Y >= 31'd332 && select == 8'h14&& isBomb18 == 1'b0)
 					begin
 						erasebox18= 1;
+						ccount = ccount + 1'b1;
 					end
-			if(object38X >= 31'd920 && object38X <= 31'd1070 - 31'd100 && object38Y <= 31'd482 -31'd100 && object38Y >= 31'd332 && select == 1'b1 && isBomb18 == 1'b1)
+			if(object38X >= 31'd920 && object38X <= 31'd1070 - 31'd100 && object38Y <= 31'd482 -31'd100 && object38Y >= 31'd332 && select == 8'h14&& isBomb18 == 1'b1)
 					begin
 						bombAT18 = 1;
 			end
 			//newSquare
-			if(object38X >= 31'd1086 && object38X <= 31'd1236 - 31'd100 && object38Y <= 31'd482 -31'd100 && object38Y >= 31'd332 && select == 1'b1 && isBomb19 == 1'b0)
+			if(object38X >= 31'd1086 && object38X <= 31'd1236 - 31'd100 && object38Y <= 31'd482 -31'd100 && object38Y >= 31'd332 && select == 8'h14&& isBomb19 == 1'b0)
 					begin
 						erasebox19= 1;
+						ccount = ccount + 1'b1;
 					end
-			if(object38X >= 31'd1086 && object38X <= 31'd1236 - 31'd100 && object38Y <= 31'd482 -31'd100 && object38Y >= 31'd332 && select == 1'b1 && isBomb19 == 1'b1)
+			if(object38X >= 31'd1086 && object38X <= 31'd1236 - 31'd100 && object38Y <= 31'd482 -31'd100 && object38Y >= 31'd332 && select == 8'h14 && isBomb19 == 1'b1)
 					begin
 						bombAT19 = 1;
 			end
 			//newSquare
-			if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd648-31'd100 && object38Y >= 31'd498 && select == 1'b1 && isBomb20 == 1'b0)
+			if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd648-31'd100 && object38Y >= 31'd498 && select == 8'h14 && isBomb20 == 1'b0)
 					begin
 						erasebox20= 1;
+						ccount = ccount + 1'b1;
 					end
-			if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd648 -31'd100 && object38Y >= 31'd498 && select == 1'b1 && isBomb20 == 1'b1)
+			if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd648 -31'd100 && object38Y >= 31'd498 && select == 8'h14 && isBomb20 == 1'b1)
 					begin
 						bombAT20 = 1;
 			end
 			//newSquare
-			if(object38X >= 31'd422 && object38X <= 31'd572 - 31'd100 && object38Y <= 31'd648 -31'd100 && object38Y >= 31'd498 && select == 1'b1 && isBomb21 == 1'b0)
+			if(object38X >= 31'd422 && object38X <= 31'd572 - 31'd100 && object38Y <= 31'd648 -31'd100 && object38Y >= 31'd498 && select == 8'h14 && isBomb21 == 1'b0)
 					begin
 						erasebox21= 1;
+						ccount = ccount + 1'b1;
 					end
-			if(object38X >= 31'd422 && object38X <= 31'd572 - 31'd100 && object38Y <= 31'd648 -31'd100 && object38Y >= 31'd498 && select == 1'b1 && isBomb21 == 1'b1)
+			if(object38X >= 31'd422 && object38X <= 31'd572 - 31'd100 && object38Y <= 31'd648 -31'd100 && object38Y >= 31'd498 && select == 8'h14 && isBomb21 == 1'b1)
 					begin
 						bombAT21 = 1;
 			end
 			//newSquare
-			if(object38X >= 31'd588 && object38X <= 31'd738 - 31'd100 && object38Y <= 31'd648 -31'd100 && object38Y >= 31'd498 && select == 1'b1 && isBomb22 == 1'b0)
+			if(object38X >= 31'd588 && object38X <= 31'd738 - 31'd100 && object38Y <= 31'd648 -31'd100 && object38Y >= 31'd498 && select == 8'h14 && isBomb22 == 1'b0)
 					begin
 						erasebox22= 1;
+						ccount = ccount + 1'b1;
 					end
-			if(object38X >= 31'd588 && object38X <= 31'd738 - 31'd100 && object38Y <= 31'd648 -31'd100 && object38Y >= 31'd498 && select == 1'b1 && isBomb22 == 1'b1)
+			if(object38X >= 31'd588 && object38X <= 31'd738 - 31'd100 && object38Y <= 31'd648 -31'd100 && object38Y >= 31'd498 && select == 8'h14 && isBomb22 == 1'b1)
 					begin
 						bombAT22 = 1;
 			end
 			//newSquare
-			if(object38X >= 31'd754 && object38X <= 31'd904 - 31'd100 && object38Y <= 31'd648 -31'd100 && object38Y >= 31'd498 && select == 1'b1 && isBomb23 == 1'b0)
+			if(object38X >= 31'd754 && object38X <= 31'd904 - 31'd100 && object38Y <= 31'd648 -31'd100 && object38Y >= 31'd498 && select == 8'h14 && isBomb23 == 1'b0)
 					begin
 						erasebox23= 1;
+						ccount = ccount + 1'b1;
 					end
-			if(object38X >= 31'd754 && object38X <= 31'd904 - 31'd100 && object38Y <= 31'd648 -31'd100 && object38Y >= 31'd498 && select == 1'b1 && isBomb23 == 1'b1)
+			if(object38X >= 31'd754 && object38X <= 31'd904 - 31'd100 && object38Y <= 31'd648 -31'd100 && object38Y >= 31'd498 && select == 8'h14&& isBomb23 == 1'b1)
 					begin
 						bombAT23 = 1;
 			end
 			//newSquare
-			if(object38X >= 31'd920 && object38X <= 31'd1070 - 31'd100 && object38Y <= 31'd648 -31'd100 && object38Y >= 31'd498 && select == 1'b1 && isBomb24 == 1'b0)
+			if(object38X >= 31'd920 && object38X <= 31'd1070 - 31'd100 && object38Y <= 31'd648 -31'd100 && object38Y >= 31'd498 && select == 8'h14 && isBomb24 == 1'b0)
 					begin
 						erasebox24= 1;
+						ccount = ccount + 1'b1;
 					end
-			if(object38X >= 31'd920 && object38X <= 31'd1070 - 31'd100 && object38Y <= 31'd648 -31'd100 && object38Y >= 31'd498 && select == 1'b1 && isBomb24 == 1'b1)
+			if(object38X >= 31'd920 && object38X <= 31'd1070 - 31'd100 && object38Y <= 31'd648 -31'd100 && object38Y >= 31'd498 && select ==8'h14&& isBomb24 == 1'b1)
 					begin
 						bombAT24 = 1;
 			end
 			//newSquare
-			if(object38X >= 31'd1086 && object38X <= 31'd1236 - 31'd100 && object38Y <= 31'd648 -31'd100 && object38Y >= 31'd498 && select == 1'b1 && isBomb25 == 1'b0)
+			if(object38X >= 31'd1086 && object38X <= 31'd1236 - 31'd100 && object38Y <= 31'd648 -31'd100 && object38Y >= 31'd498 && select == 8'h14 && isBomb25 == 1'b0)
 					begin
 						erasebox25= 1;
+						ccount = ccount + 1'b1;
 					end
-			if(object38X >= 31'd1086 && object38X <= 31'd1236 - 31'd100 && object38Y <= 31'd648 -31'd100 && object38Y >= 31'd498 && select == 1'b1 && isBomb25 == 1'b1)
+			if(object38X >= 31'd1086 && object38X <= 31'd1236 - 31'd100 && object38Y <= 31'd648 -31'd100 && object38Y >= 31'd498 && select == 8'h14 && isBomb25 == 1'b1)
 					begin
 						bombAT25 = 1;
 			end
 			//newSquare
-			if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd814 -31'd100 && object38Y >= 31'd664 && select == 1'b1 && isBomb26 == 1'b0)
+			if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd814 -31'd100 && object38Y >= 31'd664 && select == 8'h14 && isBomb26 == 1'b0)
 					begin
 						erasebox26= 1;
+						ccount = ccount + 1'b1;
 					end
-			if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd814 -31'd100 && object38Y >= 31'd664 && select == 1'b1 && isBomb26 == 1'b1)
+			if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd814 -31'd100 && object38Y >= 31'd664 && select == 8'h14 && isBomb26 == 1'b1)
 					begin
 						bombAT26 = 1;
 			end
 			//newSquare
-			if(object38X >= 31'd422 && object38X <= 31'd572 - 31'd100 && object38Y <= 31'd814 -31'd100 && object38Y >= 31'd664 && select == 1'b1 && isBomb27 == 1'b0)
+			if(object38X >= 31'd422 && object38X <= 31'd572 - 31'd100 && object38Y <= 31'd814 -31'd100 && object38Y >= 31'd664 && select == 8'h14 && isBomb27 == 1'b0)
 					begin
 						erasebox27= 1;
+						ccount = ccount + 1'b1;
 					end
-			if(object38X >= 31'd422 && object38X <= 31'd572 - 31'd100 && object38Y <= 31'd814 -31'd100 && object38Y >= 31'd664 && select == 1'b1 && isBomb27 == 1'b1)
+			if(object38X >= 31'd422 && object38X <= 31'd572 - 31'd100 && object38Y <= 31'd814 -31'd100 && object38Y >= 31'd664 && select == 8'h14 && isBomb27 == 1'b1)
 					begin
 						bombAT27 = 1;
 			end
 			//newSquare
-			if(object38X >= 31'd588 && object38X <= 31'd738 - 31'd100 && object38Y <= 31'd814 -31'd100 && object38Y >= 31'd664 && select == 1'b1 && isBomb28 == 1'b0)
+			if(object38X >= 31'd588 && object38X <= 31'd738 - 31'd100 && object38Y <= 31'd814 -31'd100 && object38Y >= 31'd664 && select == 8'h14 && isBomb28 == 1'b0)
 					begin
 						erasebox28= 1;
+						ccount = ccount + 1'b1;
 					end
-			if(object38X >= 31'd588 && object38X <= 31'd738 - 31'd100 && object38Y <= 31'd814 -31'd100 && object38Y >= 31'd664 && select == 1'b1 && isBomb28 == 1'b1)
+			if(object38X >= 31'd588 && object38X <= 31'd738 - 31'd100 && object38Y <= 31'd814 -31'd100 && object38Y >= 31'd664 && select == 8'h14 && isBomb28 == 1'b1)
 					begin
 						bombAT28 = 1;
 			end
 			//newSquare
-			if(object38X >= 31'd754 && object38X <= 31'd904 - 31'd100 && object38Y <= 31'd814 -31'd100 && object38Y >= 31'd664 && select == 1'b1 && isBomb29 == 1'b0)
+			if(object38X >= 31'd754 && object38X <= 31'd904 - 31'd100 && object38Y <= 31'd814 -31'd100 && object38Y >= 31'd664 && select == 8'h14 && isBomb29 == 1'b0)
 					begin
 						erasebox29= 1;
+						ccount = ccount + 1'b1;
 					end
-			if(object38X >= 31'd754 && object38X <= 31'd904 - 31'd100 && object38Y <= 31'd814 -31'd100 && object38Y >= 31'd664 && select == 1'b1 && isBomb29 == 1'b1)
+			if(object38X >= 31'd754 && object38X <= 31'd904 - 31'd100 && object38Y <= 31'd814 -31'd100 && object38Y >= 31'd664 && select == 8'h14&& isBomb29 == 1'b1)
 					begin
 						bombAT29 = 1;
 			end
 			//newSquare
-			if(object38X >= 31'd920 && object38X <= 31'd1070 - 31'd100 && object38Y <= 31'd814 -31'd100 && object38Y >= 31'd664 && select == 1'b1 && isBomb30 == 1'b0)
+			if(object38X >= 31'd920 && object38X <= 31'd1070 - 31'd100 && object38Y <= 31'd814 -31'd100 && object38Y >= 31'd664 && select == 8'h14 && isBomb30 == 1'b0)
 					begin
 						erasebox30= 1;
+						ccount = ccount + 1'b1;
 					end
-			if(object38X >= 31'd920 && object38X <= 31'd1070 - 31'd100 && object38Y <= 31'd814 -31'd100 && object38Y >= 31'd664 && select == 1'b1 && isBomb30 == 1'b1)
+			if(object38X >= 31'd920 && object38X <= 31'd1070 - 31'd100 && object38Y <= 31'd814 -31'd100 && object38Y >= 31'd664 && select == 8'h14 && isBomb30 == 1'b1)
 					begin
 						bombAT30 = 1;
 			end
 			//newSquare
-			if(object38X >= 31'd1086 && object38X <= 31'd1236 - 31'd100 && object38Y <= 31'd814 -31'd100 && object38Y >= 31'd664 && select == 1'b1 && isBomb31 == 1'b0)
+			if(object38X >= 31'd1086 && object38X <= 31'd1236 - 31'd100 && object38Y <= 31'd814 -31'd100 && object38Y >= 31'd664 && select == 8'h14 && isBomb31 == 1'b0)
 					begin
 						erasebox31= 1;
+						ccount = ccount + 1'b1;
 					end
-			if(object38X >= 31'd1086 && object38X <= 31'd1236 - 31'd100 && object38Y <= 31'd814 -31'd100 && object38Y >= 31'd664 && select == 1'b1 && isBomb31 == 1'b1)
+			if(object38X >= 31'd1086 && object38X <= 31'd1236 - 31'd100 && object38Y <= 31'd814 -31'd100 && object38Y >= 31'd664 && select == 8'h14&& isBomb31 == 1'b1)
 					begin
 						bombAT31 = 1;
 			end
 			//newSquare
-			if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd980 -31'd100 && object38Y >= 31'd830 && select == 1'b1 && isBomb32 == 1'b0)
+			if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd980 -31'd100 && object38Y >= 31'd830 && select ==8'h14 && isBomb32 == 1'b0)
 					begin
 						erasebox32= 1;
+						ccount = ccount + 1'b1;
 					end
-			if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd980 -31'd100 && object38Y >= 31'd830 && select == 1'b1 && isBomb32 == 1'b1)
+			if(object38X >= 31'd256 && object38X <= 31'd406 - 31'd100 && object38Y <= 31'd980 -31'd100 && object38Y >= 31'd830 && select == 8'h14&& isBomb32 == 1'b1)
 					begin
 						bombAT32 = 1;
 			end
 			//newSquare
-			if(object38X >= 31'd422 && object38X <= 31'd572 - 31'd100 && object38Y <= 31'd980 -31'd100 && object38Y >= 31'd830 && select == 1'b1 && isBomb33 == 1'b0)
+			if(object38X >= 31'd422 && object38X <= 31'd572 - 31'd100 && object38Y <= 31'd980 -31'd100 && object38Y >= 31'd830 && select == 8'h14 && isBomb33 == 1'b0)
 					begin
 						erasebox33= 1;
+						ccount = ccount + 1'b1;
 					end
-			if(object38X >= 31'd422 && object38X <= 31'd572 - 31'd100 && object38Y <= 31'd980 -31'd100 && object38Y >= 31'd830 && select == 1'b1 && isBomb33 == 1'b1)
+			if(object38X >= 31'd422 && object38X <= 31'd572 - 31'd100 && object38Y <= 31'd980 -31'd100 && object38Y >= 31'd830 && select == 8'h14 && isBomb33 == 1'b1)
 					begin
 						bombAT33 = 1;
 			end
 			//newSquare
-			if(object38X >= 31'd588 && object38X <= 31'd738 - 31'd100 && object38Y <= 31'd980 -31'd100 && object38Y >= 31'd830 && select == 1'b1 && isBomb34 == 1'b0)
+			if(object38X >= 31'd588 && object38X <= 31'd738 - 31'd100 && object38Y <= 31'd980 -31'd100 && object38Y >= 31'd830 && select == 8'h14&& isBomb34 == 1'b0)
 					begin
 						erasebox34= 1;
+						ccount = ccount + 1'b1;
 					end
-			if(object38X >= 31'd588 && object38X <= 31'd738 - 31'd100 && object38Y <= 31'd980 -31'd100 && object38Y >= 31'd830 && select == 1'b1 && isBomb34 == 1'b1)
+			if(object38X >= 31'd588 && object38X <= 31'd738 - 31'd100 && object38Y <= 31'd980 -31'd100 && object38Y >= 31'd830 && select == 8'h14 && isBomb34 == 1'b1)
 					begin
 						bombAT34 = 1;
 			end
-			if(object38X >= 31'd754 && object38X <= 31'd904 - 31'd100 && object38Y <= 31'd980 -31'd100 && object38Y >= 31'd830 && select == 1'b1 && isBomb35 == 1'b0)
+			if(object38X >= 31'd754 && object38X <= 31'd904 - 31'd100 && object38Y <= 31'd980 -31'd100 && object38Y >= 31'd830 && select == 8'h14 && isBomb35 == 1'b0)
 					begin
 						erasebox35= 1;
+						ccount = ccount + 1'b1;
 					end
-			if(object38X >= 31'd754 && object38X <= 31'd904 - 31'd100 && object38Y <= 31'd980 -31'd100 && object38Y >= 31'd830 && select == 1'b1 && isBomb35 == 1'b1)
+			if(object38X >= 31'd754 && object38X <= 31'd904 - 31'd100 && object38Y <= 31'd980 -31'd100 && object38Y >= 31'd830 && select == 8'h14 && isBomb35 == 1'b1)
 					begin
 						bombAT35 = 1;
 			end
-			if(object38X >= 31'd920 && object38X <= 31'd1070 - 31'd100 && object38Y <= 31'd980 -31'd100 && object38Y >= 31'd830 && select == 1'b1 && isBomb36 == 1'b0)
+			if(object38X >= 31'd920 && object38X <= 31'd1070 - 31'd100 && object38Y <= 31'd980 -31'd100 && object38Y >= 31'd830 && select == 8'h14 && isBomb36 == 1'b0)
 					begin
 						erasebox36= 1;
+						ccount = ccount + 1'b1;
 					end
-			if(object38X >= 31'd920 && object38X <= 31'd1070 - 31'd100 && object38Y <= 31'd980 -31'd100 && object38Y >= 31'd830 && select == 1'b1 && isBomb36 == 1'b1)
+			if(object38X >= 31'd920 && object38X <= 31'd1070 - 31'd100 && object38Y <= 31'd980 -31'd100 && object38Y >= 31'd830 && select ==8'h14 && isBomb36 == 1'b1)
 					begin
 						bombAT36 = 1;
 			end
-			if(object38X >= 31'd1086 && object38X <= 31'd1236 - 31'd100 && object38Y <= 31'd980 -31'd100 && object38Y >= 31'd830 && select == 1'b1 && isBomb37 == 1'b0)
+			if(object38X >= 31'd1086 && object38X <= 31'd1236 - 31'd100 && object38Y <= 31'd980 -31'd100 && object38Y >= 31'd830 && select == 8'h14 && isBomb37 == 1'b0)
 					begin
 						erasebox37= 1;
+						ccount = ccount + 1'b1;
 					end
-			if(object38X >= 31'd1086 && object38X <= 31'd1236 - 31'd100 && object38Y <= 31'd980 -31'd100 && object38Y >= 31'd830 && select == 1'b1 && isBomb37 == 1'b1)
+			if(object38X >= 31'd1086 && object38X <= 31'd1236 - 31'd100 && object38Y <= 31'd980 -31'd100 && object38Y >= 31'd830 && select == 8'h14 && isBomb37 == 1'b1)
 					begin
 						bombAT37 = 1;
 			end
@@ -1955,67 +1994,65 @@ always @ (posedge clk)
 			begin
 			caution37 = 1;
 			end
+			
+			if(ccount == 6'd27)
+				begin
+					win = 1;
+				end
 
 			//end of corners			 
 		end //end of the always BLOCK
 //END OF GIVING SQUARES WARNINGS AND CAUTIONS
 
+//WINNER MODULE
+	always @(posedge clk)
+		begin
+		if(ccount == 6'd27)begin
+				win = 1;
+			end
+		end
 
-//wire clkUPdate;	 DELETE THIS
-//updateCLK myupdateclk(clk, clkUPdate);
-//kbInput kbIn(kbCLK, data, direction, reset);	
-wire [7:0]keyVal;
-keyboard myKeyBoard(clk, data, kbCLK, keyVal);
+//KEYBOARD 	
+wire [7:0]select;
+keyboard myKeyBoard(clk, data, kbCLK, select);
 // MOVEMENT OF THE SELECTOR BLOck
 	reg [19:0]count;	
 	//this moves our selector block  
 		always@(posedge clk)
 			begin
 				count <= count + 1;
-				if(count == 833334 && keyVal ==8'h1C)// this has to be like this
+				if(count == 833334 && select ==8'h1C)// this has to be like this
 					begin
 						if(object38X >= 10) //restrictions to movement
 							begin
 								object38X=object38X-32'd10;
 							end
 					end
-				if(count == 833334&& keyVal ==8'h1D)
+				if(count == 833334&& select ==8'h1D)
 					begin
 						if(object38Y >= 10)
 						begin
 							object38Y=object38Y-32'd10;
 						end
 					end
-				if(count==833334 && keyVal==8'h1B)
+				if(count==833334 && select ==8'h1B)
 					begin
 						if(object38Y <= 914)
 						begin
 							object38Y=object38Y+32'd10;
 						end
 					end
-				if(count==833334 && keyVal ==8'h23)
+				if(count==833334 && select ==8'h23)
 					begin
 						if(object38X <= 1170)
 						begin
 							object38X=object38X+32'd10; 
 						end
 					end 
-				/*case(direction)
-					5'b00010: object38Y <= object38Y - 11'd15;
-					5'b00100: object38X <= object38X - 11'd15;
-					5'b01000: object38Y <= object38Y + 11'd15;
-					5'b10000: object38X <= object38X + 11'd15;
-					5'b10100: begin  might not need
-								 object38X <= object38X; 
-								 object38Y <= object38Y;
-								end */
-					
-				/*else
-					begin	
-					object38X = object38X;
-				/*end */ 
 			end
 //END OF MOVEMENT BLOCK
+
+
 
 //======Borrowed Code======//
 //==========DO NOT EDIT BELOW==========//
@@ -2160,22 +2197,9 @@ begin
 		end
 	end 
 
-	
-
-	
-//This is movement
-/*always @ (posedge clk)
-begin
-if(count >= 31'd1000010)
-count <= 0;
-else
-begin
-count <= count + 1;
-end
-end */
 //======Modified Borrowed Code======//
 //Determines the color output based on the decision from the priority block
-color(clk, VGA_R, VGA_B, VGA_G, box1, box2, erasebox2, bombAT2, caution2, box3, erasebox3, bombAT3, caution3, box4, erasebox4, bombAT4, caution4, box5, erasebox5, bombAT5, caution5, box6, erasebox6, bombAT6, caution6, box7, erasebox7, bombAT7, caution7, box8, erasebox8, bombAT8, caution8, box9, erasebox9, bombAT9, caution9, box10, erasebox10, bombAT10, caution10, box11, erasebox11, bombAT11, caution11, box12, erasebox12, bombAT12, caution12, box13, erasebox13, bombAT13, caution13, box14, erasebox14, bombAT14, caution14, box15, erasebox15, bombAT15, caution15, box16, erasebox16, bombAT16, caution16, box17, erasebox17, bombAT17, caution17, box18, erasebox18, bombAT18, caution18, box19, erasebox19, bombAT19, caution19, box20, erasebox20, bombAT20, caution20, box21, erasebox21, bombAT21, caution21, box22, erasebox22, bombAT22, caution22, box23, erasebox23, bombAT23, caution23, box24, erasebox24, bombAT24, caution24, box25, erasebox25, bombAT25, caution25, box26, erasebox26, bombAT26, caution26, box27, erasebox27, bombAT27, caution27, box28, erasebox28, bombAT28, caution28, box29, erasebox29, bombAT29, caution29, box30, erasebox30, bombAT30, caution30, box31, erasebox31, bombAT31, caution31, box32, erasebox32, bombAT32, caution32, box33, erasebox33, bombAT33, caution33, box34, erasebox34, bombAT34, caution34, box35, erasebox35, bombAT35, caution35, box36, erasebox36, bombAT36, caution36, box37, erasebox37, bombAT37, caution37, box38, warning2,  warning3,  warning4,  warning5,  warning6,  warning7,  warning8,  warning9,  warning10,  warning11,  warning12,  warning13,  warning14,  warning15,  warning16,  warning17,  warning18,  warning19,  warning20,  warning21,  warning22,  warning23,  warning24,  warning25,  warning26,  warning27,  warning28,  warning29,  warning30,  warning31,  warning32,  warning33,  warning34,  warning35,  warning36,  warning37);//ADD here
+color(clk, VGA_R, VGA_B, VGA_G, box1, box2, erasebox2, bombAT2, caution2, box3, erasebox3, bombAT3, caution3, box4, erasebox4, bombAT4, caution4, box5, erasebox5, bombAT5, caution5, box6, erasebox6, bombAT6, caution6, box7, erasebox7, bombAT7, caution7, box8, erasebox8, bombAT8, caution8, box9, erasebox9, bombAT9, caution9, box10, erasebox10, bombAT10, caution10, box11, erasebox11, bombAT11, caution11, box12, erasebox12, bombAT12, caution12, box13, erasebox13, bombAT13, caution13, box14, erasebox14, bombAT14, caution14, box15, erasebox15, bombAT15, caution15, box16, erasebox16, bombAT16, caution16, box17, erasebox17, bombAT17, caution17, box18, erasebox18, bombAT18, caution18, box19, erasebox19, bombAT19, caution19, box20, erasebox20, bombAT20, caution20, box21, erasebox21, bombAT21, caution21, box22, erasebox22, bombAT22, caution22, box23, erasebox23, bombAT23, caution23, box24, erasebox24, bombAT24, caution24, box25, erasebox25, bombAT25, caution25, box26, erasebox26, bombAT26, caution26, box27, erasebox27, bombAT27, caution27, box28, erasebox28, bombAT28, caution28, box29, erasebox29, bombAT29, caution29, box30, erasebox30, bombAT30, caution30, box31, erasebox31, bombAT31, caution31, box32, erasebox32, bombAT32, caution32, box33, erasebox33, bombAT33, caution33, box34, erasebox34, bombAT34, caution34, box35, erasebox35, bombAT35, caution35, box36, erasebox36, bombAT36, caution36, box37, erasebox37, bombAT37, caution37, box38, warning2,  warning3,  warning4,  warning5,  warning6,  warning7,  warning8,  warning9,  warning10,  warning11,  warning12,  warning13,  warning14,  warning15,  warning16,  warning17,  warning18,  warning19,  warning20,  warning21,  warning22,  warning23,  warning24,  warning25,  warning26,  warning27,  warning28,  warning29,  warning30,  warning31,  warning32,  warning33,  warning34,  warning35,  warning36,  warning37, win);//ADD here
 
 //======Borrowed code======//
 //======DO NOT EDIT========//
@@ -2209,9 +2233,9 @@ endmodule
 //============================//
 //========== COLOR ===========//
 //============================//  look below at this design, be very careful with it
-module color(clk, red, blue, green, box1, box2, erase2, bomb2, caution2, box3, erase3, bomb3, caution3, box4, erase4, bomb4, caution4, box5, erase5, bomb5, caution5, box6, erase6, bomb6, caution6, box7, erase7, bomb7, caution7, box8, erase8, bomb8, caution8, box9, erase9, bomb9, caution9, box10, erase10, bomb10, caution10, box11, erase11, bomb11, caution11, box12, erase12, bomb12, caution12, box13, erase13, bomb13, caution13, box14, erase14, bomb14, caution14, box15, erase15, bomb15, caution15, box16, erase16, bomb16, caution16, box17, erase17, bomb17, caution17, box18, erase18, bomb18, caution18, box19, erase19, bomb19, caution19, box20, erase20, bomb20, caution20, box21, erase21, bomb21, caution21, box22, erase22, bomb22, caution22, box23, erase23, bomb23, caution23, box24, erase24, bomb24, caution24, box25, erase25, bomb25, caution25, box26, erase26, bomb26, caution26, box27, erase27, bomb27, caution27, box28, erase28, bomb28, caution28, box29, erase29, bomb29, caution29, box30, erase30, bomb30, caution30, box31, erase31, bomb31, caution31, box32, erase32, bomb32, caution32, box33, erase33, bomb33, caution33, box34, erase34, bomb34, caution34, box35, erase35, bomb35, caution35, box36, erase36, bomb36, caution36, box37, erase37, bomb37, caution37, box38, warning2,  warning3,  warning4,  warning5,  warning6,  warning7,  warning8,  warning9,  warning10,  warning11,  warning12,  warning13,  warning14,  warning15,  warning16,  warning17,  warning18,  warning19,  warning20,  warning21,  warning22,  warning23,  warning24,  warning25,  warning26,  warning27,  warning28,  warning29,  warning30,  warning31,  warning32,  warning33,  warning34,  warning35,  warning36,  warning37);
+module color(clk, red, blue, green, box1, box2, erase2, bomb2, caution2, box3, erase3, bomb3, caution3, box4, erase4, bomb4, caution4, box5, erase5, bomb5, caution5, box6, erase6, bomb6, caution6, box7, erase7, bomb7, caution7, box8, erase8, bomb8, caution8, box9, erase9, bomb9, caution9, box10, erase10, bomb10, caution10, box11, erase11, bomb11, caution11, box12, erase12, bomb12, caution12, box13, erase13, bomb13, caution13, box14, erase14, bomb14, caution14, box15, erase15, bomb15, caution15, box16, erase16, bomb16, caution16, box17, erase17, bomb17, caution17, box18, erase18, bomb18, caution18, box19, erase19, bomb19, caution19, box20, erase20, bomb20, caution20, box21, erase21, bomb21, caution21, box22, erase22, bomb22, caution22, box23, erase23, bomb23, caution23, box24, erase24, bomb24, caution24, box25, erase25, bomb25, caution25, box26, erase26, bomb26, caution26, box27, erase27, bomb27, caution27, box28, erase28, bomb28, caution28, box29, erase29, bomb29, caution29, box30, erase30, bomb30, caution30, box31, erase31, bomb31, caution31, box32, erase32, bomb32, caution32, box33, erase33, bomb33, caution33, box34, erase34, bomb34, caution34, box35, erase35, bomb35, caution35, box36, erase36, bomb36, caution36, box37, erase37, bomb37, caution37, box38, warning2,  warning3,  warning4,  warning5,  warning6,  warning7,  warning8,  warning9,  warning10,  warning11,  warning12,  warning13,  warning14,  warning15,  warning16,  warning17,  warning18,  warning19,  warning20,  warning21,  warning22,  warning23,  warning24,  warning25,  warning26,  warning27,  warning28,  warning29,  warning30,  warning31,  warning32,  warning33,  warning34,  warning35,  warning36,  warning37, win);
 input clk, box1, box2, box3, box4, box5, box6, box7, box8, box9, box10, box11, box12, box13, box14, box15, box16, box17, box18, box19, box20, box21, box22, box23, box24, box25, box26, box27, box28, box29, box30, box31, box32, box33, box34, box35, box36, box37, box38;
-
+input win; 
 input erase2, erase3, erase4, erase5, erase6, erase7, erase8, erase9, erase10, erase11, erase12, erase13, erase14, erase15, erase16, erase17, erase18, erase19, erase20, erase21, erase22, erase23, erase24, erase25, erase26, erase27, erase28, erase29, erase30, erase31, erase32, erase33, erase34, erase35, erase36, erase37; 
 input bomb2, bomb3, bomb4, bomb5, bomb6, bomb7, bomb8, bomb9, bomb10, bomb11, bomb12, bomb13, bomb14, bomb15, bomb16, bomb17, bomb18, bomb19, bomb20, bomb21, bomb22, bomb23, bomb24, bomb25, bomb26, bomb27, bomb28, bomb29, bomb30, bomb31, bomb32, bomb33, bomb34, bomb35, bomb36, bomb37;
 input caution2, caution3, caution4, caution5, caution6, caution7, caution8, caution9, caution10, caution11, caution12, caution13, caution14, caution15, caution16, caution17, caution18, caution19, caution20, caution21, caution22, caution23, caution24, caution25, caution26, caution27, caution28, caution29, caution30, caution31, caution32, caution33, caution34, caution35, caution36, caution37;
@@ -2491,6 +2515,11 @@ else if(warning11 == 1'b1) begin
           blue = 8'd255;
           green = 8'd51;
     end
+else if(win == 1) begin
+			 red = 8'd255;
+          blue = 8'd255;
+          green = 8'd255;
+		end
     else begin
         red = 8'd000;
         blue = 8'd000;
